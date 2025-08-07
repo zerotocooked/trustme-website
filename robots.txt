@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Disallow access to sensitive files
+Disallow: /.htaccess
+Disallow: /.htpasswd
+Disallow: /assets/
+Disallow: /3d/
+Disallow: /*.html$
+
+# Allow access to main page
+Allow: /index.html
+Allow: /
+
+# Sitemap location
+Sitemap: https://trustme.bio/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
