@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineer - Chuyên gia AI Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .project-card { 
+            animation: fadeIn 0.5s ease-in-out;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        /* Special 3D card animations */
+        .project-card[data-category="3d"]:hover {
+            transform: translateY(-8px) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .project-card[data-category="3d"] .animate-bounce {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Notification animations */
+        .notification {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .notification.translate-x-full {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="h-8 w-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-bolt text-white"></i>
+                        </div>
+                        <span class="ml-2 text-xl font-bold text-gray-900">AI Prompt Engineer</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-indigo-600 transition-colors">Trang chủ</a>
+                    <a href="#about" class="text-gray-600 hover:text-indigo-600 transition-colors">Giới thiệu</a>
+                    <a href="#projects" class="text-gray-600 hover:text-indigo-600 transition-colors">Dự án</a>
+                    <a href="#services" class="text-gray-600 hover:text-indigo-600 transition-colors">Dịch vụ</a>
+                    <a href="#contact" class="text-gray-600 hover:text-indigo-600 transition-colors">Liên hệ</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-indigo-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
+                <a href="#home" class="block px-3 py-2 text-gray-600 hover:text-indigo-600">Trang chủ</a>
+                <a href="#about" class="block px-3 py-2 text-gray-600 hover:text-indigo-600">Giới thiệu</a>
+                <a href="#projects" class="block px-3 py-2 text-gray-600 hover:text-indigo-600">Dự án</a>
+                <a href="#services" class="block px-3 py-2 text-gray-600 hover:text-indigo-600">Dịch vụ</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-600 hover:text-indigo-600">Liên hệ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg pt-20 pb-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+            <div class="text-center">
+                <div class="animate-bounce mb-8">
+                    <div class="mx-auto h-20 w-20 rounded-full shadow-2xl overflow-hidden border-4 border-white">
+                        <img src="assets/avatar.jpg" 
+                             alt="Prompt Engineer Avatar" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Prompt Engineer
+                    <span class="block text-2xl md:text-4xl mt-2 text-indigo-200">Chuyên gia AI Landing Page</span>
+                </h1>
+                <p class="text-xl text-indigo-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Từ landing page truyền thống đến <strong>3D Interactive Experiences</strong> - khám phá 
+                    <strong>sự đa dạng</strong>, <strong>sáng tạo không giới hạn</strong> và <strong>tính linh hoạt</strong> 
+                    trong thiết kế nhờ sức mạnh Prompt Engineering
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-colors inline-flex items-center justify-center">
+                        <i class="fas fa-eye mr-2"></i>
+                        Xem dự án mẫu
+                    </a>
+                    <a href="#contact" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-indigo-600 transition-colors inline-flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        Liên hệ ngay
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-20 bg-white -mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-8 bg-white rounded-2xl shadow-xl card-hover">
+                    <div class="h-16 w-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-palette text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Đa dạng phong cách</h3>
+                    <p class="text-gray-600">Từ Artistic Watercolor đến Modern Chic, từ Minimalist đến 3D Interactive - 16 phong cách thiết kế độc đáo</p>
+                </div>
+                <div class="text-center p-8 bg-white rounded-2xl shadow-xl card-hover">
+                    <div class="h-16 w-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-lightbulb text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Sáng tạo không giới hạn</h3>
+                    <p class="text-gray-600">Prompt Engineering mở ra vô vàn khả năng sáng tạo, từ ý tưởng đến thực hiện, không bị giới hạn bởi template có sẵn</p>
+                </div>
+                <div class="text-center p-8 bg-white rounded-2xl shadow-xl card-hover">
+                    <div class="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-puzzle-piece text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Linh hoạt & Thích ứng</h3>
+                    <p class="text-gray-600">Dễ dàng tùy chỉnh và thích ứng với mọi yêu cầu, từ đám cưới cổ điển đến sự kiện công nghệ hiện đại</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        Hành trình trở thành <span class="text-indigo-600">Prompt Engineer</span>
+                    </h2>
+                    <p class="text-lg text-gray-700 mb-6">
+                        Với hơn 3 năm kinh nghiệm trong lĩnh vực web development và 2 năm chuyên sâu về AI, 
+                        tôi đã phát triển khả năng <strong>tư duy sáng tạo đa chiều</strong> và <strong>thiết kế linh hoạt</strong> 
+                        nhờ Prompt Engineering. Từ việc brainstorm ý tưởng đến hiện thực hóa thiết kế, 
+                        tôi có thể tạo ra những trải nghiệm web độc đáo và đa dạng.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Master Prompt Engineering với GPT-4, Claude, Gemini cho creative workflow</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Đã hoàn thành 16 templates đa dạng, mỗi phong cách mang đặc trưng riêng</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Chuyên sâu 3D Interactive với Three.js, WebGL, tạo ra trải nghiệm immersive</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Tập trung vào sự đa dạng - sáng tạo - tính linh hoạt trong thiết kế</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-4">Quy trình sáng tạo</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-white bg-opacity-20 rounded-full p-2 mr-4 mt-1">
+                                    <span class="text-sm font-bold">1</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Khám phá & Lên ý tưởng</h4>
+                                    <p class="text-indigo-100 text-sm">Brainstorm ý tưởng sáng tạo, xác định phong cách và cảm xúc muốn truyền tải</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-white bg-opacity-20 rounded-full p-2 mr-4 mt-1">
+                                    <span class="text-sm font-bold">2</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Thiết kế đa chiều</h4>
+                                    <p class="text-indigo-100 text-sm">Sử dụng AI để tạo ra thiết kế đa dạng, từ 2D truyền thống đến 3D tương tác</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-white bg-opacity-20 rounded-full p-2 mr-4 mt-1">
+                                    <span class="text-sm font-bold">3</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Tùy chỉnh linh hoạt</h4>
+                                    <p class="text-indigo-100 text-sm">Điều chỉnh và personalize để phù hợp hoàn hảo với brand và vision</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Portfolio <span class="text-indigo-600">Landing Page Templates</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    16 mẫu landing page thể hiện sự <strong>đa dạng sáng tạo</strong> của Prompt Engineering - 
+                    từ nghệ thuật watercolor đến công nghệ 3D, mỗi thiết kế mang một câu chuyện riêng
+                </p>
+                
+                <!-- Quick Actions -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12">
+                    <button id="expand-all" class="px-6 py-2 text-sm rounded-full bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition-colors">
+                        <i class="fas fa-expand-alt mr-2"></i>
+                        Mở tất cả (20)
+                    </button>
+                    <button id="collapse-all" class="px-6 py-2 text-sm rounded-full bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-compress-alt mr-2"></i>
+                        Thu gọn tất cả
+                    </button>
+                    <button id="shuffle-categories" class="px-6 py-2 text-sm rounded-full bg-purple-100 text-purple-700 font-semibold hover:bg-purple-200 transition-colors">
+                        <i class="fas fa-random mr-2"></i>
+                        Xem ngẫu nhiên
+                    </button>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <button class="filter-btn active px-4 py-2 text-sm rounded-full bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition-colors" data-category="all">
+                        <i class="fas fa-th mr-2"></i>
+                        Tất cả
+                    </button>
+                    <button class="filter-btn px-4 py-2 text-sm rounded-full bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition-colors" data-category="artistic">
+                        <i class="fas fa-palette mr-2"></i>
+                        Artistic
+                    </button>
+                    <button class="filter-btn px-4 py-2 text-sm rounded-full bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition-colors" data-category="luxury">
+                        <i class="fas fa-crown mr-2"></i>
+                        Luxury
+                    </button>
+                    <button class="filter-btn px-4 py-2 text-sm rounded-full bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition-colors" data-category="minimalist">
+                        <i class="fas fa-square mr-2"></i>
+                        Minimalist
+                    </button>
+                    <button class="filter-btn px-4 py-2 text-sm rounded-full bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition-colors" data-category="modern">
+                        <i class="fas fa-star mr-2"></i>
+                        Modern
+                    </button>
+                    <button class="filter-btn px-4 py-2 text-sm rounded-full bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition-colors" data-category="3d">
+                        <i class="fas fa-cube mr-2"></i>
+                        3D Interactive
+                    </button>
+                    <button class="filter-btn px-4 py-2 text-sm rounded-full bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition-colors" data-category="others">
+                        <i class="fas fa-plus-circle mr-2"></i>
+                        Các mẫu khác
+                    </button>
+                </div>
+            </div>
+            
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <!-- ARTISTIC CATEGORY -->
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="artistic">
+                    <div class="h-48 bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-palette text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Fairy Tale</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full font-medium">Artistic</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Fairy Tale Watercolor</h3>
+                        <p class="text-gray-600 text-sm mb-4">Phong cách watercolor nghệ thuật với màu sắc mơ mộng</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">67 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="artistic-and-handcrafted-fairy-tale-watercolor.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="artistic">
+                    <div class="h-48 bg-gradient-to-br from-amber-400 via-orange-300 to-red-400 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-envelope text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Vintage Letters</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full font-medium">Artistic</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Vintage Love Letters</h3>
+                        <p class="text-gray-600 text-sm mb-4">Thiết kế cổ điển lãng mạn với typography thư tay</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">67 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="artistic-and-handcrafted-vintage-love-letters.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="artistic">
+                    <div class="h-48 bg-gradient-to-br from-rose-300 via-pink-300 to-purple-300 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-heart text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Watercolor Love</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full font-medium">Artistic</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Watercolor Love</h3>
+                        <p class="text-gray-600 text-sm mb-4">Nghệ thuật watercolor tinh tế với hiệu ứng màu nước</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">63 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="artistic-and-handcrafted-watercolor-love.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LUXURY CATEGORY -->
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="luxury">
+                    <div class="h-48 bg-gradient-to-br from-yellow-300 via-amber-400 to-orange-500 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-star text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Luminous</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-medium">Luxury</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Luminous Elegance</h3>
+                        <p class="text-gray-600 text-sm mb-4">Thiết kế sang trọng với hiệu ứng ánh sáng và vàng kim</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">63 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="luxury-and-glamorous-luminous-elegance.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="luxury">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 via-indigo-600 to-blue-700 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-crown text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Royal</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-medium">Luxury</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Royal Elegance</h3>
+                        <p class="text-gray-600 text-sm mb-4">Phong cách hoàng gia với tone màu tím deep</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">77 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="luxury-and-glamorous-royal-elegance.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="luxury">
+                    <div class="h-48 bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-600 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-gem text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Versailles</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-medium">Luxury</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Versailles Opulence</h3>
+                        <p class="text-gray-600 text-sm mb-4">Lấy cảm hứng từ cung điện với chi tiết baroque</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">71 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="luxury-and-glamorous-versailles-opulence.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MINIMALIST CATEGORY -->
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="minimalist">
+                    <div class="h-48 bg-gradient-to-br from-slate-400 via-gray-500 to-zinc-600 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-bolt text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Futuristic</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full font-medium">Minimalist</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Futuristic Glow</h3>
+                        <p class="text-gray-600 text-sm mb-4">Thiết kế minimal hiện đại với hiệu ứng glow</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">45 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="minimalist-futuristic-glow.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="minimalist">
+                    <div class="h-48 bg-gradient-to-br from-gray-300 via-slate-400 to-gray-600 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-square text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Monochrome</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full font-medium">Minimalist</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Monochrome Modern</h3>
+                        <p class="text-gray-600 text-sm mb-4">Phong cách đơn sắc hiện đại với typography sạch</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">46 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="minimalist-monochrome-modern.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="minimalist">
+                    <div class="h-48 bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-leaf text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Nature</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full font-medium">Minimalist</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Nature Harmony</h3>
+                        <p class="text-gray-600 text-sm mb-4">Minimal với cảm hứng thiên nhiên, tone xanh tươi mát</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">72 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="minimalist-nature-harmony.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODERN CATEGORY -->
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="modern">
+                    <div class="h-48 bg-gradient-to-br from-rose-400 via-pink-500 to-fuchsia-600 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-tshirt text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">High Fashion</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full font-medium">Modern</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">High Fashion Inspired</h3>
+                        <p class="text-gray-600 text-sm mb-4">Lấy cảm hứng từ thời trang cao cấp với layout magazine-style</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">64 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="modern-and-chic-high-fashion-inspired.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="modern">
+                    <div class="h-48 bg-gradient-to-br from-violet-400 via-purple-500 to-indigo-600 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-user-circle text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Vogue</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full font-medium">Modern</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Personalized Vogue</h3>
+                        <p class="text-gray-600 text-sm mb-4">Phong cách tạp chí thời trang cá nhân hóa</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">58 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="modern-and-chic-personalized-vogue.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="modern">
+                    <div class="h-48 bg-gradient-to-br from-slate-500 via-gray-600 to-zinc-700 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-gem text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Sleek</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full font-medium">Modern</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Sleek Elegance</h3>
+                        <p class="text-gray-600 text-sm mb-4">Thiết kế sleek với đường nét sắc sảo</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">56 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="modern-and-chic-sleek-elegance.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3D INTERACTIVE CATEGORY -->
+                <div class="project-card bg-white rounded-xl shadow-xl overflow-hidden card-hover transform hover:scale-105" data-category="3d">
+                    <div class="h-48 bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-blue-600/20"></div>
+                        <div class="absolute inset-0 opacity-30">
+                            <div class="absolute top-4 left-4 w-8 h-8 bg-white rounded-full animate-bounce"></div>
+                            <div class="absolute top-8 right-8 w-6 h-6 bg-cyan-200 rounded-full animate-pulse"></div>
+                            <div class="absolute bottom-6 left-6 w-4 h-4 bg-blue-200 rounded-full animate-ping"></div>
+                            <div class="absolute bottom-4 right-4 w-12 h-12 border-2 border-white rounded-full animate-spin"></div>
+                        </div>
+                        <div class="text-center text-white relative z-10">
+                            <div class="relative">
+                                <i class="fas fa-cube text-4xl mb-2 animate-pulse"></i>
+                                <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-bounce"></div>
+                            </div>
+                            <p class="font-bold text-sm">3D Interactive</p>
+                            <div class="flex items-center justify-center mt-1">
+                                <span class="bg-gradient-to-r from-cyan-400 to-blue-500 text-xs px-2 py-1 rounded-full font-bold">THREE.JS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 border-l-4 border-cyan-500">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-gradient-to-r from-cyan-100 to-blue-100 text-cyan-800 text-xs px-2 py-1 rounded-full font-medium">3D Interactive</span>
+                            <div class="flex items-center">
+                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse mr-2"></span>
+                                <span class="text-xs text-green-600 font-medium">Live Demo</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">NFC Wedding Cards</h3>
+                        <p class="text-gray-600 text-sm mb-4">Website bán thiệp cưới NFC với giao diện 3D tương tác và trải nghiệm AR</p>
+                        <div class="bg-gradient-to-r from-cyan-50 to-blue-50 p-3 rounded-lg mb-4">
+                            <div class="flex items-center text-sm text-gray-700 mb-1">
+                                <i class="fas fa-microchip mr-2 text-cyan-600"></i>
+                                <span class="font-medium">Tech Stack:</span>
+                            </div>
+                            <div class="text-xs text-gray-600">Three.js • WebGL • NFC Technology • AR Experience • E-commerce</div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">NFC Product</span>
+                            <button class="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:from-cyan-700 hover:to-blue-700 transition-all shadow-lg project-detail-btn" data-file="3d/index.html">
+                                Xem 3D Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AR GIFT CATEGORY -->
+                <div class="project-card bg-white rounded-xl shadow-xl overflow-hidden card-hover transform hover:scale-105" data-category="3d">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 via-pink-500 to-orange-500 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-600/20"></div>
+                        <div class="absolute inset-0 opacity-30">
+                            <div class="absolute top-4 left-4 w-8 h-8 bg-white rounded-full animate-bounce"></div>
+                            <div class="absolute top-8 right-8 w-6 h-6 bg-pink-200 rounded-full animate-pulse"></div>
+                            <div class="absolute bottom-6 left-6 w-4 h-4 bg-orange-200 rounded-full animate-ping"></div>
+                            <div class="absolute bottom-4 right-4 w-12 h-12 border-2 border-white rounded-full animate-spin"></div>
+                        </div>
+                        <div class="text-center text-white relative z-10">
+                            <div class="relative">
+                                <i class="fas fa-gift text-4xl mb-2 animate-pulse"></i>
+                                <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-bounce"></div>
+                            </div>
+                            <p class="font-bold text-sm">AR Gift Experience</p>
+                            <div class="flex items-center justify-center mt-1">
+                                <span class="bg-gradient-to-r from-purple-400 to-pink-500 text-xs px-2 py-1 rounded-full font-bold">AR/3D</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 border-l-4 border-purple-500">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 text-xs px-2 py-1 rounded-full font-medium">3D Interactive</span>
+                            <div class="flex items-center">
+                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse mr-2"></span>
+                                <span class="text-xs text-green-600 font-medium">Live Demo</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">AR Gift Frame</h3>
+                        <p class="text-gray-600 text-sm mb-4">Website bán khung ảnh kết hợp công nghệ AR để xem ảnh với trải nghiệm 3D tương tác</p>
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-3 rounded-lg mb-4">
+                            <div class="flex items-center text-sm text-gray-700 mb-1">
+                                <i class="fas fa-microchip mr-2 text-purple-600"></i>
+                                <span class="font-medium">Tech Stack:</span>
+                            </div>
+                            <div class="text-xs text-gray-600">AR Technology • 3D Interactive • E-commerce • Product Showcase</div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">AR Product</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg project-detail-btn" data-file="ar-gift.html">
+                                Xem AR Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTHERS CATEGORY -->
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="others">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-700 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-chart-line text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Marketing</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded-full font-medium">Others</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Marketing Consulting</h3>
+                        <p class="text-gray-600 text-sm mb-4">Landing page dịch vụ tư vấn marketing chuyên nghiệp cho doanh nghiệp SMEs</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">78 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="others-marketing-consulting.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="others">
+                    <div class="h-48 bg-gradient-to-br from-pink-300 via-rose-400 to-purple-500 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-magic text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">Bridal</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded-full font-medium">Others</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Bridal Makeup Service</h3>
+                        <p class="text-gray-600 text-sm mb-4">Landing page dịch vụ trang điểm cô dâu chuyên nghiệp với phong cách lãng mạn</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">82 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="others-bridal-makeup-service.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="others">
+                    <div class="h-48 bg-gradient-to-br from-purple-600 via-indigo-700 to-cyan-500 flex items-center justify-center relative">
+                        <div class="text-center text-white relative z-10">
+                            <i class="fas fa-robot text-4xl mb-2"></i>
+                            <p class="font-semibold text-sm">AI Course</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded-full font-medium">Others</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">AI Prompt Engineering</h3>
+                        <p class="text-gray-600 text-sm mb-4">Landing page khóa học AI Prompt Engineering với phong cách công nghệ tương lai</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">75 KB</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors project-detail-btn" data-file="others-ai-prompt-engineering.html">
+                                Xem Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 bg-gray-50 rounded-2xl p-8">
+                <h4 class="text-xl font-bold text-gray-900 mb-4">Tổng quan Portfolio</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-indigo-600 mb-1">20</div>
+                        <div class="text-sm text-gray-600">Templates</div>
+                    </div>
+                    <div class="text-center">
+                    <div class="text-2xl font-bold text-indigo-600 mb-1">6</div>
+                        <div class="text-sm text-gray-600">Categories</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-indigo-600 mb-1">100%</div>
+                        <div class="text-sm text-gray-600">AI Generated</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-indigo-600 mb-1">24h</div>
+                        <div class="text-sm text-gray-600">Avg. Delivery</div>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6">Từ nghệ thuật watercolor cổ điển đến 3D interactive cutting-edge - thể hiện sự đa dạng, sáng tạo và linh hoạt không giới hạn của Prompt Engineering</p>
+                <button class="bg-indigo-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-indigo-700 transition-colors">
+                    Đặt hàng template tùy chỉnh
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Dịch vụ <span class="text-indigo-600">AI Landing Page</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Báo giá linh hoạt phù hợp với mọi dự án - Liên hệ ngay để được tư vấn và báo giá tốt nhất!
+                </p>
+            </div>
+
+            <!-- Main CTA Card -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl shadow-2xl overflow-hidden relative">
+                    <div class="absolute inset-0 bg-black bg-opacity-10"></div>
+                    <div class="relative z-10 px-8 py-12 text-center text-white">
+                        <div class="mb-8">
+                            <div class="inline-flex items-center bg-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-bold mb-4">
+                                <i class="fas fa-bolt mr-2"></i>
+                                ⚡ BÁOGIÁ SIÊU TỐC ⚡
+                            </div>
+                            <h3 class="text-3xl md:text-4xl font-bold mb-4">
+                                Giá Rẻ Nhất Thị Trường!
+                            </h3>
+                            <p class="text-xl text-indigo-100 mb-6">
+                                Nhận báo giá cụ thể trong <strong>15 phút</strong> - Cam kết giá tốt nhất!
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white bg-opacity-20 rounded-xl p-6 backdrop-blur-sm">
+                                <div class="text-3xl font-bold text-yellow-300 mb-2">24h</div>
+                                <div class="text-sm">Giao hàng nhanh</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-xl p-6 backdrop-blur-sm">
+                                <div class="text-3xl font-bold text-yellow-300 mb-2">-50%</div>
+                                <div class="text-sm">So với thị trường</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-xl p-6 backdrop-blur-sm">
+                                <div class="text-3xl font-bold text-yellow-300 mb-2">100%</div>
+                                <div class="text-sm">Đảm bảo chất lượng</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="tel:+84353056067" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 transition-colors inline-flex items-center justify-center shadow-lg">
+                                <i class="fas fa-phone-alt mr-2"></i>
+                                Gọi Ngay - Báo Giá Tức Thì!
+                            </a>
+                            <a href="#contact" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-indigo-600 transition-colors inline-flex items-center justify-center">
+                                <i class="fas fa-calculator mr-2"></i>
+                                Chat Báo Giá Online
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Types -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Basic -->
+                <div class="bg-white rounded-2xl shadow-lg border-l-4 border-green-500 hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-rocket text-green-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Landing Page Cơ Bản</h3>
+                            <div class="text-2xl font-bold text-green-600 mb-2">Từ 299K</div>
+                            <p class="text-sm text-gray-600 mb-4">Responsive • Form liên hệ • Gallery ảnh</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-sm font-semibold text-green-800">⚡ Giao trong 12h</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium -->
+                <div class="bg-white rounded-2xl shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-gem text-blue-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Landing Page Cao Cấp</h3>
+                            <div class="text-2xl font-bold text-blue-600 mb-2">Từ 599K</div>
+                            <p class="text-sm text-gray-600 mb-4">Animation • Countdown • RSVP</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <div class="bg-blue-50 p-3 rounded-lg text-center">
+                            <div class="text-sm font-semibold text-blue-800">⚡ Giao trong 24h</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3D -->
+                <div class="bg-white rounded-2xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-cube text-purple-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">3D Interactive</h3>
+                            <div class="text-2xl font-bold text-purple-600 mb-2">Từ 888K</div>
+                            <p class="text-sm text-gray-600 mb-4">Three.js • WebGL • VR Ready</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <div class="bg-purple-50 p-3 rounded-lg text-center">
+                            <div class="text-sm font-semibold text-purple-800">⚡ Giao trong 48h</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom -->
+                <div class="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl shadow-lg text-white hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="p-6 flex-grow">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-magic text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">Dự Án Đặc Biệt</h3>
+                            <div class="text-2xl font-bold mb-2">Thương Lượng</div>
+                            <p class="text-sm text-orange-100 mb-4">Custom Design • Unlimited Revision</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <div class="bg-white bg-opacity-20 p-3 rounded-lg text-center">
+                            <div class="text-sm font-semibold">💬 Chat để báo giá</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Bottom CTA -->
+            <div class="text-center mt-12 bg-white rounded-2xl p-8 shadow-lg">
+                <h4 class="text-2xl font-bold text-gray-900 mb-4">
+                    🤝 Cam Kết Giá Tốt Nhất - Không Thì Hoàn Tiền!
+                </h4>
+                <p class="text-gray-600 mb-6">
+                    Tìm được giá rẻ hơn ở nơi khác? Chúng tôi sẽ <strong>beat giá đó thêm 10%</strong>!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="tel:+84353056067" class="bg-green-500 text-white px-8 py-3 rounded-full font-bold hover:bg-green-600 transition-colors inline-flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        Hotline: 0353 056 067
+                    </a>
+                    <a href="https://zalo.me/84353056067" target="_blank" class="bg-blue-500 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-600 transition-colors inline-flex items-center justify-center">
+                        <i class="fas fa-comments mr-2"></i>
+                        Chat Zalo/Messenger
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Liên hệ <span class="text-indigo-600">ngay hôm nay</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Sẵn sàng cùng bạn khám phá những ý tưởng sáng tạo và biến chúng thành hiện thực với Prompt Engineering
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Gửi yêu cầu dự án</h3>
+                    <form class="space-y-6" id="contact-form">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Họ và tên</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Số điện thoại</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="service" class="block text-sm font-medium text-gray-700 mb-2">Loại dịch vụ</label>
+                            <select id="service" name="service" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                <option value="">Chọn dịch vụ</option>
+                                <option value="wedding">Landing page đám cưới</option>
+                                <option value="event">Landing page sự kiện</option>
+                                <option value="business">Landing page doanh nghiệp</option>
+                                <option value="personal">Landing page cá nhân</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Mô tả dự án</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Mô tả chi tiết về dự án của bạn..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors flex items-center justify-center">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Gửi yêu cầu
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Thông tin liên hệ</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <div class="h-12 w-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-indigo-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Email</h4>
+                                    <p class="text-gray-600">damvuong.work@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="h-12 w-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-indigo-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Điện thoại</h4>
+                                    <p class="text-gray-600">+84 353 056 067</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="h-12 w-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-indigo-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Địa chỉ</h4>
+                                    <p class="text-gray-600">Hà Nội, Việt Nam</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Kết nối với tôi</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://www.facebook.com/amhoangquocvuong" target="_blank" class="h-12 w-12 bg-blue-600 rounded-lg flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="tel:+84353056067" class="h-12 w-12 bg-green-500 rounded-lg flex items-center justify-center text-white hover:bg-green-600 transition-colors">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </a>
+                            <a href="mailto:damvuong.work@gmail.com" class="h-12 w-12 bg-red-500 rounded-lg flex items-center justify-center text-white hover:bg-red-600 transition-colors">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CTA Card -->
+                    <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
+                        <h4 class="text-xl font-bold mb-4">Tư vấn sáng tạo miễn phí</h4>
+                        <p class="mb-6 text-indigo-100">
+                            Đặt lịch brainstorm để cùng khám phá những ý tưởng sáng tạo cho dự án của bạn. 
+                            Tôi sẽ tư vấn miễn phí về phong cách thiết kế và approach phù hợp nhất.
+                        </p>
+                        <a href="tel:+84353056067" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-colors inline-flex items-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            Gọi ngay
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center mb-6">
+                    <div class="h-10 w-10 bg-indigo-600 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-bolt text-white"></i>
+                    </div>
+                    <span class="text-2xl font-bold">AI Prompt Engineer</span>
+                </div>
+                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                    Chuyên gia Prompt Engineering - Khám phá sự đa dạng và sáng tạo không giới hạn trong thiết kế web
+                </p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#home" class="text-gray-400 hover:text-white transition-colors">Trang chủ</a>
+                    <a href="#about" class="text-gray-400 hover:text-white transition-colors">Giới thiệu</a>
+                    <a href="#projects" class="text-gray-400 hover:text-white transition-colors">Dự án</a>
+                    <a href="#services" class="text-gray-400 hover:text-white transition-colors">Dịch vụ</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition-colors">Liên hệ</a>
+                </div>
+                <div class="border-t border-gray-800 pt-6">
+                    <p class="text-gray-400">
+                        © 2025 AI Prompt Engineer. Tất cả quyền được bảo lưu.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing...');
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    // Close mobile menu if open
+                    if (mobileMenu) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Contact form handling
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Cảm ơn bạn đã liên hệ! Tôi sẽ phản hồi trong vòng 24 giờ.');
+                    this.reset();
+                });
+            }
+
+            // Category filter functionality
+            console.log('Initializing filters...');
+            
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            console.log('Filter buttons found:', filterButtons.length);
+            console.log('Project cards found:', projectCards.length);
+            
+            // Debug: Check all project cards and their categories
+            projectCards.forEach((card, index) => {
+                const category = card.getAttribute('data-category');
+                const title = card.querySelector('h3')?.textContent || 'No title';
+                console.log(`Card ${index}: ${title} - Category: ${category}`);
+            });
+
+            // Ensure all cards are visible initially
+            projectCards.forEach(card => {
+                card.style.display = 'block';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            });
+
+            // Quick Actions functionality
+            const expandAllBtn = document.getElementById('expand-all');
+            const collapseAllBtn = document.getElementById('collapse-all');
+            const shuffleCategoriesBtn = document.getElementById('shuffle-categories');
+
+            if (expandAllBtn) {
+                expandAllBtn.addEventListener('click', function() {
+                    console.log('Expand all clicked');
+                    projectCards.forEach(card => {
+                        card.style.display = 'block';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    });
+                    
+                    // Update button states
+                    expandAllBtn.classList.remove('bg-gray-100', 'text-gray-700');
+                    expandAllBtn.classList.add('bg-indigo-600', 'text-white');
+                    collapseAllBtn.classList.remove('bg-indigo-600', 'text-white');
+                    collapseAllBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    
+                    // Reset filter buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                    });
+                    
+                    // Show success message
+                    showNotification('Đã mở tất cả 20 templates!', 'success');
+                });
+            }
+
+            if (collapseAllBtn) {
+                collapseAllBtn.addEventListener('click', function() {
+                    console.log('Collapse all clicked');
+                    projectCards.forEach(card => {
+                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                    });
+                    
+                    // Update button states
+                    collapseAllBtn.classList.remove('bg-gray-100', 'text-gray-700');
+                    collapseAllBtn.classList.add('bg-indigo-600', 'text-white');
+                    expandAllBtn.classList.remove('bg-indigo-600', 'text-white');
+                    expandAllBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    
+                    // Reset filter buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                    });
+                    
+                    // Show success message
+                    showNotification('Đã thu gọn tất cả templates!', 'info');
+                });
+            }
+
+            if (shuffleCategoriesBtn) {
+                shuffleCategoriesBtn.addEventListener('click', function() {
+                    console.log('Shuffle categories clicked');
+                    
+                    // Get all categories
+                    const categories = ['artistic', 'luxury', 'minimalist', 'modern', '3d', 'others'];
+                    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+                    
+                    // Hide all cards first
+                    projectCards.forEach(card => {
+                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                    });
+                    
+                    // Show only cards from random category
+                    let visibleCount = 0;
+                    projectCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (cardCategory === randomCategory) {
+                            card.style.display = 'block';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                            visibleCount++;
+                        }
+                    });
+                    
+                    // Update button states
+                    expandAllBtn.classList.remove('bg-indigo-600', 'text-white');
+                    expandAllBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    collapseAllBtn.classList.remove('bg-indigo-600', 'text-white');
+                    collapseAllBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    
+                    // Reset filter buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                    });
+                    
+                    // Show success message
+                    const categoryNames = {
+                        'artistic': 'Artistic & Handcrafted',
+                        'luxury': 'Luxury & Glamorous', 
+                        'minimalist': 'Minimalist',
+                        'modern': 'Modern & Chic',
+                        '3d': '3D Interactive',
+                        'others': 'Các mẫu khác'
+                    };
+                    showNotification(`Đang xem ngẫu nhiên: ${categoryNames[randomCategory]} (${visibleCount} templates)`, 'success');
+                });
+            }
+
+            // Notification function
+            function showNotification(message, type = 'info') {
+                // Remove existing notification
+                const existingNotification = document.querySelector('.notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+                
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `notification fixed top-20 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full`;
+                
+                // Set colors based on type
+                if (type === 'success') {
+                    notification.classList.add('bg-green-500', 'text-white');
+                } else if (type === 'info') {
+                    notification.classList.add('bg-blue-500', 'text-white');
+                } else {
+                    notification.classList.add('bg-gray-500', 'text-white');
+                }
+                
+                notification.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} mr-2"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Animate in
+                setTimeout(() => {
+                    notification.classList.remove('translate-x-full');
+                }, 100);
+                
+                // Auto remove after 3 seconds
+                setTimeout(() => {
+                    notification.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            filterButtons.forEach((button, index) => {
+                const category = button.getAttribute('data-category');
+                console.log(`Setting up button ${index}:`, category);
+                
+                button.addEventListener('click', function() {
+                    const selectedCategory = this.getAttribute('data-category');
+                    console.log('Filter clicked:', selectedCategory);
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                    });
+                    
+                    this.classList.add('active', 'bg-indigo-600', 'text-white');
+                    this.classList.remove('bg-gray-100', 'text-gray-700');
+
+                    // Reset quick action buttons
+                    expandAllBtn.classList.remove('bg-indigo-600', 'text-white');
+                    expandAllBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    collapseAllBtn.classList.remove('bg-indigo-600', 'text-white');
+                    collapseAllBtn.classList.add('bg-gray-100', 'text-gray-700');
+
+                    // Filter projects
+                    let visibleCount = 0;
+                    projectCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        console.log('Checking card:', cardCategory, 'against filter:', selectedCategory);
+                        
+                        if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+                            card.style.display = 'block';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                            card.style.opacity = '0';
+                        }
+                    });
+                    
+                    console.log('Visible cards after filter:', visibleCount);
+                    
+                    // Show notification
+                    const categoryNames = {
+                        'all': 'Tất cả categories',
+                        'artistic': 'Artistic & Handcrafted',
+                        'luxury': 'Luxury & Glamorous', 
+                        'minimalist': 'Minimalist',
+                        'modern': 'Modern & Chic',
+                        '3d': '3D Interactive',
+                        'others': 'Các mẫu khác'
+                    };
+                    showNotification(`Đang xem: ${categoryNames[selectedCategory]} (${visibleCount} templates)`, 'info');
+                });
+            });
+
+            // Project demo buttons - Direct open without modal
+            document.querySelectorAll('.project-detail-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Prevent the onclick from firing if we're handling it here
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const fileName = this.getAttribute('data-file');
+                    const templateName = this.closest('.project-card').querySelector('h3').textContent;
+                    const category = this.closest('.project-card').getAttribute('data-category');
+                    
+                    // Show a brief loading notification
+                    showNotification(`Đang mở ${templateName}...`, 'info');
+                    
+                    // Open the file directly in new tab
+                    window.open(fileName, '_blank');
+                });
+            });
+
+            // Scroll animations (simple fade in)
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.card-hover').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Add active navigation highlighting
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('nav a[href^="#"]');
+                
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    if (window.pageYOffset >= sectionTop) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('text-indigo-600', 'font-semibold');
+                    link.classList.add('text-gray-600');
+                    
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.remove('text-gray-600');
+                        link.classList.add('text-indigo-600', 'font-semibold');
+                    }
+                });
+            });
+
+            console.log('✅ All functionality initialized successfully!');
+        });
+    </script>
+</body>
+</html>
