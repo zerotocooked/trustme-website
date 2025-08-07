@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quà Tặng AR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- FontAwesome cho icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Google Font: Dancing Script cho thư -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" />
+    <!-- FontAwesome cho icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        /* Container chứa cả 2 lớp ảnh nền */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Hai lớp ảnh nền */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 2s ease-in-out;
+        }
+
+        /* Ảnh nền đầu tiên hiển thị mặc định */
+        .hero-bg.active {
+            opacity: 1;
+        }
+
+        /* Ảnh nền mới sẽ mờ dần vào */
+        .hero-bg.inactive {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-gray-200 to-white overflow-x-hidden">
+<!-- Flash Sale Banner -->
+<div id="flashSaleBanner" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-[800px] bg-gradient-to-b from-gray-200 to-white text-gray-800 rounded-xl shadow-lg px-4 py-3">
+    <div class="grid grid-cols-12 items-center">
+        <!-- Logo (col-span-3): Chỉ hiển thị logo hình ảnh -->
+        <div class="col-span-3 flex items-center justify-center sm:justify-start">
+                            <img src="https://placehold.co/200x200" alt="Logo" class="h-8 w-auto" />
+        </div>
+        <!-- Flash Sale Text (col-span-3) -->
+        <div class="col-span-3 text-center">
+            <div class="text-sm sm:text-base">
+                <span class="line-through mr-1">199.000₫</span>
+                <span class="font-bold text-xl sm:text-2xl">99.000₫</span>
+            </div>
+            <p class="text-xs sm:text-sm">Flash Sale Hôm Nay</p>
+        </div>
+        <!-- CTA + Close Button (col-span-6) -->
+        <div class="col-span-6 flex items-center justify-end space-x-3">
+            <a href="/order" class="inline-block bg-gray-800 text-white text-xs sm:text-sm font-semibold px-3 py-2 sm:px-4 sm:py-2 rounded-full shadow hover:bg-gray-700 transition-colors duration-300">
+                Mua Ngay
+            </a>
+            <button type="button" class="text-gray-800 hover:text-gray-600 focus:outline-none" onclick="document.getElementById('flashSaleBanner').remove();" aria-label="Đóng banner">
+                <i class="fas fa-times text-xs sm:text-base"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Hero Section -->
+<section class="hero">
+    <!-- Hai lớp background -->
+    <div id="heroBg1" class="hero-bg active"></div>
+    <div id="heroBg2" class="hero-bg inactive"></div>
+
+    <!-- Nội dung Hero -->
+    <div class="relative z-10 flex items-center justify-center h-full text-white px-6 md:px-12">
+        <div class="text-center">
+            <h1 class="text-3xl md:text-5xl font-bold">Quà Tặng AR</h1>
+            <p class="text-lg md:text-xl mt-4">Trải nghiệm quà tặng công nghệ thực tế tăng cường độc đáo</p>
+            <a href="/order"
+               class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300">
+                Mua ngay
+            </a>
+        </div>
+    </div>
+</section>
+<!-- Lợi Ích Chính -->
+<!-- Trên mobile: min-h-screen, trên desktop: min-h-[80vh] (cắt đi 1/5 chiều cao) -->
+<section class="relative w-full py-20 min-h-screen md:min-h-[80vh]">
+    <div class="container mx-auto px-6 md:px-12">
+        <h2 class="text-3xl md:text-5xl font-bold text-center text-gray-800 mb-10">
+            Lợi Ích Nổi Bật
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+            <!-- Lợi ích 1 -->
+            <div class="benefit-card" id="benefit1">
+                <div class="icon-container">🎁</div>
+                <div class="text-container">
+                    <h3 class="text-2xl font-semibold text-gray-800">Trải nghiệm Cá nhân hóa</h3>
+                    <p class="text-gray-600 mt-2">Xây dựng trải nghiệm riêng biệt với nội dung, tương tác tùy chỉnh theo nhu cầu khách hàng.</p>
+                </div>
+            </div>
+
+            <!-- Lợi ích 2 -->
+            <div class="benefit-card" id="benefit2">
+                <div class="icon-container">📢</div>
+                <div class="text-container">
+                    <h3 class="text-2xl font-semibold text-gray-800">Câu chuyện Thương hiệu</h3>
+                    <p class="text-gray-600 mt-2">Truyền tải thương hiệu bằng cách trực quan, sinh động, giúp tăng sự gắn kết.</p>
+                </div>
+            </div>
+
+            <!-- Lợi ích 3 -->
+            <div class="benefit-card" id="benefit3">
+                <div class="icon-container">🔒</div>
+                <div class="text-container">
+                    <h3 class="text-2xl font-semibold text-gray-800">Bảo vệ Thương hiệu</h3>
+                    <p class="text-gray-600 mt-2">Chống giả mạo bằng cách định danh số độc nhất, bảo mật và không thể sao chép.</p>
+                </div>
+            </div>
+
+            <!-- Lợi ích 4 -->
+            <div class="benefit-card" id="benefit4">
+                <div class="icon-container">🛡️</div>
+                <div class="text-container">
+                    <h3 class="text-2xl font-semibold text-gray-800">Xác thực Quyền sở hữu</h3>
+                    <p class="text-gray-600 mt-2">Tích hợp Blockchain để chứng thực quyền sở hữu tài sản vật lý và số.</p>
+                </div>
+            </div>
+
+            <!-- Lợi ích 5 -->
+            <div class="benefit-card" id="benefit5">
+                <div class="icon-container">📊</div>
+                <div class="text-container">
+                    <h3 class="text-2xl font-semibold text-gray-800">Kiến tạo Tài sản số</h3>
+                    <p class="text-gray-600 mt-2">Định danh và xác thực quyền sở hữu, giúp giao dịch minh bạch và an toàn.</p>
+                </div>
+            </div>
+
+            <!-- Lợi ích 6 -->
+            <div class="benefit-card" id="benefit6">
+                <div class="icon-container">🔑</div>
+                <div class="text-container">
+                    <h3 class="text-2xl font-semibold text-gray-800">Hộ chiếu Sản phẩm số</h3>
+                    <p class="text-gray-600 mt-2">Cung cấp thông tin sản phẩm minh bạch từ nguồn gốc, xuất xứ đến bảo hành.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Gallery Section -->
+<section id="gallery-section" class="h-screen flex items-center justify-center">
+    <div id="gallery-container" class="relative w-[75vw] h-[75vh] shadow-2xl rounded-2xl overflow-hidden">
+        <!-- Gallery cho Desktop -->
+        <div id="gallery-desktop" class="w-full h-full hidden md:block">
+                            <img src="https://placehold.co/1600x900" alt="Slide 1" class="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-1000">
+                <img src="https://placehold.co/1600x900" alt="Slide 2" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+                <img src="https://placehold.co/1600x900" alt="Slide 3" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+                <img src="https://placehold.co/1600x900" alt="Slide 4" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+                <img src="https://placehold.co/1600x900" alt="Slide 5" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+        </div>
+        <!-- Gallery cho Mobile -->
+        <div id="gallery-mobile" class="w-full h-full block md:hidden">
+                            <img src="https://placehold.co/900x1600" alt="Slide 1" class="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-1000">
+                <img src="https://placehold.co/900x1600" alt="Slide 2" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+                <img src="https://placehold.co/900x1600" alt="Slide 3" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+                <img src="https://placehold.co/900x1600" alt="Slide 4" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+                <img src="https://placehold.co/900x1600" alt="Slide 5" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+        </div>
+        <!-- Nút chuyển ảnh -->
+        <button id="prevBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/50 hover:bg-white/80 transition-all duration-300 rounded-full p-2 md:p-3 shadow-lg hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 md:w-6 md:h-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <button id="nextBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/50 hover:bg-white/80 transition-all duration-300 rounded-full p-2 md:p-3 shadow-lg hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 md:w-6 md:h-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+        <!-- Dot Indicator -->
+        <div id="dot-indicators" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+            <div class="w-3 h-3 bg-white rounded-full opacity-100"></div>
+            <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+            <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+            <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+            <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Video & Thư Section -->
+<section id="video-section" class="h-screen flex items-center justify-center">
+    <!-- Khối chứa Video & Thư, sử dụng responsive order: trên mobile video ở trên, thư ở dưới; trên desktop ngược lại -->
+    <div id="video-block" class="flex flex-col md:flex-row w-[90%] mx-auto items-stretch">
+        <!-- Bức thư tay: trên mobile: order-2 (xuất hiện sau video), trên desktop: order-1 (xuất hiện bên trái) -->
+        <div id="letter-container" class="w-full md:w-[30%] order-2 md:order-1 mt-4 md:mt-0 md:mr-8">
+            <div class="bg-[#fffaf0] border border-[#d4a373] shadow-lg rounded-lg p-6 h-full" style="font-family: 'Dancing Script', cursive;">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Thư Tâm Ý</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    Gửi Quý khách thân mến,
+                </p>
+                <p class="text-gray-700 leading-relaxed mt-2">
+                    Chúng tôi vô cùng trân trọng sự tin tưởng và ủng hộ của quý khách đối với sản phẩm của chúng tôi. Mỗi sản phẩm được tạo ra với tâm huyết, nhằm mang đến trải nghiệm tuyệt vời nhất.
+                </p>
+                <p class="text-gray-700 leading-relaxed mt-2">
+                    Chúc quý khách sức khỏe và thành công.
+                </p>
+                <p class="text-gray-700 leading-relaxed mt-4 text-right font-semibold">
+                    Trân trọng,
+                </p>
+                <p class="text-gray-700 leading-relaxed text-right font-semibold">
+                    Đội ngũ Quà Tặng AR
+                </p>
+            </div>
+        </div>
+        <!-- Video Container: trên mobile: order-1 (xuất hiện trước), trên desktop: order-2 (xuất hiện bên phải) -->
+        <div id="video-container" class="w-full md:w-[70%] order-1 md:order-2">
+            <video class="w-full rounded-lg shadow-2xl object-cover" controls autoplay loop muted>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Trình duyệt của bạn không hỗ trợ video.
+            </video>
+        </div>
+    </div>
+</section>
+
+<!-- Bằng chứng xã hội (Review) Section -->
+<!-- Trên desktop: chiều cao 1 màn hình, trên mobile: chiều cao tự động theo nội dung -->
+<section id="review-section" class="flex flex-col justify-center py-8 md:py-0 px-4 md:h-screen">
+    <div class="container mx-auto">
+        <!-- Tiêu đề Section -->
+        <h2 class="text-3xl md:text-5xl font-bold text-center text-gray-800 mb-8">
+            Đánh Giá & Review
+        </h2>
+        <!-- Grid chứa 6 review: sử dụng 2 cột trên mọi thiết bị -->
+        <div class="grid grid-cols-2 gap-8  overflow-hidden">
+            <!-- Review Card 1 (Left Column) -->
+            <div class="review-card bg-white p-6 rounded-xl shadow-md flex flex-col items-center transform">
+                <img src="https://placehold.co/100x100" alt="Avatar 1" class="w-20 h-20 rounded-full mb-4">
+                <div class="text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-gray-700 text-center">
+                    Sản phẩm tuyệt vời, trải nghiệm AR thực sự làm nên sự khác biệt!
+                </p>
+            </div>
+            <!-- Review Card 2 (Right Column) -->
+            <div class="review-card bg-white p-6 rounded-xl shadow-md flex flex-col items-center transform">
+                <img src="https://placehold.co/100x100" alt="Avatar 2" class="w-20 h-20 rounded-full mb-4">
+                <div class="text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-700 text-center">
+                    Tôi rất hài lòng với dịch vụ và chất lượng sản phẩm. Rất đáng giá!
+                </p>
+            </div>
+            <!-- Review Card 3 (Left Column) -->
+            <div class="review-card bg-white p-6 rounded-xl shadow-md flex flex-col items-center transform">
+                <img src="https://placehold.co/100x100" alt="Avatar 3" class="w-20 h-20 rounded-full mb-4">
+                <div class="text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p class="text-gray-700 text-center">
+                    Review trung thực, sản phẩm mang lại trải nghiệm mới mẻ.
+                </p>
+            </div>
+            <!-- Review Card 4 (Right Column) -->
+            <div class="review-card bg-white p-6 rounded-xl shadow-md flex flex-col items-center transform">
+                <img src="https://placehold.co/100x100" alt="Avatar 4" class="w-20 h-20 rounded-full mb-4">
+                <div class="text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p class="text-gray-700 text-center">
+                    Dịch vụ khách hàng tuyệt vời. Sản phẩm xứng đáng với giá trị của nó.
+                </p>
+            </div>
+            <!-- Review Card 5 (Left Column) -->
+            <div class="review-card bg-white p-6 rounded-xl shadow-md flex flex-col items-center transform">
+                <img src="https://placehold.co/100x100" alt="Avatar 5" class="w-20 h-20 rounded-full mb-4">
+                <div class="text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p class="text-gray-700 text-center">
+                    Tôi yêu cách công nghệ AR mang đến trải nghiệm sống động cho quà tặng này.
+                </p>
+            </div>
+            <!-- Review Card 6 (Right Column) -->
+            <div class="review-card bg-white p-6 rounded-xl shadow-md flex flex-col items-center transform">
+                <img src="https://placehold.co/100x100" alt="Avatar 6" class="w-20 h-20 rounded-full mb-4">
+                <div class="text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-700 text-center">
+                    Sản phẩm thật độc đáo, giúp tôi tạo ấn tượng mạnh với người nhận.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Cam kết & Chính sách hỗ trợ - Timeline -->
+<section id="support-section" class="py-16 bg-gradient-to-r from-blue-50 to-purple-50">
+    <div class="container mx-auto px-4">
+        <!-- Tiêu đề -->
+        <h2 class="text-3xl md:text-5xl font-bold text-center text-gray-800 mb-12">
+            Cam kết & Chính sách hỗ trợ
+        </h2>
+        <!-- Timeline container -->
+        <div class="relative">
+            <!-- Đường timeline dọc (chỉ trên desktop) -->
+            <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-gray-300"></div>
+            <!-- Timeline cards -->
+            <div class="space-y-12 relative">
+                <!-- Card 1: Căn trái -->
+                <div class="md:flex md:items-center">
+                    <div class="md:w-1/2 md:pr-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg relative group">
+                            <!-- Dot timeline cho card này -->
+                            <div class="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-blue-500 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Giao hàng nhanh chóng</h3>
+                            <p class="text-gray-600">Chúng tôi cam kết giao hàng nhanh chóng và đúng hẹn, mang đến sự hài lòng tối đa.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:w-1/2"></div>
+                </div>
+                <!-- Card 2: Căn phải -->
+                <div class="md:flex md:items-center flex-col-reverse md:flex-row">
+                    <div class="hidden md:block md:w-1/2"></div>
+                    <div class="md:w-1/2 md:pl-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg relative group">
+                            <div class="hidden md:block absolute -left-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-green-500 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Đổi trả linh hoạt</h3>
+                            <p class="text-gray-600">Chính sách đổi trả trong vòng 30 ngày nếu sản phẩm không đáp ứng được kỳ vọng.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3: Căn trái -->
+                <div class="md:flex md:items-center">
+                    <div class="md:w-1/2 md:pr-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg relative group">
+                            <div class="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-red-500 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Hỗ trợ 24/7</h3>
+                            <p class="text-gray-600">Đội ngũ hỗ trợ luôn sẵn sàng giải đáp mọi thắc mắc của bạn 24/7, bất kể thời gian.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:w-1/2"></div>
+                </div>
+                <!-- Card 4: Căn phải -->
+                <div class="md:flex md:items-center flex-col-reverse md:flex-row">
+                    <div class="hidden md:block md:w-1/2"></div>
+                    <div class="md:w-1/2 md:pl-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg relative group">
+                            <div class="hidden md:block absolute -left-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-purple-500 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Bảo hành chất lượng</h3>
+                            <p class="text-gray-600">Chúng tôi cam kết bảo hành sản phẩm trong thời gian dài, đảm bảo chất lượng và độ bền.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5: Căn trái -->
+                <div class="md:flex md:items-center">
+                    <div class="md:w-1/2 md:pr-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg relative group">
+                            <div class="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-indigo-500 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Hỗ trợ đổi mới</h3>
+                            <p class="text-gray-600">Luôn cập nhật và đổi mới sản phẩm để mang đến những mẫu mã độc đáo, hiện đại.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:w-1/2"></div>
+                </div>
+                <!-- Card 6: Căn phải -->
+                <div class="md:flex md:items-center flex-col-reverse md:flex-row">
+                    <div class="hidden md:block md:w-1/2"></div>
+                    <div class="md:w-1/2 md:pl-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg relative group">
+                            <div class="hidden md:block absolute -left-3 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Hỗ trợ kỹ thuật chuyên nghiệp</h3>
+                            <p class="text-gray-600">Đội ngũ kỹ thuật chuyên nghiệp, sẵn sàng hỗ trợ và tư vấn mọi vấn đề liên quan đến sản phẩm.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 6. Footer (Thông tin liên hệ, Chính sách, MXH) -->
+<footer class="bg-gray-800 text-gray-200">
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Thông tin liên hệ -->
+            <div>
+                <h3 class="text-xl font-bold mb-4">Thông tin liên hệ</h3>
+                <ul class="space-y-2">
+                    <li><i class="fas fa-map-marker-alt mr-2"></i>123 Đường ABC, Quận XYZ, TP.HCM</li>
+                    <li><i class="fas fa-phone mr-2"></i>+84 123 456 789</li>
+                    <li><i class="fas fa-envelope mr-2"></i>contact@quatangar.com</li>
+                </ul>
+            </div>
+            <!-- Chính sách -->
+            <div>
+                <h3 class="text-xl font-bold mb-4">Chính sách</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white transition-colors">Chính sách bảo mật</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Chính sách đổi trả</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Điều khoản dịch vụ</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Chính sách vận chuyển</a></li>
+                </ul>
+            </div>
+            <!-- Mạng xã hội -->
+            <div>
+                <h3 class="text-xl font-bold mb-4">Mạng xã hội</h3>
+                <ul class="flex space-x-4">
+                    <li>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-tiktok fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-youtube fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Dòng chân -->
+        <div class="mt-12 border-t border-gray-700 pt-4 text-center">
+            <p class="text-sm">&copy; 2025 Quà Tặng AR. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- GSAP ScrollTrigger (nếu muốn thêm hiệu ứng động cho toàn khối timeline, có thể bổ sung) -->
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+    // Ví dụ: Bạn có thể áp dụng hiệu ứng fade-in cho toàn bộ timeline khi cuộn
+    gsap.from("#support-section", {
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+            trigger: "#support-section",
+            start: "top 90%",
+            end: "top 60%",
+            scrub: true,
+        }
+    });
+</script>
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Áp dụng hiệu ứng scroll cho từng review card
+    const reviews = document.querySelectorAll('.review-card');
+    reviews.forEach((card, index) => {
+        const fromX = (index % 2 === 0) ? -150 : 150;
+        gsap.fromTo(card,
+            { x: fromX, opacity: 0, scale: 0.8 },
+            {
+                x: 0, opacity: 1, scale: 1, duration: 2, ease: "power2.out",
+                scrollTrigger: {
+                    trigger: card,
+                    // Review xuất hiện sớm hơn (khi card gần đạt trung tâm)
+                    start: "top 90%",
+                    // Khi phần dưới của card còn 50% của viewport, hiệu ứng bắt đầu reverse
+                    end: "bottom 50%",
+                    scrub: true,
+                    toggleActions: "play reverse play reverse"
+                    // markers: true
+                }
+            }
+        );
+    });
+</script>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hiệu ứng scroll cho Gallery
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#gallery-section",
+            start: "top center",
+            end: "bottom center",
+            scrub: true,
+        }
+    })
+        .fromTo("#gallery-container",
+            { scale: 0.6, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 1 }
+        )
+        .to("#gallery-container",
+            { scale: 0.4, opacity: 0, duration: 1 }
+        );
+
+    // Slider Gallery
+    let currentIndex = 0;
+    const slideDuration = 3000; // 3 giây
+    const totalSlides = 5;
+    let autoSlideTimeout;
+
+    function showSlide(index) {
+        const galleries = [
+            document.getElementById("gallery-desktop"),
+            document.getElementById("gallery-mobile")
+        ];
+        galleries.forEach(gallery => {
+            if (gallery) {
+                const slides = gallery.querySelectorAll("img");
+                slides.forEach((slide, i) => {
+                    slide.style.opacity = i === index ? "1" : "0";
+                });
+            }
+        });
+        const dotContainer = document.getElementById("dot-indicators");
+        if (dotContainer) {
+            const dots = dotContainer.children;
+            for (let i = 0; i < dots.length; i++) {
+                if (i === index) {
+                    dots[i].classList.add("opacity-100");
+                    dots[i].classList.remove("opacity-50");
+                } else {
+                    dots[i].classList.add("opacity-50");
+                    dots[i].classList.remove("opacity-100");
+                }
+            }
+        }
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        showSlide(currentIndex);
+    }
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        showSlide(currentIndex);
+    }
+    function startAutoSlide() {
+        autoSlideTimeout = setTimeout(() => {
+            nextSlide();
+            startAutoSlide();
+        }, slideDuration);
+    }
+    startAutoSlide();
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+        clearTimeout(autoSlideTimeout);
+        nextSlide();
+        startAutoSlide();
+    });
+    document.getElementById("prevBtn").addEventListener("click", () => {
+        clearTimeout(autoSlideTimeout);
+        prevSlide();
+        startAutoSlide();
+    });
+
+    // Vuốt trên mobile
+    const galleryContainer = document.getElementById("gallery-container");
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const threshold = 50;
+
+    galleryContainer.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    galleryContainer.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleGesture();
+    });
+    function handleGesture() {
+        if (touchEndX < touchStartX - threshold) {
+            clearTimeout(autoSlideTimeout);
+            nextSlide();
+            startAutoSlide();
+        } else if (touchEndX > touchStartX + threshold) {
+            clearTimeout(autoSlideTimeout);
+            prevSlide();
+            startAutoSlide();
+        }
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hiệu ứng scroll cho khối chứa Video & Thư (video-block)
+    if (window.innerWidth < 768) {
+        // Mobile: Timeline với 2 tween, kéo dài 3 giây mỗi tween
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#video-section",
+                start: "top 50%",
+                end: "bottom 70%",
+                scrub: true,
+                // markers: true
+            }
+        });
+        tl.fromTo("#video-block",
+            { scale: 0.3, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 3, ease: "power2.out" }
+        );
+        tl.to("#video-block",
+            { scale: 0.3, opacity: 0, duration: 3, ease: "power2.in" }
+        );
+    } else {
+        // Desktop: Timeline với 2 tween, kéo dài 2 giây mỗi tween
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#video-section",
+                start: "top center",
+                end: "bottom 70%",
+                scrub: true,
+                // markers: true
+            }
+        });
+        tl.fromTo("#video-block",
+            { scale: 0.6, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 2, ease: "power2.out" }
+        )
+            .to("#video-block",
+                { scale: 0.4, opacity: 0, duration: 2, ease: "power2.in" }
+            );
+    }
+</script>
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Kiểm tra màn hình có phải mobile không
+    const isMobile = window.innerWidth < 768;
+    const benefits = document.querySelectorAll(".benefit-card");
+
+    if (isMobile) {
+        // Hiệu ứng cho mobile: chuyển động nhanh hơn (duration giảm xuống 1.4 giây)
+        benefits.forEach((benefit) => {
+            gsap.fromTo(benefit,
+                { opacity: 0, y: 100, scale: 0.9 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1.4,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: benefit,
+                        start: "top 80%",
+                        end: "top 60%",
+                        toggleActions: "play none none reverse",
+                        scrub: false
+                    }
+                }
+            );
+        });
+    } else {
+        // Hiệu ứng cho desktop: chuyển động nhanh hơn (duration giảm xuống 2.5 giây, stagger giảm xuống 0.4 giây)
+        gsap.fromTo(benefits,
+            { opacity: 0, y: 150, scale: 0.8 },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 2.5,
+                ease: "power2.out",
+                stagger: 0.4,
+                scrollTrigger: {
+                    trigger: ".benefit-card",
+                    start: "top 80%",
+                    end: "top 60%",
+                    toggleActions: "play none none reverse",
+                    scrub: 1
+                }
+            }
+        );
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Danh sách ảnh nền cho Desktop
+        const desktopBanners = [
+            "https://placehold.co/1600x900",
+            "https://placehold.co/1600x900",
+            "https://placehold.co/1600x900"
+        ];
+
+        // Danh sách ảnh nền cho Mobile
+        const mobileBanners = [
+            "https://placehold.co/900x1600",
+            "https://placehold.co/900x1600",
+            "https://placehold.co/900x1600"
+        ];
+
+        let index = 0;
+        let bg1 = document.getElementById("heroBg1");
+        let bg2 = document.getElementById("heroBg2");
+
+        function changeBanner() {
+            const banners = window.innerWidth > 640 ? desktopBanners : mobileBanners;
+            let nextIndex = (index + 1) % banners.length;
+
+            // Đổi ảnh của lớp nền mới
+            bg2.style.backgroundImage = `url('${banners[nextIndex]}')`;
+
+            // Chuyển hiệu ứng fade-in/fade-out
+            bg1.classList.add("inactive");
+            bg2.classList.remove("inactive");
+            bg2.classList.add("active");
+
+            // Đổi vị trí hai lớp để ảnh mới trở thành ảnh nền chính
+            setTimeout(() => {
+                let temp = bg1;
+                bg1 = bg2;
+                bg2 = temp;
+            }, 2000); // Sau 2 giây, hoán đổi ảnh nền
+
+            index = nextIndex;
+        }
+
+        // Đặt ảnh nền đầu tiên
+        bg1.style.backgroundImage = `url('${desktopBanners[0]}')`;
+        bg2.style.backgroundImage = `url('${desktopBanners[1]}')`;
+
+        // Cập nhật ảnh nền mỗi 5 giây
+        setInterval(changeBanner, 5000);
+    });
+</script>
+
+</body>
+</html>

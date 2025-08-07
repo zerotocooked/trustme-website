@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúng Tôi Sắp Cưới - Minh & Hương</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style>
+        /* Biến để dễ thay đổi màu sắc */
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #f5f5f5;
+            --accent-color: #000000;
+            --text-color: #333333;
+            --highlight-color: #C0C0C0;
+            --gold-accent: #D4AF37;
+        }
+
+        /* Thiết lập cơ bản */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: var(--primary-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Thiết lập các section */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        /* Parallax effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--accent-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container.left {
+            left: 0;
+        }
+
+        .timeline-container.right {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--secondary-color);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Mobile Responsive Fix */
+        @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+            
+            .container {
+                max-width: 100%;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            height: 250px;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1500;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        /* RSVP Form */
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            background-clip: padding-box;
+            border: 1px solid var(--highlight-color);
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            font-weight: 500;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            color: var(--primary-color);
+            background-color: var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--text-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Countdown */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .countdown-item {
+            text-align: center;
+            border: 2px solid var(--highlight-color);
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* Control buttons for music and hearts */
+        .control-buttons {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .control-btn.active {
+            background-color: var(--gold-accent);
+            transform: scale(1.1);
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hearts animation */
+        .heart {
+            position: fixed;
+            font-size: 25px;
+            color: #D4AF37;
+            z-index: 9999;
+            pointer-events: none;
+            animation: heartFloat 4s linear forwards;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                bottom: -20px;
+                opacity: 1;
+            }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+                transform: translateX(20px);
+            }
+        }
+
+        /* Masonry Gallery */
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            overflow: hidden;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+        }
+
+        .masonry-item:hover {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        /* Guestbook */
+        .guestbook-entry {
+            background-color: var(--secondary-color);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--highlight-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-xl font-bold">M & H</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-gray-500 transition">Trang Chủ</a>
+                    <a href="#story" class="hover:text-gray-500 transition">Câu Chuyện</a>
+                    <a href="#event" class="hover:text-gray-500 transition">Sự Kiện</a>
+                    <a href="#gallery" class="hover:text-gray-500 transition">Hình Ảnh</a>
+                    <a href="#rsvp" class="hover:text-gray-500 transition">RSVP</a>
+                    <a href="#guestbook" class="hover:text-gray-500 transition">Lưu Bút</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden py-4">
+                <a href="#home" class="block py-2 hover:text-gray-500 transition">Trang Chủ</a>
+                <a href="#story" class="block py-2 hover:text-gray-500 transition">Câu Chuyện</a>
+                <a href="#event" class="block py-2 hover:text-gray-500 transition">Sự Kiện</a>
+                <a href="#gallery" class="block py-2 hover:text-gray-500 transition">Hình Ảnh</a>
+                <a href="#rsvp" class="block py-2 hover:text-gray-500 transition">RSVP</a>
+                <a href="#guestbook" class="block py-2 hover:text-gray-500 transition">Lưu Bút</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="parallax h-screen flex items-center justify-center" style="background-image: url('https://placehold.co/1200x800'); background-color: #f5f5f5;">
+        <div class="container mx-auto px-4 text-center">
+            <h1 id="main-title" class="text-4xl md:text-6xl font-bold mb-4">Chúng Tôi Sắp Cưới</h1>
+            <h2 class="text-2xl md:text-4xl mb-8">Minh & Hương</h2>
+            <p class="text-xl mb-8">25.07.2025</p>
+            
+            <!-- Countdown -->
+            <div class="countdown mb-12">
+                <div class="countdown-item">
+                    <div id="days" class="countdown-number">00</div>
+                    <div class="countdown-label">Ngày</div>
+                </div>
+                <div class="countdown-item">
+                    <div id="hours" class="countdown-number">00</div>
+                    <div class="countdown-label">Giờ</div>
+                </div>
+                <div class="countdown-item">
+                    <div id="minutes" class="countdown-number">00</div>
+                    <div class="countdown-label">Phút</div>
+                </div>
+                <div class="countdown-item">
+                    <div id="seconds" class="countdown-number">00</div>
+                    <div class="countdown-label">Giây</div>
+                </div>
+            </div>
+            
+            <a href="#rsvp" class="btn btn-primary">Xác Nhận Tham Dự</a>
+        </div>
+    </section>
+
+    <!-- Love Story Section -->
+    <section id="story" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Câu Chuyện Tình Yêu</h2>
+            
+            <!-- Mobile Timeline (hiển thị trên thiết bị di động) -->
+            <div class="md:hidden">
+                <div class="space-y-8">
+                    <!-- Timeline Item 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm fade-in">
+                        <h3 class="font-bold text-xl mb-2">Lần Đầu Gặp Gỡ</h3>
+                        <p class="text-gray-700 mb-2">10.05.2022</p>
+                        <p>Chúng tôi gặp nhau lần đầu tiên tại một buổi triển lãm nghệ thuật. Ánh mắt đầu tiên đã nói lên tất cả.</p>
+                    </div>
+                    
+                    <!-- Timeline Item 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm fade-in">
+                        <h3 class="font-bold text-xl mb-2">Buổi Hẹn Đầu Tiên</h3>
+                        <p class="text-gray-700 mb-2">24.06.2022</p>
+                        <p>Chúng tôi dành trọn buổi chiều lang thang qua những con phố nhỏ, thưởng thức cà phê và chia sẻ những câu chuyện.</p>
+                    </div>
+                    
+                    <!-- Timeline Item 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm fade-in">
+                        <h3 class="font-bold text-xl mb-2">Kỷ Niệm Đầu Tiên</h3>
+                        <p class="text-gray-700 mb-2">15.09.2022</p>
+                        <p>Chuyến đi Đà Lạt đầu tiên cùng nhau, nơi chúng tôi cùng đón bình minh và ngắm hoàng hôn trên đồi thông.</p>
+                    </div>
+                    
+                    <!-- Timeline Item 4 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm fade-in">
+                        <h3 class="font-bold text-xl mb-2">Về Quê Ra Mắt</h3>
+                        <p class="text-gray-700 mb-2">30.01.2023</p>
+                        <p>Khoảnh khắc đáng nhớ khi chúng tôi cùng nhau về quê và gặp gỡ gia đình hai bên.</p>
+                    </div>
+                    
+                    <!-- Timeline Item 5 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm fade-in">
+                        <h3 class="font-bold text-xl mb-2">Lời Cầu Hôn</h3>
+                        <p class="text-gray-700 mb-2">14.02.2024</p>
+                        <p>Dưới ánh nến lung linh và tiếng dương cầm nhẹ nhàng, anh ấy đã quỳ gối và trao cho em chiếc nhẫn cùng lời hứa mãi mãi.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop Timeline (hiển thị trên màn hình lớn) -->
+            <div class="hidden md:block">
+                <div class="timeline">
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-container left fade-in">
+                        <div class="timeline-content">
+                            <h3 class="font-bold text-xl mb-2">Lần Đầu Gặp Gỡ</h3>
+                            <p class="text-gray-700">10.05.2022</p>
+                            <p class="mt-2">Chúng tôi gặp nhau lần đầu tiên tại một buổi triển lãm nghệ thuật. Ánh mắt đầu tiên đã nói lên tất cả.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-container right fade-in">
+                        <div class="timeline-content">
+                            <h3 class="font-bold text-xl mb-2">Buổi Hẹn Đầu Tiên</h3>
+                            <p class="text-gray-700">24.06.2022</p>
+                            <p class="mt-2">Chúng tôi dành trọn buổi chiều lang thang qua những con phố nhỏ, thưởng thức cà phê và chia sẻ những câu chuyện.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 3 -->
+                    <div class="timeline-container left fade-in">
+                        <div class="timeline-content">
+                            <h3 class="font-bold text-xl mb-2">Kỷ Niệm Đầu Tiên</h3>
+                            <p class="text-gray-700">15.09.2022</p>
+                            <p class="mt-2">Chuyến đi Đà Lạt đầu tiên cùng nhau, nơi chúng tôi cùng đón bình minh và ngắm hoàng hôn trên đồi thông.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 4 -->
+                    <div class="timeline-container right fade-in">
+                        <div class="timeline-content">
+                            <h3 class="font-bold text-xl mb-2">Về Quê Ra Mắt</h3>
+                            <p class="text-gray-700">30.01.2023</p>
+                            <p class="mt-2">Khoảnh khắc đáng nhớ khi chúng tôi cùng nhau về quê và gặp gỡ gia đình hai bên.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 5 -->
+                    <div class="timeline-container left fade-in">
+                        <div class="timeline-content">
+                            <h3 class="font-bold text-xl mb-2">Lời Cầu Hôn</h3>
+                            <p class="text-gray-700">14.02.2024</p>
+                            <p class="mt-2">Dưới ánh nến lung linh và tiếng dương cầm nhẹ nhàng, anh ấy đã quỳ gối và trao cho em chiếc nhẫn cùng lời hứa mãi mãi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Section -->
+    <section id="event" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Thông Tin Lễ Cưới</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Lễ Vu Quy -->
+                <div class="bg-white p-6 rounded-lg shadow-md fade-in">
+                    <h3 class="text-2xl font-bold mb-4">Lễ Vu Quy</h3>
+                    <p class="mb-2"><strong>Ngày:</strong> 25.07.2025</p>
+                    <p class="mb-2"><strong>Giờ:</strong> 9:00 - 11:30</p>
+                    <p class="mb-2"><strong>Địa điểm:</strong> Nhà hàng White Palace</p>
+                    <p class="mb-2"><strong>Địa chỉ:</strong> 194 Hoàng Văn Thụ, Phường 9, Phú Nhuận, TP.HCM</p>
+                    <div class="mt-4">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2543383400434!2d106.68019307486607!3d10.79179435945746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d681089f3b%3A0x5439f1c9608e10c3!2sWhite%20Palace!5e0!3m2!1svi!2s!4v1709899645057!5m2!1svi!2s" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                
+                <!-- Lễ Thành Hôn -->
+                <div class="bg-white p-6 rounded-lg shadow-md fade-in">
+                    <h3 class="text-2xl font-bold mb-4">Lễ Thành Hôn</h3>
+                    <p class="mb-2"><strong>Ngày:</strong> 26.07.2025</p>
+                    <p class="mb-2"><strong>Giờ:</strong> 18:00 - 21:00</p>
+                    <p class="mb-2"><strong>Địa điểm:</strong> GEM Center</p>
+                    <p class="mb-2"><strong>Địa chỉ:</strong> 8 Nguyễn Bỉnh Khiêm, Đa Kao, Quận 1, TP.HCM</p>
+                    <div class="mt-4">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4341572998915!2d106.70198007486585!3d10.78328705961407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f4670702e91%3A0xa5aeba0a2ff295e2!2sGEM%20Center!5e0!3m2!1svi!2s!4v1709899724534!5m2!1svi!2s" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dress Code & Timeline -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Dress Code -->
+                <div class="bg-white p-6 rounded-lg shadow-md fade-in">
+                    <h3 class="text-2xl font-bold mb-4">Dress Code</h3>
+                    <p class="mb-4">Chúng tôi khuyến khích quý khách mặc trang phục trong tông màu:</p>
+                    <div class="flex space-x-4 mb-4">
+                        <div class="w-16 h-16 bg-white border border-gray-300 rounded-full"></div>
+                        <div class="w-16 h-16 bg-black rounded-full"></div>
+                        <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                    </div>
+                    <p>Trắng, đen hoặc các tông xám để phù hợp với không gian tiệc cưới tối giản, hiện đại của chúng tôi.</p>
+                </div>
+                
+                <!-- Timeline -->
+                <div class="bg-white p-6 rounded-lg shadow-md fade-in">
+                    <h3 class="text-2xl font-bold mb-4">Lịch Trình Sự Kiện</h3>
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <div class="mr-4 flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-black text-white">1</div>
+                            <div>
+                                <h4 class="font-bold">Đón Tiếp</h4>
+                                <p>17:30 - 18:00</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="mr-4 flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-black text-white">2</div>
+                            <div>
+                                <h4 class="font-bold">Lễ Thành Hôn</h4>
+                                <p>18:00 - 18:30</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="mr-4 flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-black text-white">3</div>
+                            <div>
+                                <h4 class="font-bold">Tiệc & Giao Lưu</h4>
+                                <p>18:30 - 20:30</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="mr-4 flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-black text-white">4</div>
+                            <div>
+                                <h4 class="font-bold">Cắt Bánh & Kết Thúc</h4>
+                                <p>20:30 - 21:00</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Album Ảnh & Video</h2>
+            
+            <div class="masonry-grid">
+                <!-- Gallery Items -->
+                <div class="masonry-item fade-in">
+                    <img src="https://placehold.co/600x800" alt="Ảnh cưới" class="w-full">
+                </div>
+                <div class="masonry-item fade-in">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới" class="w-full">
+                </div>
+                <div class="masonry-item fade-in">
+                    <img src="https://placehold.co/600x600" alt="Ảnh cưới" class="w-full">
+                </div>
+                <div class="masonry-item fade-in">
+                    <img src="https://placehold.co/600x450" alt="Ảnh cưới" class="w-full">
+                </div>
+                <div class="masonry-item fade-in">
+                    <img src="https://placehold.co/600x700" alt="Ảnh cưới" class="w-full">
+                </div>
+                <div class="masonry-item fade-in">
+                    <img src="https://placehold.co/600x500" alt="Ảnh cưới" class="w-full">
+                </div>
+                <div class="masonry-item fade-in">
+                    <img src="https://placehold.co/600x850" alt="Ảnh cưới" class="w-full">
+                </div>
+                <div class="masonry-item fade-in">
+                    <img src="https://placehold.co/600x550" alt="Ảnh cưới" class="w-full">
+                </div>
+                <div class="masonry-item fade-in">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới" class="w-full">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <span class="close cursor-pointer absolute top-4 right-4 text-white text-4xl">&times;</span>
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Xác Nhận Tham Dự</h2>
+            
+            <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md fade-in">
+                <form id="rsvp-form">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 mb-2">Tên của bạn</label>
+                        <input type="text" id="name" class="form-control" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-700 mb-2">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="example@mail.com" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="phone" class="block text-gray-700 mb-2">Số điện thoại</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="0912345678">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="guests" class="block text-gray-700 mb-2">Số người tham dự</label>
+                        <select id="guests" class="form-control">
+                            <option value="1">1 người</option>
+                            <option value="2">2 người</option>
+                            <option value="3">3 người</option>
+                            <option value="4">4 người</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Lựa chọn món ăn</label>
+                        <div class="flex items-center space-x-2 mb-2">
+                            <input type="radio" id="non-veg" name="meal" value="non-veg" checked>
+                            <label for="non-veg">Không chay</label>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <input type="radio" id="veg" name="meal" value="veg">
+                            <label for="veg">Chay</label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="message" class="block text-gray-700 mb-2">Lời nhắn</label>
+                        <textarea id="message" class="form-control" rows="3" placeholder="Lời chúc hoặc ghi chú của bạn"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-full">Gửi Xác Nhận</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guestbook Section -->
+    <section id="guestbook" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Sổ Lưu Bút</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Form Lời Chúc -->
+                <div class="fade-in">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-4">Để Lại Lời Chúc</h3>
+                        <form id="guestbook-form">
+                            <div class="mb-4">
+                                <label for="gb-name" class="block text-gray-700 mb-2">Tên của bạn</label>
+                                <input type="text" id="gb-name" class="form-control" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="gb-message" class="block text-gray-700 mb-2">Lời chúc</label>
+                                <textarea id="gb-message" class="form-control" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-full">Gửi Lời Chúc</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Danh Sách Lời Chúc -->
+                <div class="fade-in">
+                    <div id="guestbook-entries" class="space-y-4">
+                        <div class="guestbook-entry">
+                            <h4 class="font-bold">Nguyễn Văn A</h4>
+                            <p class="text-sm text-gray-500">20.02.2025</p>
+                            <p class="mt-2">Chúc mừng hai bạn! Mong rằng tình yêu của hai bạn sẽ ngày càng bền chặt và hạnh phúc.</p>
+                        </div>
+                        
+                        <div class="guestbook-entry">
+                            <h4 class="font-bold">Trần Thị B</h4>
+                            <p class="text-sm text-gray-500">18.02.2025</p>
+                            <p class="mt-2">Chúc hai bạn trăm năm hạnh phúc, trọn đời bên nhau. Mong rằng cả hai sẽ luôn yêu thương và chia sẻ mọi khoảnh khắc trong cuộc sống.</p>
+                        </div>
+                        
+                        <div class="guestbook-entry">
+                            <h4 class="font-bold">Lê Văn C</h4>
+                            <p class="text-sm text-gray-500">15.02.2025</p>
+                            <p class="mt-2">Gửi lời chúc mừng đến đôi uyên ương. Chúc hai bạn có một đám cưới thật đẹp và một cuộc sống hôn nhân viên mãn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registry Section -->
+    <section id="registry" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Danh Sách Quà Cưới</h2>
+            
+            <div class="max-w-lg mx-auto text-center fade-in">
+                <p class="mb-8">Sự hiện diện của bạn là món quà quý giá nhất đối với chúng tôi. Tuy nhiên, nếu bạn muốn gửi tặng một món quà, bạn có thể tham khảo danh sách quà cưới của chúng tôi.</p>
+                
+                <div class="flex justify-center space-x-8 mb-8">
+                    <div class="text-center">
+                        <div class="bg-gray-200 w-32 h-32 flex items-center justify-center rounded-lg mb-2">
+                            <span class="text-3xl"><img src="https://placehold.co/120x120" alt="QR Code Shopee" class="w-full h-full"></span>
+                        </div>
+                        <p>Shopee</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-gray-200 w-32 h-32 flex items-center justify-center rounded-lg mb-2">
+                            <span class="text-3xl"><img src="https://placehold.co/120x120" alt="QR Code Tiki" class="w-full h-full"></span>
+                        </div>
+                        <p>Tiki</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-gray-200 w-32 h-32 flex items-center justify-center rounded-lg mb-2">
+                            <span class="text-3xl"><img src="https://placehold.co/120x120" alt="QR Code Honeymoon" class="w-full h-full"></span>
+                        </div>
+                        <p>Quỹ Tuần Trăng Mật</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">Minh & Hương</h3>
+            <p class="mb-4">Cảm ơn bạn đã đồng hành cùng chúng tôi trong ngày trọng đại này</p>
+            
+            <div class="flex justify-center space-x-4 mb-6">
+                <a href="#" class="text-white hover:text-gray-400 transition">
+                    <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-gray-400 transition">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-gray-400 transition">
+                    <i class="fab fa-tiktok text-xl"></i>
+                </a>
+            </div>
+            
+            <p class="text-gray-400">© 2025 Minh & Hương Wedding</p>
+        </div>
+    </footer>
+
+    <!-- Control buttons -->
+    <div class="control-buttons">
+        <div id="hearts-toggle" class="control-btn">
+            <i class="fas fa-heart"></i>
+        </div>
+        <div id="music-toggle" class="control-btn">
+            <i class="fas fa-music"></i>
+        </div>
+    </div>
+
+    <!-- Audio - sử dụng file MP3 giả lập -->
+    <audio id="background-music" loop preload="auto">
+        <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Sticky Navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade-in animation on scroll
+        function checkFadeIn() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (rect.top <= windowHeight * 0.8) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkFadeIn);
+        window.addEventListener('load', checkFadeIn);
+
+        // Countdown Timer
+        function updateCountdown() {
+            const weddingDate = new Date('July 25, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = weddingDate - now;
+            
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+            }
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Typing Animation for main title
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = document.getElementById('main-title');
+            const text = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            setTimeout(typeWriter, 500);
+        });
+
+        // Gallery Lightbox
+        const masonry = document.querySelectorAll('.masonry-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const close = document.querySelector('.close');
+        
+        masonry.forEach(item => {
+            item.addEventListener('click', function() {
+                const img = item.querySelector('img');
+                lightboxImg.src = img.src;
+                lightbox.style.display = 'flex';
+            });
+        });
+        
+        close.addEventListener('click', function() {
+            lightbox.style.display = 'none';
+        });
+        
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+
+        // RSVP Form Submit
+        document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Cảm ơn bạn đã xác nhận tham dự!');
+            this.reset();
+        });
+
+        // Guestbook Form Submit
+        document.getElementById('guestbook-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('gb-name').value;
+            const message = document.getElementById('gb-message').value;
+            const date = new Date().toLocaleDateString();
+
+            const entry = document.createElement('div');
+            entry.className = 'guestbook-entry';
+            entry.innerHTML = `
+                <h4 class="font-bold">${name}</h4>
+                <p class="text-sm text-gray-500">${date}</p>
+                <p class="mt-2">${message}</p>
+            `;
+
+            document.getElementById('guestbook-entries').prepend(entry);
+
+            // Confetti effect
+            createConfetti();
+
+            this.reset();
+        });
+
+        // Hearts Animation
+        const heartsToggle = document.getElementById('hearts-toggle');
+        let heartsInterval = null;
+        
+        // Tạo một trái tim mới và thêm vào trang
+        function createHeart() {
+            // Tạo phần tử trái tim
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤';
+            
+            // Đặt vị trí ngẫu nhiên theo chiều ngang
+            const randomX = Math.floor(Math.random() * window.innerWidth);
+            heart.style.left = randomX + 'px';
+            
+            // Thêm vào body
+            document.body.appendChild(heart);
+            
+            // Xóa sau khi animation kết thúc
+            setTimeout(() => heart.remove(), 4000);
+        }
+        
+        // Bật/tắt hiệu ứng tim bay
+        function toggleHearts() {
+            if (heartsInterval) {
+                // Đang BẬT -> TẮT
+                clearInterval(heartsInterval);
+                heartsInterval = null;
+                heartsToggle.classList.remove('active');
+                console.log('Đã TẮT hiệu ứng tim bay');
+            } else {
+                // Đang TẮT -> BẬT
+                heartsInterval = setInterval(createHeart, 300);
+                heartsToggle.classList.add('active');
+                console.log('Đã BẬT hiệu ứng tim bay');
+            }
+        }
+        
+        // Xử lý khi click nút tim
+        heartsToggle.addEventListener('click', toggleHearts);
+        
+        // Tự động bật hiệu ứng tim bay khi tải trang
+        window.addEventListener('DOMContentLoaded', function() {
+            // Bật hiệu ứng tim bay sau 1 giây
+            setTimeout(function() {
+                toggleHearts();
+                // Tạo ngay 10 trái tim ban đầu
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(createHeart, i * 100);
+                }
+            }, 1000);
+        });
+
+        // Music Toggle
+        const musicToggle = document.getElementById('music-toggle');
+        const backgroundMusic = document.getElementById('background-music');
+        let musicPlaying = false;
+        
+        // Xử lý khi click nút nhạc
+        musicToggle.addEventListener('click', function() {
+            if (musicPlaying) {
+                // Đang BẬT -> TẮT
+                this.classList.remove('active');
+                backgroundMusic.pause();
+                musicPlaying = false;
+                console.log('Đã TẮT nhạc nền');
+            } else {
+                // Đang TẮT -> BẬT
+                this.classList.add('active');
+                backgroundMusic.volume = 0.5;
+                
+                // Phát nhạc và xử lý trường hợp thất bại
+                const playPromise = backgroundMusic.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Phát nhạc thành công
+                        musicPlaying = true;
+                        console.log('Đã BẬT nhạc nền');
+                    })
+                    .catch(error => {
+                        // Phát nhạc thất bại
+                        this.classList.remove('active');
+                        console.log('Lỗi phát nhạc:', error);
+                        alert('Để phát nhạc, vui lòng nhấn vào nút phát nhạc một lần nữa.');
+                    });
+                }
+            }
+        });
+
+        // Create confetti effect when sending wishes
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'heart';
+                confetti.innerHTML = ['❤', '✨', '💕', '💖'][Math.floor(Math.random() * 4)];
+                
+                // Vị trí ngẫu nhiên
+                const randomX = Math.floor(Math.random() * window.innerWidth);
+                confetti.style.left = randomX + 'px';
+                
+                document.body.appendChild(confetti);
+                
+                // Xóa sau khi animation kết thúc
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+        
+        // Kiểm tra xem các nút điều khiển có tồn tại không
+        console.log("Nút bật/tắt tim:", heartsToggle);
+        console.log("Nút bật/tắt nhạc:", musicToggle);
+        
+        // Tạo một số tim ban đầu (không phụ thuộc vào hiệu ứng tim bay)
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createHeart, i * 200);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+/* Custom Font Families */
+.font-playfair {
+    font-family: 'Playfair Display', serif;
+}
+
+.font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 3D Card Effect */
+.transform-style-preserve-3d {
+    transform-style: preserve-3d;
+}
+
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.translate-z-20 {
+    transform: translateZ(20px);
+}
+
+.translate-z-30 {
+    transform: translateZ(30px);
+}
+
+.translate-z-40 {
+    transform: translateZ(40px);
+}
+
+.translate-z-50 {
+    transform: translateZ(50px);
+}
+
+.translate-z-60 {
+    transform: translateZ(60px);
+}
+
+.translate-z-70 {
+    transform: translateZ(70px);
+}
+
+.translate-z-80 {
+    transform: translateZ(80px);
+}
+
+.rotate-x-10 {
+    transform: rotateX(-10deg);
+}
+
+.rotate-y-10 {
+    transform: rotateY(10deg);
+}
+
+/* Feature Cards Animation */
+.feature-card {
+    backface-visibility: hidden;
+}
+
+.feature-card:hover .icon-container {
+    animation: icon-rotate 1.5s infinite alternate;
+}
+
+@keyframes icon-rotate {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(10deg);
+    }
+}
+
+/* Floating Animation */
+.animate-bounce-slow {
+    animation: bounce-slow 3s infinite alternate;
+}
+
+@keyframes bounce-slow {
+    0% {
+        transform: translateY(0) translateZ(30px);
+    }
+    100% {
+        transform: translateY(-10px) translateZ(30px);
+    }
+}
+
+/* Video Container */
+.aspect-w-16 {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.aspect-w-16 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+}
+
+/* Testimonial Cards Animation */
+.testimonial-card {
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.testimonial-card:hover img {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+/* Chat Popup Animation */
+#chatPopup.active {
+    display: block;
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Animate Reveal - Hiệu ứng khi scroll đến phần tử */
+@keyframes fadeInUp {
+    from {
+        opacity: 0.5;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-reveal {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Disable 3D transforms on small screens for better performance */
+@media (max-width: 768px) {
+    .transform-style-preserve-3d {
+        transform-style: flat;
+    }
+}
+
+/* Contact Form Animation */
+#contactForm:focus-within {
+    transform: translateZ(30px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .perspective-1000,
+    .translate-z-20,
+    .translate-z-30,
+    .translate-z-40,
+    .translate-z-50,
+    .translate-z-60 {
+        transform: none;
+    }
+
+    .feature-card:hover,
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Enable auto-rotate for feature icons on mobile */
+    .icon-container {
+        animation: icon-rotate-mobile 3s infinite linear;
+    }
+
+    @keyframes icon-rotate-mobile {
+        0% {
+            transform: rotateY(0);
+        }
+        100% {
+            transform: rotateY(360deg);
+        }
+    }
+}

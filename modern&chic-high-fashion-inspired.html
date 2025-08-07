@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOGUE WEDDING | Minh & Hà - The Love Story of The Year</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Biến màu chính - dễ thay đổi */
+        :root {
+            --primary-color: #f5f5f5; /* Trắng ngọc trai */
+            --secondary-color: #0a3d62; /* Xanh navy */
+            --accent-color: #f8c291; /* Hồng dusty rose */
+            --highlight-color: #f1c40f; /* Vàng ánh kim */
+            --dark-color: #111111; /* Đen tuyền */
+            --light-color: #ffffff;
+            --gray-color: #e0e0e0;
+
+            --font-primary: 'Playfair Display', serif;
+            --font-secondary: 'Montserrat', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .preloader .hearts {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .preloader .heart {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            transform: translate(-50%, -50%) scale(0);
+            animation: pulse 2s infinite;
+            color: var(--accent-color);
+            font-size: 50px;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 15px 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--secondary-color);
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar .nav-links li {
+            margin: 0 15px;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .navbar .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* Header Section */
+        .header {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary-color);
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://placehold.co/1920x1080');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.8);
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                    135deg,
+                    rgba(245, 245, 245, 0.7),
+                    rgba(10, 61, 98, 0.4)
+            );
+            z-index: -1;
+        }
+
+        .header-content {
+            text-align: center;
+            color: var(--dark-color);
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .header-content .subtitle {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 5px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .header-content h1 {
+            font-family: var(--font-primary);
+            font-size: 80px;
+            font-weight: 700;
+            margin: 20px 0;
+            line-height: 1.2;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+
+        .header-content h1 span {
+            color: var(--secondary-color);
+        }
+
+        .header-content .date {
+            font-family: var(--font-secondary);
+            font-size: 18px;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 1.1s;
+        }
+
+        .header-content .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 1.4s;
+        }
+
+        .header-content .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                    90deg,
+                    var(--secondary-color),
+                    var(--accent-color),
+                    var(--highlight-color)
+            );
+            z-index: -1;
+            transition: transform 0.5s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+
+        .header-content .cta-button:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .header-content .cta-button:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-family: var(--font-primary);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--dark-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Story Section */
+        .story {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--dark-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background-color: var(--accent-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            margin-bottom: 50px;
+            padding: 0 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--light-color);
+            border: 4px solid var(--accent-color);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -12px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 30px;
+            background-color: var(--light-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-date {
+            font-family: var(--font-primary);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .timeline-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark-color);
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        /* Event Section */
+        .event {
+            padding: 100px 0;
+            background-color: var(--primary-color);
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .event-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .event-content {
+            padding: 30px;
+        }
+
+        .event-title {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .event-info {
+            margin-bottom: 15px;
+        }
+
+        .event-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .event-info-item i {
+            color: var(--accent-color);
+            font-size: 18px;
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .event-info-text {
+            font-size: 16px;
+            color: var(--dark-color);
+        }
+
+        .event-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+
+        .event-map {
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        /* RSVP Section */
+        .rsvp {
+            padding: 100px 0;
+            background-color: var(--light-color);
+            background-image: url('https://placehold.co/1920x1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .rsvp-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .rsvp-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .rsvp-form {
+            background-color: var(--light-color);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-color);
+            border-radius: 5px;
+            font-family: var(--font-secondary);
+            font-size: 16px;
+            color: var(--dark-color);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(248, 194, 145, 0.2);
+        }
+
+        .form-textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-submit {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font-secondary);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .form-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                    90deg,
+                    var(--secondary-color),
+                    var(--accent-color),
+                    var(--highlight-color)
+            );
+            z-index: -1;
+            transition: transform 0.5s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+
+        .form-submit:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .form-submit:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 0;
+            background-color: var(--primary-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            height: 300px;
+        }
+
+        .gallery-item:nth-child(3n-1) {
+            grid-row: span 2;
+            height: auto;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 61, 98, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-icon {
+            color: var(--light-color);
+            font-size: 24px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 5px;
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--light-color);
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .lightbox-prev {
+            left: -70px;
+        }
+
+        .lightbox-next {
+            right: -70px;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--light-color);
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Guestbook Section */
+        .guestbook {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .guestbook-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .message-list {
+            margin-bottom: 50px;
+        }
+
+        .message-item {
+            background-color: var(--primary-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .message-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .message-author {
+            font-family: var(--font-primary);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .message-date {
+            font-size: 14px;
+            color: var(--dark-color);
+            opacity: 0.7;
+        }
+
+        .message-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark-color);
+        }
+
+        .guestbook-form {
+            background-color: var(--primary-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Registry Section */
+        .registry {
+            padding: 100px 0;
+            background-color: var(--primary-color);
+        }
+
+        .registry-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .registry-intro {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 18px;
+            color: var(--dark-color);
+        }
+
+        .registry-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .registry-item {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .registry-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .registry-icon {
+            font-size: 36px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .registry-title {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .registry-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .registry-qr {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .qr-image {
+            max-width: 200px;
+            border-radius: 10px;
+        }
+
+        .gift-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .gift-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gray-color);
+        }
+
+        .gift-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .gift-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .gift-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gift-info {
+            flex: 1;
+        }
+
+        .gift-name {
+            font-family: var(--font-primary);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .gift-price {
+            font-size: 14px;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .gift-button {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .gift-button:hover {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+        }
+
+        .bank-details {
+            background-color: rgba(248, 194, 145, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .bank-info {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .bank-info:last-child {
+            margin-bottom: 0;
+        }
+
+        .bank-label {
+            font-weight: 600;
+            width: 130px;
+            color: var(--secondary-color);
+        }
+
+        .bank-value {
+            flex: 1;
+            font-family: var(--font-secondary);
+        }
+
+        @media screen and (max-width: 992px) {
+            .registry-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .footer {
+            padding: 50px 0;
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-primary);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--light-color);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Controls for Music & Hearts */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--secondary-color);
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-button.active {
+            background-color: var(--accent-color);
+            color: var(--light-color);
+        }
+
+        /* Heart Animation */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99;
+            overflow: hidden;
+            display: none;
+        }
+
+        .hearts-container.active {
+            display: block;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--accent-color);
+            animation: float 4s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 992px) {
+            .navbar {
+                padding: 15px 30px;
+            }
+
+            .navbar.scrolled {
+                padding: 10px 30px;
+            }
+
+            .navbar .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--light-color);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                padding: 20px 0;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar .nav-links.active {
+                display: flex;
+            }
+
+            .navbar .nav-links li {
+                margin: 10px 0;
+            }
+
+            .navbar .menu-toggle {
+                display: block;
+            }
+
+            .header-content h1 {
+                font-size: 60px;
+            }
+
+            .countdown {
+                bottom: 20px;
+                right: 20px;
+                gap: 10px;
+            }
+
+            .countdown-item {
+                min-width: 60px;
+                padding: 10px;
+            }
+
+            .countdown-number {
+                font-size: 24px;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 20px;
+            }
+
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item:nth-child(3n-1) {
+                grid-row: span 1;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+
+            .navbar.scrolled {
+                padding: 8px 20px;
+            }
+
+            .header-content h1 {
+                font-size: 40px;
+            }
+
+            .header-content .subtitle {
+                font-size: 18px;
+            }
+
+            .countdown {
+                right: 50%;
+                transform: translateX(50%);
+                flex-wrap: wrap;
+                justify-content: center;
+                bottom: 20px;
+            }
+
+            .section-title h2 {
+                font-size: 36px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Preloader -->
+<div class="preloader">
+    <div class="hearts">
+        <i class="fas fa-heart heart"></i>
+    </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">M&H</div>
+    <ul class="nav-links">
+        <li><a href="#home">Trang Chủ</a></li>
+        <li><a href="#story">Câu Chuyện</a></li>
+        <li><a href="#event">Sự Kiện</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
+        <li><a href="#registry">Quà Cưới</a></li>
+        <li><a href="#gallery">Album</a></li>
+        <li><a href="#guestbook">Lưu Bút</a></li>
+    </ul>
+    <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+<!-- Header Section -->
+<section class="header" id="home">
+    <div class="header-bg"></div>
+    <div class="header-overlay"></div>
+    <div class="header-content">
+        <div class="subtitle">VOGUE WEDDING</div>
+        <h1>Minh <span>&</span> Hà</h1>
+        <div class="date">23.08.2024</div>
+        <a href="#rsvp" class="cta-button">RSVP</a>
+    </div>
+    <div class="countdown">
+        <div class="countdown-item">
+            <div class="countdown-number" id="days">00</div>
+            <div class="countdown-label">Ngày</div>
+        </div>
+        <div class="countdown-item">
+            <div class="countdown-number" id="hours">00</div>
+            <div class="countdown-label">Giờ</div>
+        </div>
+        <div class="countdown-item">
+            <div class="countdown-number" id="minutes">00</div>
+            <div class="countdown-label">Phút</div>
+        </div>
+        <div class="countdown-item">
+            <div class="countdown-number" id="seconds">00</div>
+            <div class="countdown-label">Giây</div>
+        </div>
+    </div>
+</section>
+
+<!-- Story Section -->
+<section class="story" id="story">
+    <div class="section-title">
+        <h2>Câu Chuyện Tình Yêu</h2>
+        <p>Hành trình tình yêu của chúng tôi đã bắt đầu từ một cuộc gặp gỡ tình cờ...</p>
+    </div>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">Tháng 6, 2020</div>
+                <h3 class="timeline-title">Lần Đầu Gặp Gỡ</h3>
+                <p class="timeline-description">Chúng tôi gặp nhau lần đầu tại một buổi workshop nhiếp ảnh. Minh là người hướng dẫn, còn Hà là học viên.</p>
+                <img src="https://placehold.co/600x400" alt="Lần đầu gặp gỡ" class="timeline-image">
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">Tháng 9, 2020</div>
+                <h3 class="timeline-title">Buổi Hẹn Đầu Tiên</h3>
+                <p class="timeline-description">Sau nhiều lần trò chuyện, Minh đã mời Hà đi uống cà phê tại một quán nhỏ ven hồ, nơi chúng tôi đã nói chuyện suốt cả ngày mà không biết chán.</p>
+                <img src="https://placehold.co/600x400" alt="Buổi hẹn đầu tiên" class="timeline-image">
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">Tháng 2, 2021</div>
+                <h3 class="timeline-title">Chuyến Du Lịch Đầu Tiên</h3>
+                <p class="timeline-description">Chúng tôi cùng nhau khám phá Đà Lạt và đó là lúc chúng tôi nhận ra mình là một nửa hoàn hảo của nhau.</p>
+                <img src="https://placehold.co/600x400" alt="Chuyến du lịch đầu tiên" class="timeline-image">
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="timeline-date">Tháng 12, 2023</div>
+                <h3 class="timeline-title">Lời Cầu Hôn</h3>
+                <p class="timeline-description">Trong ánh hoàng hôn trên bãi biển, Minh đã quỳ gối và trao cho Hà chiếc nhẫn với lời cầu hôn ngọt ngào nhất.</p>
+                <img src="https://placehold.co/600x400" alt="Lời cầu hôn" class="timeline-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Event Section -->
+<section class="event" id="event">
+    <div class="section-title">
+        <h2>Thông Tin Lễ Cưới</h2>
+        <p>Chúng tôi rất mong được đón tiếp bạn trong ngày trọng đại này</p>
+    </div>
+    <div class="event-grid">
+        <div class="event-card">
+                            <img src="https://placehold.co/600x400" alt="Lễ vu quy" class="event-image">
+            <div class="event-content">
+                <h3 class="event-title">Lễ Vu Quy</h3>
+                <div class="event-info">
+                    <div class="event-info-item">
+                        <i class="fas fa-calendar"></i>
+                        <span class="event-info-text">23 Tháng 8, 2024 - 09:00 AM</span>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="event-info-text">Nhà hàng White Palace, 194 Hoàng Văn Thụ, Q. Phú Nhuận, TP. HCM</span>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-tshirt"></i>
+                        <span class="event-info-text">Dress Code: Trang trọng (Navy, Pastel)</span>
+                    </div>
+                </div>
+                <p class="event-description">Lễ vu quy sẽ được tổ chức tại nhà gái theo nghi thức truyền thống, kết hợp với không gian tiệc cưới hiện đại.</p>
+                <div class="event-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2585347248674!2d106.67219197474918!3d10.795254089360956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d4a8afdb7b%3A0x45e74ca9d5742cd0!2zMTk0IEhvw6BuZyBWxINuIFRo4bulLCBQaMaw4budbmcgOSwgUGjDuiBOaHXhuq1uLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1710096001841!5m2!1svi!2s" width="100%" height="200" style="border:0; border-radius:5px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="event-card">
+                            <img src="https://placehold.co/600x400" alt="Tiệc cưới" class="event-image">
+            <div class="event-content">
+                <h3 class="event-title">Tiệc Cưới</h3>
+                <div class="event-info">
+                    <div class="event-info-item">
+                        <i class="fas fa-calendar"></i>
+                        <span class="event-info-text">23 Tháng 8, 2024 - 06:00 PM</span>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="event-info-text">GEM Center, 8 Nguyễn Bỉnh Khiêm, Q.1, TP. HCM</span>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-tshirt"></i>
+                        <span class="event-info-text">Dress Code: Dạ hội (Black Tie)</span>
+                    </div>
+                </div>
+                <p class="event-description">Tiệc cưới tối sẽ là một buổi dạ tiệc sang trọng với âm nhạc, khiêu vũ và những giây phút hạnh phúc cùng gia đình, bạn bè.</p>
+                <div class="event-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4737900766237!2d106.7022359747489!3d10.777985589344435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f4670377f25%3A0xbc5ab6d462425347!2sGEM%20Center!5e0!3m2!1svi!2s!4v1710096075908!5m2!1svi!2s" width="100%" height="200" style="border:0; border-radius:5px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RSVP Section -->
+<section class="rsvp" id="rsvp">
+    <div class="rsvp-overlay"></div>
+    <div class="rsvp-container">
+        <div class="section-title">
+            <h2>Xác Nhận Tham Dự</h2>
+            <p>Vui lòng xác nhận sự tham dự của bạn trước ngày 01/08/2024</p>
+        </div>
+        <div class="rsvp-form">
+            <form id="rsvpForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Họ và tên</label>
+                        <input type="text" id="name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Số điện thoại</label>
+                        <input type="tel" id="phone" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="guests" class="form-label">Số lượng người tham dự</label>
+                        <select id="guests" class="form-select">
+                            <option value="1">1 người</option>
+                            <option value="2">2 người</option>
+                            <option value="3">3 người</option>
+                            <option value="4">4 người</option>
+                            <option value="5">5 người</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="meal" class="form-label">Lựa chọn món ăn</label>
+                    <select id="meal" class="form-select">
+                        <option value="standard">Thực đơn chuẩn</option>
+                        <option value="vegetarian">Thực đơn chay</option>
+                        <option value="seafood">Hải sản</option>
+                        <option value="special">Đặc biệt (ghi chú bên dưới)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Lời nhắn</label>
+                    <textarea id="message" class="form-textarea" placeholder="Lời chúc hoặc ghi chú đặc biệt của bạn"></textarea>
+                </div>
+                <button type="submit" class="form-submit">Gửi xác nhận</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Registry Section -->
+<section class="registry" id="registry">
+    <div class="section-title">
+        <h2>Quà Mừng Cưới</h2>
+        <p>Sự hiện diện của bạn là món quà quý giá nhất đối với chúng tôi, nhưng nếu bạn muốn tặng thêm một món quà, dưới đây là một số gợi ý</p>
+    </div>
+    <div class="registry-container">
+        <div class="registry-intro">
+            <p>Các bạn có thể lựa chọn một trong các hình thức sau để gửi quà mừng:</p>
+        </div>
+        <div class="registry-grid">
+            <div class="registry-item">
+                <div class="registry-icon">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <h3 class="registry-title">Quét mã QR</h3>
+                <p class="registry-description">Quét mã QR dưới đây để gửi lì xì điện tử chúc mừng cặp đôi</p>
+                <div class="registry-qr">
+                    <img src="https://placehold.co/200x200" alt="QR Code" class="qr-image">
+                </div>
+            </div>
+            <div class="registry-item">
+                <div class="registry-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3 class="registry-title">Danh sách quà tặng</h3>
+                <p class="registry-description">Bạn có thể chọn một món quà trong danh sách mong muốn của chúng tôi</p>
+                <ul class="gift-list">
+                    <li class="gift-item">
+                        <div class="gift-image">
+                            <img src="https://placehold.co/100x100" alt="Bộ dao kéo nhà bếp">
+                        </div>
+                        <div class="gift-info">
+                            <h4 class="gift-name">Bộ dao kéo nhà bếp</h4>
+                            <div class="gift-price">3.500.000 VNĐ</div>
+                            <a href="#" class="gift-button">Chọn món quà này</a>
+                        </div>
+                    </li>
+                    <li class="gift-item">
+                        <div class="gift-image">
+                            <img src="https://placehold.co/100x100" alt="Bộ chăn ga gối cao cấp">
+                        </div>
+                        <div class="gift-info">
+                            <h4 class="gift-name">Bộ chăn ga gối cao cấp</h4>
+                            <div class="gift-price">5.000.000 VNĐ</div>
+                            <a href="#" class="gift-button">Chọn món quà này</a>
+                        </div>
+                    </li>
+                    <li class="gift-item">
+                        <div class="gift-image">
+                            <img src="https://placehold.co/100x100" alt="Voucher du lịch">
+                        </div>
+                        <div class="gift-info">
+                            <h4 class="gift-name">Voucher du lịch</h4>
+                            <div class="gift-price">10.000.000 VNĐ</div>
+                            <a href="#" class="gift-button">Chọn món quà này</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="registry-item">
+                <div class="registry-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h3 class="registry-title">Thông tin tài khoản</h3>
+                <p class="registry-description">Nếu bạn muốn gửi tặng tiền mặt, bạn có thể chuyển khoản theo thông tin sau</p>
+                <div class="bank-details">
+                    <div class="bank-info">
+                        <div class="bank-label">Chủ tài khoản:</div>
+                        <div class="bank-value">NGUYEN VAN MINH</div>
+                    </div>
+                    <div class="bank-info">
+                        <div class="bank-label">Số tài khoản:</div>
+                        <div class="bank-value">123456789</div>
+                    </div>
+                    <div class="bank-info">
+                        <div class="bank-label">Ngân hàng:</div>
+                        <div class="bank-value">Vietcombank - Chi nhánh Thành phố Hồ Chí Minh</div>
+                    </div>
+                    <div class="bank-info">
+                        <div class="bank-label">Nội dung:</div>
+                        <div class="bank-value">MUNG CUOI M&H [Tên của bạn]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery" id="gallery">
+    <div class="section-title">
+        <h2>Album Ảnh</h2>
+        <p>Những khoảnh khắc đáng nhớ của chúng tôi</p>
+    </div>
+    <div class="gallery-grid">
+        <div class="gallery-item" data-index="0">
+                            <img src="https://placehold.co/600x400" alt="Gallery Image 1" class="gallery-image">
+            <div class="gallery-overlay">
+                <i class="fas fa-search-plus gallery-icon"></i>
+            </div>
+        </div>
+        <div class="gallery-item" data-index="1">
+                            <img src="https://placehold.co/600x800" alt="Gallery Image 2" class="gallery-image">
+            <div class="gallery-overlay">
+                <i class="fas fa-search-plus gallery-icon"></i>
+            </div>
+        </div>
+        <div class="gallery-item" data-index="2">
+                            <img src="https://placehold.co/600x400" alt="Gallery Image 3" class="gallery-image">
+            <div class="gallery-overlay">
+                <i class="fas fa-search-plus gallery-icon"></i>
+            </div>
+        </div>
+        <div class="gallery-item" data-index="3">
+                            <img src="https://placehold.co/600x400" alt="Gallery Image 4" class="gallery-image">
+            <div class="gallery-overlay">
+                <i class="fas fa-search-plus gallery-icon"></i>
+            </div>
+        </div>
+        <div class="gallery-item" data-index="4">
+                            <img src="https://placehold.co/600x800" alt="Gallery Image 5" class="gallery-image">
+            <div class="gallery-overlay">
+                <i class="fas fa-search-plus gallery-icon"></i>
+            </div>
+        </div>
+        <div class="gallery-item" data-index="5">
+                            <img src="https://placehold.co/600x400" alt="Gallery Image 6" class="gallery-image">
+            <div class="gallery-overlay">
+                <i class="fas fa-search-plus gallery-icon"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox">
+    <div class="lightbox-content">
+        <img src="" alt="Lightbox Image" class="lightbox-image">
+        <div class="lightbox-prev">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="lightbox-next">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="lightbox-close">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Guestbook Section -->
+<section class="guestbook" id="guestbook">
+    <div class="section-title">
+        <h2>Sổ Lưu Bút</h2>
+        <p>Hãy để lại lời chúc tốt đẹp cho chúng tôi</p>
+    </div>
+    <div class="guestbook-container">
+        <div class="message-list">
+            <div class="message-item">
+                <div class="message-header">
+                    <div class="message-author">Nguyễn Văn A</div>
+                    <div class="message-date">10/06/2024</div>
+                </div>
+                <div class="message-content">
+                    Chúc hai bạn trăm năm hạnh phúc, sớm sinh quý tử! Đám cưới của các bạn thật tuyệt vời và đáng nhớ.
+                </div>
+            </div>
+            <div class="message-item">
+                <div class="message-header">
+                    <div class="message-author">Trần Thị B</div>
+                    <div class="message-date">05/06/2024</div>
+                </div>
+                <div class="message-content">
+                    Mong rằng tình yêu của hai bạn sẽ mãi bền vững và hạnh phúc. Chúc mừng hai bạn đã tìm thấy nhau!
+                </div>
+            </div>
+        </div>
+        <div class="guestbook-form">
+            <form id="guestbookForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guestName" class="form-label">Họ và tên</label>
+                        <input type="text" id="guestName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestEmail" class="form-label">Email</label>
+                        <input type="email" id="guestEmail" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="guestMessage" class="form-label">Lời chúc</label>
+                    <textarea id="guestMessage" class="form-textarea" required></textarea>
+                </div>
+                <button type="submit" class="form-submit">Gửi lời chúc</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-logo">M&H</div>
+    <p class="footer-text">"Tình yêu không phải là nhìn nhau, mà là cùng nhau nhìn về một hướng." - Antoine de Saint-Exupéry</p>
+    <div class="social-links">
+        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="footer-copyright">© 2024 Minh & Hà Wedding. All rights reserved.</div>
+</footer>
+
+<!-- Hearts Container -->
+<div class="hearts-container" id="heartsContainer"></div>
+
+<!-- Controls -->
+<div class="controls">
+    <div class="control-button" id="heartToggle">
+        <i class="fas fa-heart"></i>
+    </div>
+    <div class="control-button" id="musicToggle">
+        <i class="fas fa-music"></i>
+    </div>
+</div>
+
+<!-- Audio -->
+<audio id="backgroundMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/02/10/audio_dc2a56ee7d.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    // Preloader
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            document.querySelector('.preloader').style.opacity = '0';
+            setTimeout(function() {
+                document.querySelector('.preloader').style.display = 'none';
+            }, 500);
+        }, 1000);
+    });
+
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            navLinks.classList.remove('active');
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Sticky Navbar
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Countdown Timer
+    function updateCountdown() {
+        const weddingDate = new Date('August 23, 2024 09:00:00').getTime();
+        const now = new Date().getTime();
+        const timeLeft = weddingDate - now;
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = days.toString().padStart(2, '0');
+        document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Lightbox Gallery
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImage = document.querySelector('.lightbox-image');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+    let currentImageIndex = 0;
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            currentImageIndex = parseInt(this.dataset.index);
+            const imageSrc = this.querySelector('.gallery-image').src;
+            lightboxImage.src = imageSrc;
+            lightbox.classList.add('active');
+        });
+    });
+
+    lightboxClose.addEventListener('click', function() {
+        lightbox.classList.remove('active');
+    });
+
+    lightboxPrev.addEventListener('click', function() {
+        currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+        const imageSrc = galleryItems[currentImageIndex].querySelector('.gallery-image').src;
+        lightboxImage.src = imageSrc;
+    });
+
+    lightboxNext.addEventListener('click', function() {
+        currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+        const imageSrc = galleryItems[currentImageIndex].querySelector('.gallery-image').src;
+        lightboxImage.src = imageSrc;
+    });
+
+    // RSVP Form Submission
+    const rsvpForm = document.getElementById('rsvpForm');
+    rsvpForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Cảm ơn bạn đã xác nhận tham dự! Chúng tôi rất mong được đón tiếp bạn.');
+        rsvpForm.reset();
+    });
+
+    // Guestbook Form Submission
+    const guestbookForm = document.getElementById('guestbookForm');
+    guestbookForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('guestName').value;
+        const message = document.getElementById('guestMessage').value;
+        const today = new Date();
+        const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+
+        const messageItem = document.createElement('div');
+        messageItem.className = 'message-item';
+        messageItem.innerHTML = `
+                <div class="message-header">
+                    <div class="message-author">${name}</div>
+                    <div class="message-date">${date}</div>
+                </div>
+                <div class="message-content">
+                    ${message}
+                </div>
+            `;
+
+        document.querySelector('.message-list').prepend(messageItem);
+        createConfetti();
+        guestbookForm.reset();
+
+        alert('Cảm ơn bạn đã gửi lời chúc!');
+    });
+
+    // Heart Animation
+    const heartsContainer = document.getElementById('heartsContainer');
+    const heartToggle = document.getElementById('heartToggle');
+    let heartsActive = false;
+    let heartInterval;
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '<i class="fas fa-heart"></i>';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+        heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
+
+    function toggleHearts() {
+        heartsActive = !heartsActive;
+        if (heartsActive) {
+            heartsContainer.classList.add('active');
+            heartToggle.classList.add('active');
+            heartInterval = setInterval(createHeart, 300);
+        } else {
+            heartsContainer.classList.remove('active');
+            heartToggle.classList.remove('active');
+            clearInterval(heartInterval);
+        }
+    }
+
+    heartToggle.addEventListener('click', toggleHearts);
+
+    // Background Music
+    const musicToggle = document.getElementById('musicToggle');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    let musicPlaying = false;
+
+    function toggleMusic() {
+        musicPlaying = !musicPlaying;
+        if (musicPlaying) {
+            backgroundMusic.play();
+            musicToggle.classList.add('active');
+        } else {
+            backgroundMusic.pause();
+            musicToggle.classList.remove('active');
+        }
+    }
+
+    musicToggle.addEventListener('click', toggleMusic);
+
+    // Confetti Animation for Guestbook
+    function createConfetti() {
+        for (let i = 0; i < 100; i++) {
+            const confetti = document.createElement('div');
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = Math.random() * 5 + 5 + 'px';
+            confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            confetti.style.position = 'fixed';
+            confetti.style.zIndex = '1000';
+            confetti.style.top = '-10px';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            confetti.style.opacity = '1';
+            confetti.style.pointerEvents = 'none';
+
+            document.body.appendChild(confetti);
+
+            const animationDuration = Math.random() * 3 + 2;
+
+            confetti.animate([
+                { top: '-10px', opacity: 1 },
+                { top: '100vh', opacity: 0 }
+            ], {
+                duration: animationDuration * 1000,
+                easing: 'cubic-bezier(0,1,1,1)'
+            });
+
+            setTimeout(() => {
+                confetti.remove();
+            }, animationDuration * 1000);
+        }
+    }
+
+    // Scroll Animation for Timeline
+    function checkTimelineAnimation() {
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const triggerBottom = window.innerHeight * 0.8;
+
+        timelineItems.forEach(item => {
+            const itemTop = item.getBoundingClientRect().top;
+
+            if (itemTop < triggerBottom) {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }
+        });
+    }
+
+    window.addEventListener('scroll', checkTimelineAnimation);
+    window.addEventListener('load', checkTimelineAnimation);
+
+    // Apply initial styles for timeline animation
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(50px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+
+    // Text Animation for Title
+    function animateText() {
+        const headerTitle = document.querySelector('.header-content h1');
+        const text = headerTitle.textContent;
+        headerTitle.textContent = '';
+
+        for (let i = 0; i < text.length; i++) {
+            const span = document.createElement('span');
+            span.textContent = text[i];
+            span.style.display = 'inline-block';
+            span.style.opacity = '0';
+            span.style.transform = 'translateY(20px)';
+            span.style.transition = `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${i * 0.05}s`;
+            headerTitle.appendChild(span);
+
+            setTimeout(() => {
+                span.style.opacity = '1';
+                span.style.transform = 'translateY(0)';
+            }, 100);
+        }
+    }
+
+    window.addEventListener('load', animateText);
+</script>
+</body>
+</html>

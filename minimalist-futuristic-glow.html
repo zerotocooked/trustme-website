@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minh & Hà - Một Tương Lai Cùng Nhau</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Biến cho màu sắc chính */
+        :root {
+            --primary-dark: #121212;
+            --primary-light: #f8f8f8;
+            --accent-neon: #8c5aff;
+            --neon-blue: #0affff;
+            --neon-purple: #c770ff;
+            --neon-shadow: 0 0 10px #8c5aff, 0 0 20px #8c5aff, 0 0 30px #8c5aff;
+        }
+
+        /* Global Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--primary-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://placehold.co/1920x1080') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent 50%, var(--primary-dark) 150%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .glowing-text {
+            color: var(--primary-light);
+            text-shadow: var(--neon-shadow);
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(18, 18, 18, 0.8);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-neon);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: transparent;
+            color: var(--primary-light);
+            border: 2px solid var(--accent-neon);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(140, 90, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 0 15px var(--accent-neon);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .section {
+            padding: 6rem 1rem;
+            position: relative;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-neon);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--accent-neon);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+            box-shadow: var(--neon-shadow);
+        }
+
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container.left {
+            left: 0;
+        }
+
+        .timeline-container.right {
+            left: 50%;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--primary-dark);
+            border: 3px solid var(--accent-neon);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: var(--neon-shadow);
+        }
+
+        .timeline-container.left::after {
+            right: -10px;
+        }
+
+        .timeline-container.right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: rgba(18, 18, 18, 0.8);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid rgba(140, 90, 255, 0.3);
+            backdrop-filter: blur(5px);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .timeline-content.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .timeline-container.left .timeline-content {
+            margin-right: 40px;
+        }
+
+        .timeline-container.right .timeline-content {
+            margin-left: 40px;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            border: 1px solid rgba(140, 90, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            filter: grayscale(50%);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 70%,
+                rgba(140, 90, 255, 0.3)
+            );
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-content {
+            max-width: 80%;
+            max-height: 80%;
+            border: 2px solid var(--accent-neon);
+            box-shadow: var(--neon-shadow);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: var(--primary-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent-neon);
+            transform: rotate(90deg);
+        }
+
+        /* Form Styles */
+        .form-container {
+            background-color: rgba(18, 18, 18, 0.8);
+            border-radius: 6px;
+            border: 1px solid rgba(140, 90, 255, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 2rem;
+        }
+
+        .form-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(140, 90, 255, 0.3);
+            color: var(--primary-light);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-neon);
+            box-shadow: 0 0 0 2px rgba(140, 90, 255, 0.2);
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-dark);
+            border: 2px solid var(--accent-neon);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--neon-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+
+        .music-icon {
+            color: var(--primary-light);
+            font-size: 1.2rem;
+        }
+
+        /* Heart Animation */
+        .heart {
+            position: fixed;
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238c5aff'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0;
+            z-index: 9998;
+            animation: float 3s ease-in-out forwards;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        /* Heart Toggle Button */
+        #heart-control {
+            border-color: #ff6b95;
+        }
+        
+        #heart-control.active {
+            background-color: rgba(255, 107, 149, 0.2);
+            box-shadow: 0 0 10px #ff6b95, 0 0 20px #ff6b95;
+        }
+        
+        #heart-icon {
+            color: #ff6b95;
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            text-shadow: var(--neon-shadow);
+        }
+
+        .countdown-label {
+            font-size: 0.875rem;
+            color: var(--primary-light);
+        }
+
+        /* Typing Animation */
+        .typing-animation {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 0.15em solid var(--accent-neon);
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-neon) }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--accent-neon), 0 0 20px var(--accent-neon);
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--accent-neon), 0 0 40px var(--accent-neon);
+            }
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-container.left {
+                left: 0;
+            }
+
+            .timeline-container.right {
+                left: 0;
+            }
+
+            .timeline-container.left::after, .timeline-container.right::after {
+                left: 15px;
+            }
+
+            .timeline-container.left .timeline-content,
+            .timeline-container.right .timeline-content {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar fixed top-0 w-full py-4 px-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold">M&H</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link">Trang Chủ</a>
+                <a href="#story" class="nav-link">Câu Chuyện</a>
+                <a href="#event" class="nav-link">Sự Kiện</a>
+                <a href="#gallery" class="nav-link">Bộ Sưu Tập</a>
+                <a href="#rsvp" class="nav-link">RSVP</a>
+                <a href="#guestbook" class="nav-link">Lưu Bút</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-black bg-opacity-95 fixed top-16 left-0 w-full py-4 px-6">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="nav-link">Trang Chủ</a>
+                <a href="#story" class="nav-link">Câu Chuyện</a>
+                <a href="#event" class="nav-link">Sự Kiện</a>
+                <a href="#gallery" class="nav-link">Bộ Sưu Tập</a>
+                <a href="#rsvp" class="nav-link">RSVP</a>
+                <a href="#guestbook" class="nav-link">Lưu Bút</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section flex items-center justify-center">
+        <div class="hero-content text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-8 typing-animation glowing-text">Minh & Hà</h1>
+            <p class="text-xl md:text-2xl mb-8">Một Tương Lai Cùng Nhau</p>
+            <div class="countdown mb-12">
+                <div class="countdown-item">
+                    <span id="days" class="countdown-value">00</span>
+                    <span class="countdown-label">Ngày</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours" class="countdown-value">00</span>
+                    <span class="countdown-label">Giờ</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes" class="countdown-value">00</span>
+                    <span class="countdown-label">Phút</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds" class="countdown-value">00</span>
+                    <span class="countdown-label">Giây</span>
+                </div>
+            </div>
+            <a href="#rsvp" class="cta-button px-8 py-3 rounded-full text-lg font-semibold">Xác Nhận Tham Dự</a>
+        </div>
+    </section>
+
+    <!-- Love Story Section -->
+    <section id="story" class="section bg-black">
+        <div class="container mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold">Câu Chuyện Tình Yêu</h2>
+            <div class="timeline">
+                <div class="timeline-container left">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-semibold mb-2">Lần Đầu Gặp Gỡ</h3>
+                        <p class="text-gray-300">Tháng 6, 2019</p>
+                        <p class="mt-2">Chúng tôi gặp nhau lần đầu tại một buổi workshop công nghệ, cùng đam mê về AI và tương lai.</p>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-semibold mb-2">Hẹn Hò Đầu Tiên</h3>
+                        <p class="text-gray-300">Tháng 8, 2019</p>
+                        <p class="mt-2">Buổi hẹn đầu tiên tại một quán cà phê yên tĩnh, nơi chúng tôi trò chuyện đến khuya về những ước mơ.</p>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-semibold mb-2">Chuyến Du Lịch Đầu Tiên</h3>
+                        <p class="text-gray-300">Tháng 3, 2020</p>
+                        <p class="mt-2">Cùng nhau khám phá Đà Lạt, nơi chúng tôi cùng ngắm sao và hứa hẹn về một tương lai.</p>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-semibold mb-2">Về Ra Mắt Gia Đình</h3>
+                        <p class="text-gray-300">Tháng 1, 2021</p>
+                        <p class="mt-2">Gia đình hai bên gặp gỡ, đồng hành cùng chúng tôi trong hành trình tình yêu.</p>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-semibold mb-2">Lời Cầu Hôn</h3>
+                        <p class="text-gray-300">Tháng 11, 2022</p>
+                        <p class="mt-2">Dưới bầu trời đầy sao, với chiếc nhẫn ánh lên trong đêm, và tiếng "Đồng ý" ngọt ngào.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Section -->
+    <section id="event" class="section bg-gray-900">
+        <div class="container mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold">Thông Tin Sự Kiện</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="form-container">
+                    <h3 class="text-2xl font-semibold mb-4">Lễ Cưới</h3>
+                    <div class="mb-4">
+                        <i class="far fa-calendar text-accent-neon mr-2"></i>
+                        <span>Thứ Bảy, 15 Tháng 4, 2023</span>
+                    </div>
+                    <div class="mb-4">
+                        <i class="far fa-clock text-accent-neon mr-2"></i>
+                        <span>10:00 AM - 12:00 PM</span>
+                    </div>
+                    <div class="mb-4">
+                        <i class="fas fa-map-marker-alt text-accent-neon mr-2"></i>
+                        <span>Nhà Thờ Lớn Hà Nội, 40 Nhà Chung, Hoàn Kiếm</span>
+                    </div>
+                    <div class="mb-4">
+                        <i class="fas fa-tshirt text-accent-neon mr-2"></i>
+                        <span>Dress Code: Trắng, Xám, Pastel</span>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <h3 class="text-2xl font-semibold mb-4">Tiệc Cưới</h3>
+                    <div class="mb-4">
+                        <i class="far fa-calendar text-accent-neon mr-2"></i>
+                        <span>Thứ Bảy, 15 Tháng 4, 2023</span>
+                    </div>
+                    <div class="mb-4">
+                        <i class="far fa-clock text-accent-neon mr-2"></i>
+                        <span>18:00 PM - 21:00 PM</span>
+                    </div>
+                    <div class="mb-4">
+                        <i class="fas fa-map-marker-alt text-accent-neon mr-2"></i>
+                        <span>InterContinental Hanoi Landmark72, Keangnam Hanoi Landmark Tower</span>
+                    </div>
+                    <div class="mb-4">
+                        <i class="fas fa-tshirt text-accent-neon mr-2"></i>
+                        <span>Dress Code: Trang Trọng, Lịch Sự</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12">
+                <h3 class="text-2xl font-semibold mb-4">Lịch Trình Sự Kiện</h3>
+                <div class="form-container">
+                    <div class="flex flex-col space-y-6">
+                        <div class="flex items-start">
+                            <div class="mr-4 text-accent-neon">10:00 AM</div>
+                            <div>
+                                <h4 class="text-lg font-medium">Lễ Thành Hôn</h4>
+                                <p class="text-gray-400">Nghi lễ tôn giáo tại nhà thờ</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="mr-4 text-accent-neon">18:00 PM</div>
+                            <div>
+                                <h4 class="text-lg font-medium">Đón Khách</h4>
+                                <p class="text-gray-400">Tiếp đón khách mời tại sảnh chính</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="mr-4 text-accent-neon">18:30 PM</div>
+                            <div>
+                                <h4 class="text-lg font-medium">Khai Mạc & Tiệc Chính</h4>
+                                <p class="text-gray-400">Nghi thức khai mạc và thưởng thức bữa tối</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="mr-4 text-accent-neon">20:00 PM</div>
+                            <div>
+                                <h4 class="text-lg font-medium">Cắt Bánh & Champagne</h4>
+                                <p class="text-gray-400">Nghi thức cắt bánh cưới và nâng ly chúc mừng</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="mr-4 text-accent-neon">20:30 PM</div>
+                            <div>
+                                <h4 class="text-lg font-medium">Khiêu Vũ & Âm Nhạc</h4>
+                                <p class="text-gray-400">Thời gian tự do giao lưu và khiêu vũ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section bg-black">
+        <div class="container mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold">Bộ Sưu Tập</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 6">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 7">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 8">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 9">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/600x400" alt="Ảnh cưới 10">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="section bg-gray-900">
+        <div class="container mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold">Xác Nhận Tham Dự</h2>
+            <div class="max-w-xl mx-auto">
+                <div class="form-container">
+                    <form id="rsvp-form">
+                        <div class="mb-4">
+                            <label for="name" class="block mb-2">Họ và tên</label>
+                            <input type="text" id="name" class="form-input w-full p-3 rounded-md" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block mb-2">Email</label>
+                            <input type="email" id="email" class="form-input w-full p-3 rounded-md" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="guests" class="block mb-2">Số lượng người</label>
+                            <select id="guests" class="form-input w-full p-3 rounded-md" required>
+                                <option value="1">1 người</option>
+                                <option value="2">2 người</option>
+                                <option value="3">3 người</option>
+                                <option value="4">4 người</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block mb-2">Lời nhắn (nếu có)</label>
+                            <textarea id="message" class="form-input w-full p-3 rounded-md" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="cta-button w-full py-3 rounded-md text-lg font-semibold">Gửi Xác Nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guestbook Section -->
+    <section id="guestbook" class="section bg-black">
+        <div class="container mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold">Sổ Lưu Bút</h2>
+            <div class="max-w-xl mx-auto mb-10">
+                <div class="form-container">
+                    <form id="guestbook-form">
+                        <div class="mb-4">
+                            <label for="guestbook-name" class="block mb-2">Họ và tên</label>
+                            <input type="text" id="guestbook-name" class="form-input w-full p-3 rounded-md" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="guestbook-message" class="block mb-2">Lời chúc</label>
+                            <textarea id="guestbook-message" class="form-input w-full p-3 rounded-md" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-button w-full py-3 rounded-md text-lg font-semibold">Gửi Lời Chúc</button>
+                    </form>
+                </div>
+            </div>
+            <div id="messages-container" class="max-w-4xl mx-auto">
+                <div class="form-container mb-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+                                <span class="text-xl font-semibold">T</span>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium">Thanh Tùng</h4>
+                            <p class="mt-1">Chúc mừng hai bạn! Chúc cho tình yêu của hai bạn mãi bền vững như công nghệ blockchain vậy!</p>
+                            <p class="text-sm text-gray-500 mt-1">14/03/2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-container mb-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+                                <span class="text-xl font-semibold">H</span>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium">Hương Giang</h4>
+                            <p class="mt-1">Chúc hai bạn hạnh phúc bên nhau trọn đời! Những khoảnh khắc ở đám cưới của hai bạn sẽ là những kỷ niệm đẹp mãi mãi.</p>
+                            <p class="text-sm text-gray-500 mt-1">12/03/2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gift Registry Section -->
+    <section id="registry" class="section bg-gray-900">
+        <div class="container mx-auto">
+            <h2 class="section-title text-3xl md:text-4xl font-bold">Danh Sách Quà Tặng</h2>
+            <div class="text-center mb-10">
+                <p class="max-w-2xl mx-auto">Sự hiện diện của bạn là món quà quý giá nhất đối với chúng tôi. Tuy nhiên, nếu bạn muốn tặng quà, đây là danh sách gợi ý:</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="form-container hover:border-accent-neon transition-all duration-300">
+                    <div class="text-center">
+                        <i class="fas fa-gift text-4xl mb-4 text-accent-neon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Shopee</h3>
+                        <p class="mb-4">Danh sách quà tặng trên Shopee</p>
+                        <div class="mb-4 w-32 h-32 mx-auto bg-white p-2 rounded-md">
+                            <img src="https://placehold.co/120x120" alt="QR Code Shopee" class="w-full h-full">
+                        </div>
+                        <button class="cta-button px-6 py-2 rounded-full text-sm">Truy cập</button>
+                    </div>
+                </div>
+                <div class="form-container hover:border-accent-neon transition-all duration-300">
+                    <div class="text-center">
+                        <i class="fas fa-gift text-4xl mb-4 text-accent-neon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Tiki</h3>
+                        <p class="mb-4">Danh sách quà tặng trên Tiki</p>
+                        <div class="mb-4 w-32 h-32 mx-auto bg-white p-2 rounded-md">
+                            <img src="https://placehold.co/120x120" alt="QR Code Tiki" class="w-full h-full">
+                        </div>
+                        <button class="cta-button px-6 py-2 rounded-full text-sm">Truy cập</button>
+                    </div>
+                </div>
+                <div class="form-container hover:border-accent-neon transition-all duration-300">
+                    <div class="text-center">
+                        <i class="fas fa-hand-holding-heart text-4xl mb-4 text-accent-neon"></i>
+                        <h3 class="text-xl font-semibold mb-2">Quỹ Tuần Trăng Mật</h3>
+                        <p class="mb-4">Đóng góp vào quỹ tuần trăng mật của chúng tôi</p>
+                        <div class="mb-4 w-32 h-32 mx-auto bg-white p-2 rounded-md">
+                            <img src="https://placehold.co/120x120" alt="QR Code Chuyển Khoản" class="w-full h-full">
+                        </div>
+                        <button class="cta-button px-6 py-2 rounded-full text-sm">Chi tiết</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-10 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold mb-2">Minh & Hà</h2>
+                    <p class="text-gray-400">Cảm ơn bạn đã đồng hành cùng chúng tôi</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-accent-neon transition-colors duration-300">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-accent-neon transition-colors duration-300">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-accent-neon transition-colors duration-300">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-500">© 2023 Minh & Hà</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Music Control with Heart Toggle -->
+    <div id="music-control" class="music-control">
+        <i id="music-icon" class="fas fa-volume-mute music-icon"></i>
+    </div>
+    <!-- Heart Toggle Button -->
+    <div id="heart-control" class="music-control" style="bottom: 100px;">
+        <i id="heart-icon" class="fas fa-heart music-icon"></i>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="background-music" loop>
+        <source src="" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Countdown Timer
+        const weddingDate = new Date('April 15, 2023 10:00:00').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Timeline Animation
+        function checkTimeline() {
+            const timelineContents = document.querySelectorAll('.timeline-content');
+            
+            timelineContents.forEach(content => {
+                const contentPosition = content.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (contentPosition < screenPosition) {
+                    content.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkTimeline);
+        window.addEventListener('load', checkTimeline);
+        
+        // Gallery Lightbox
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('active');
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+        
+        // RSVP Form Submission
+        const rsvpForm = document.getElementById('rsvp-form');
+        
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Cảm ơn bạn đã xác nhận tham dự!');
+            rsvpForm.reset();
+        });
+        
+        // Guestbook Form Submission
+        const guestbookForm = document.getElementById('guestbook-form');
+        const messagesContainer = document.getElementById('messages-container');
+        
+        guestbookForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('guestbook-name').value;
+            const message = document.getElementById('guestbook-message').value;
+            
+            // Create new message element
+            const newMessage = document.createElement('div');
+            newMessage.className = 'form-container mb-4';
+            
+            const today = new Date();
+            const dateString = today.toLocaleDateString('vi-VN');
+            
+            newMessage.innerHTML = `
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+                            <span class="text-xl font-semibold">${name.charAt(0)}</span>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-medium">${name}</h4>
+                        <p class="mt-1">${message}</p>
+                        <p class="text-sm text-gray-500 mt-1">${dateString}</p>
+                    </div>
+                </div>
+            `;
+            
+            // Add to the beginning of messages container
+            messagesContainer.insertBefore(newMessage, messagesContainer.firstChild);
+            
+            // Show confetti animation
+            createConfetti();
+            
+            // Reset form
+            guestbookForm.reset();
+        });
+        
+        // Heart Animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            
+            // Random position across the entire viewport
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        
+        // Music Control
+        const musicControl = document.getElementById('music-control');
+        const musicIcon = document.getElementById('music-icon');
+        const heartControl = document.getElementById('heart-control');
+        const heartIcon = document.getElementById('heart-icon');
+        const backgroundMusic = document.getElementById('background-music');
+        
+        // Set a placeholder music URL - in a real site, this would be an actual music file
+        backgroundMusic.src = "https://example.com/wedding-music.mp3";
+        
+        let isMusicPlaying = false;
+        let isHeartAnimationActive = false;
+        let heartInterval;
+        
+        // Music toggle
+        musicControl.addEventListener('click', () => {
+            if (isMusicPlaying) {
+                backgroundMusic.pause();
+                musicIcon.className = 'fas fa-volume-mute music-icon';
+            } else {
+                backgroundMusic.play().catch(e => {
+                    console.log("Autoplay prevented. User interaction required.");
+                });
+                musicIcon.className = 'fas fa-volume-up music-icon';
+            }
+            
+            isMusicPlaying = !isMusicPlaying;
+        });
+        
+        // Heart animation toggle
+        heartControl.addEventListener('click', () => {
+            if (isHeartAnimationActive) {
+                clearInterval(heartInterval);
+                heartControl.classList.remove('active');
+            } else {
+                heartInterval = setInterval(createHeart, 300);
+                heartControl.classList.add('active');
+            }
+            
+            isHeartAnimationActive = !isHeartAnimationActive;
+        });
+        
+        // Create confetti animation when sending guestbook message
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'heart';
+                
+                // Position near the guestbook form
+                const guestbookRect = guestbookForm.getBoundingClientRect();
+                confetti.style.left = (guestbookRect.left + Math.random() * guestbookRect.width) + 'px';
+                confetti.style.top = (guestbookRect.top + Math.random() * guestbookRect.height) + 'px';
+                confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+                confetti.style.opacity = Math.random();
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 4000);
+            }
+        }
+        
+        // Initialize heart control with active state if needed
+        document.addEventListener('DOMContentLoaded', () => {
+            // Optional: Start with hearts active
+            // heartControl.click();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Văn A & Nguyễn Thị B - A Royal Wedding Celebration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap">
+    <!-- Thêm favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Biến màu chính để dễ thay đổi (có thể thay đổi các giá trị này để điều chỉnh toàn bộ website)
+                        goldPrimary: '#D4AF37', // Vàng gold
+                        goldLight: '#F1E5AC', // Vàng nhạt
+                        creamWhite: '#FFFDD0', // Trắng kem
+                        royalBlue: '#002366', // Xanh hoàng gia
+                        platinum: '#E5E4E2', // Bạc platinum
+                        bordeauxRed: '#800020', // Đỏ Bordeaux
+                        charcoal: '#36454F', // Than chì
+                        heartRed: '#DC143C', // Màu tim
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'cormorant': ['Cormorant Garamond', 'serif'],
+                    },
+                    backgroundImage: {
+                                    'palace-pattern': "url('https://placehold.co/1280x720')",
+            'paper-texture': "url('https://placehold.co/1280x720')",
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        /* Custome CSS cho các hiệu ứng đặc biệt */
+        .gold-text {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(191, 149, 63, 0.3);
+        }
+        
+        .gold-border {
+            border-image: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            border-image-slice: 1;
+        }
+        
+        .royal-shadow {
+            box-shadow: 0 4px 20px rgba(0, 35, 102, 0.3);
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .palace-border {
+            border: 8px solid transparent;
+            position: relative;
+        }
+        
+        .palace-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid #D4AF37;
+            background: linear-gradient(45deg, #D4AF37, #FCF6BA, #D4AF37);
+            z-index: -1;
+            padding: 8px;
+            margin: -10px;
+        }
+        
+        .baroque-frame {
+            position: relative;
+            padding: 20px;
+        }
+        
+        .baroque-frame::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 3px solid #D4AF37;
+            z-index: -1;
+        }
+        
+        .baroque-frame::after {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid #FCF6BA;
+            z-index: -1;
+        }
+        
+        /* Heart Animation */
+        @keyframes floatHeart {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .heart {
+            position: fixed;
+            font-size: 30px;
+            color: rgba(220, 20, 60, 0.8); /* Crimson color for hearts */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            z-index: 999;
+            animation: floatHeart 10s linear infinite;
+            pointer-events: none;
+        }
+        
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Button hover effects */
+        .royal-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .royal-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.2), rgba(255, 255, 221, 0.2), rgba(212, 175, 55, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .royal-button:hover::after {
+            opacity: 1;
+        }
+        
+        .royal-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image hover effects */
+        .gallery-image {
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .gallery-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(255, 255, 221, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-image:hover::after {
+            opacity: 1;
+        }
+
+        /* Custom audio control */
+        .custom-audio-control {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-audio-control:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Countdown clock styles */
+        .countdown-box {
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: -5px; right: -5px; bottom: -5px; left: -5px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            pointer-events: none;
+        }
+        /* Áp dụng chung cho mọi hạt glitter */
+        .glitter-base {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        /* Glitter hình tròn (circular) */
+        .glitter {
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 0%, #FFD700 60%, transparent 80%);
+        }
+
+        /* Glitter hình vuông */
+        .square-glitter {
+            background: linear-gradient(45deg, #fff, #FFD700);
+        }
+
+        /* Glitter hình kim cương (thực ra là vuông xoay 45 độ) */
+        .diamond-glitter {
+            background: linear-gradient(45deg, #fff, #FFD700);
+            transform: rotate(45deg);
+        }
+
+        /* Animation float */
+        @keyframes glitterFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            25% {
+                transform: translate(calc(var(--x-drift) / 2), calc(var(--y-drift) / 2)) rotate(15deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(var(--x-drift), var(--y-drift)) rotate(-15deg);
+                opacity: 1;
+            }
+            75% {
+                transform: translate(calc(var(--x-drift) * 1.5), calc(var(--y-drift) * 1.5)) rotate(15deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(calc(var(--x-drift) * 2), calc(var(--y-drift) * 2)) rotate(0deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animation twinkle */
+        @keyframes glitterTwinkle {
+            0%, 100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Tooltip styling */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: auto;
+            min-width: 100px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 100;
+            right: 130%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: normal;
+            letter-spacing: normal;
+            text-transform: none;
+        }
+
+        /* Add arrow to tooltip */
+        .tooltip .tooltiptext::after {
+            content: " ";
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent transparent rgba(0, 0, 0, 0.8);
+        }
+
+        /* Show tooltip on hover */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* For mobile devices */
+        @media (max-width: 768px) {
+            .tooltip .tooltiptext {
+                right: 0;
+                top: -40px;
+                transform: translateY(0);
+            }
+
+            .tooltip .tooltiptext::after {
+                top: 100%;
+                left: 50%;
+                margin-top: 0;
+                margin-left: -5px;
+                border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+            }
+        }
+    </style>
+</head>
+<body class="font-cormorant bg-creamWhite text-charcoal">
+    <!-- Audio Element (Hidden) -->
+    <audio id="bgMusic" loop>
+        <!-- Sử dụng nhạc nền cổ điển từ nguồn mở -->
+        <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_f6671cab26.mp3?filename=canon-in-d-pachelbel-arrangement-with-piano-violin-and-cello-117889.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Controls for hearts, music and gift -->
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
+        <div class="tooltip">
+            <button id="heartToggle" class="custom-audio-control bg-bordeauxRed text-white shadow-lg">
+                <i class="fas fa-wand-magic-sparkles"></i>
+            </button>
+            <span class="tooltiptext">Hiệu ứng lấp lánh</span>
+        </div>
+
+        <div class="tooltip">
+            <button id="audioToggle" class="custom-audio-control bg-bordeauxRed text-white shadow-lg">
+                <i class="fas fa-music"></i>
+            </button>
+            <span class="tooltiptext">Bật/tắt nhạc nền</span>
+        </div>
+
+        <div class="tooltip">
+            <a href="#wedding-gift" id="qrCodeToggle" class="custom-audio-control bg-bordeauxRed text-white shadow-lg">
+                <i class="fas fa-gift"></i>
+            </a>
+            <span class="tooltiptext">Hộp mừng cưới</span>
+        </div>
+    </div>
+
+    <div id="glitter-container"
+         style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%; pointer-events: none; z-index: 9999;">
+    </div>
+
+    <!-- Header / Hero Section -->
+            <header id="hero" class="relative min-h-screen flex items-center justify-center" style="background-image: url('https://placehold.co/1920x1080'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="container mx-auto px-6 z-10 text-center">
+            <h1 class="font-playfair text-4xl sm:text-5xl md:text-7xl lg:text-8xl mb-6 gold-text fade-in">Nguyễn Văn A & Nguyễn Thị B</h1>
+            <p class="text-creamWhite text-2xl md:text-3xl mb-12 fade-in">A Royal Wedding Celebration</p>
+
+            <!-- Countdown -->
+            <div class="max-w-3xl mx-auto mb-12 fade-in">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
+                    <div class="countdown-box bg-white bg-opacity-10 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-lg">
+                        <div id="days" class="text-3xl sm:text-4xl md:text-5xl font-bold gold-text">00</div>
+                        <div class="text-creamWhite mt-2">Days</div>
+                    </div>
+                    <div class="countdown-box bg-white bg-opacity-10 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-lg">
+                        <div id="hours" class="text-5xl font-bold gold-text">00</div>
+                        <div class="text-creamWhite mt-2">Hours</div>
+                    </div>
+                    <div class="countdown-box bg-white bg-opacity-10 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-lg">
+                        <div id="minutes" class="text-5xl font-bold gold-text">00</div>
+                        <div class="text-creamWhite mt-2">Minutes</div>
+                    </div>
+                    <div class="countdown-box bg-white bg-opacity-10 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-lg">
+                        <div id="seconds" class="text-5xl font-bold gold-text">00</div>
+                        <div class="text-creamWhite mt-2">Seconds</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="royal-button bg-goldPrimary hover:bg-goldLight text-charcoal px-10 py-4 rounded-md text-xl tracking-wider font-medium uppercase fade-in">
+                Xác nhận tham dự
+            </button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-40 bg-creamWhite bg-opacity-95 backdrop-blur-sm border-b border-goldPrimary py-2 md:py-4 shadow-md">
+        <div class="container mx-auto px-3 sm:px-6">
+            <ul class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg font-medium">
+                <li><a href="#hero" class="hover:text-goldPrimary transition-colors duration-300">Trang chủ</a></li>
+                <li><a href="#couple" class="hover:text-goldPrimary transition-colors duration-300">Cặp đôi</a></li>
+                <li><a href="#event" class="hover:text-goldPrimary transition-colors duration-300">Sự kiện</a></li>
+                <li><a href="#gallery" class="hover:text-goldPrimary transition-colors duration-300">Hình ảnh</a></li>
+                <li><a href="#rsvp" class="hover:text-goldPrimary transition-colors duration-300">RSVP</a></li>
+                <li><a href="#guestbook" class="hover:text-goldPrimary transition-colors duration-300">Lưu bút</a></li>
+                <li><a href="#wedding-gift" class="hover:text-goldPrimary transition-colors duration-300">Quà cưới</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Couple Section -->
+    <section id="couple" class="py-10 md:py-16 lg:py-20 bg-white">
+        <div class="container mx-auto px-3 sm:px-4 md:px-6">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-playfair text-center mb-8 md:mb-16 gold-text fade-in">Câu Chuyện Tình Yêu</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div class="text-center fade-in">
+                    <div class="baroque-frame inline-block mb-4 md:mb-6">
+                        <img src="https://placehold.co/400x500" alt="Cô dâu" class="w-60 sm:w-72 md:w-80 h-72 sm:h-80 md:h-96 object-cover mx-auto royal-shadow">
+                    </div>
+                    <h3 class="text-3xl font-playfair mb-3">Nguyễn Thị B</h3>
+                    <p class="text-xl mb-4">Con gái Ông bà Nguyễn Văn C</p>
+                    <div class="flex justify-center gap-4">
+                        <a href="#" class="text-goldPrimary hover:text-royalBlue transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-goldPrimary hover:text-royalBlue transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="baroque-frame inline-block mb-4 md:mb-6">
+                        <img src="https://placehold.co/400x500" alt="Chú rể" class="w-60 sm:w-72 md:w-80 h-72 sm:h-80 md:h-96 object-cover mx-auto royal-shadow">
+                    </div>
+                    <h3 class="text-3xl font-playfair mb-3">Nguyễn Văn A</h3>
+                    <p class="text-xl mb-4">Con trai Ông bà Nguyễn Văn D</p>
+                    <div class="flex justify-center gap-4">
+                        <a href="#" class="text-goldPrimary hover:text-royalBlue transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-goldPrimary hover:text-royalBlue transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <!-- Timeline - Thay thế phần code cũ -->
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <!-- Đường timeline dọc - chỉ hiển thị trên desktop -->
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-goldPrimary via-goldLight to-goldPrimary"></div>
+
+                    <!-- Đường timeline ngang - chỉ hiển thị trên mobile -->
+                    <div class="md:hidden absolute left-8 top-0 h-full w-0.5 bg-gradient-to-b from-goldPrimary via-goldLight to-goldPrimary"></div>
+
+                    <!-- Timeline Item 1 -->
+                    <div class="relative z-10 mb-8 md:mb-16 fade-in">
+                        <!-- Desktop layout -->
+                        <div class="hidden md:flex items-center mb-4">
+                            <div class="w-1/2 pr-8 text-right">
+                                <h3 class="text-xl md:text-2xl font-playfair mb-2">Lần đầu gặp gỡ</h3>
+                                <p class="text-lg text-charcoal">Tháng 5, 2020</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-goldPrimary flex items-center justify-center royal-shadow z-10">
+                                <i class="fas fa-heart text-white"></i>
+                            </div>
+                            <div class="w-1/2 pl-8">
+                                <p class="text-lg">Chúng tôi gặp nhau lần đầu tiên tại một buổi tiệc của bạn chung và ngay lập tức có một sự kết nối đặc biệt.</p>
+                            </div>
+                        </div>
+
+                        <!-- Mobile layout -->
+                        <div class="md:hidden flex mb-4">
+                            <div class="w-16 flex-shrink-0 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-goldPrimary flex items-center justify-center royal-shadow z-10">
+                                    <i class="fas fa-heart text-white text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow pl-4">
+                                <h3 class="text-xl font-playfair mb-1">Lần đầu gặp gỡ</h3>
+                                <p class="text-base text-charcoal mb-2">Tháng 5, 2020</p>
+                                <p class="text-base">Chúng tôi gặp nhau lần đầu tiên tại một buổi tiệc của bạn chung và ngay lập tức có một sự kết nối đặc biệt.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="relative z-10 mb-8 md:mb-16 fade-in">
+                        <!-- Desktop layout -->
+                        <div class="hidden md:flex items-center mb-4">
+                            <div class="w-1/2 pr-8 text-right">
+                                <p class="text-lg">Chúng tôi bắt đầu hành trình yêu thương, cùng nhau trải qua nhiều kỉ niệm đáng nhớ.</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-goldPrimary flex items-center justify-center royal-shadow z-10">
+                                <i class="fas fa-calendar-alt text-white"></i>
+                            </div>
+                            <div class="w-1/2 pl-8">
+                                <h3 class="text-xl md:text-2xl font-playfair mb-2">Bắt đầu hẹn hò</h3>
+                                <p class="text-lg text-charcoal">Tháng 8, 2020</p>
+                            </div>
+                        </div>
+
+                        <!-- Mobile layout -->
+                        <div class="md:hidden flex mb-4">
+                            <div class="w-16 flex-shrink-0 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-goldPrimary flex items-center justify-center royal-shadow z-10">
+                                    <i class="fas fa-calendar-alt text-white text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow pl-4">
+                                <h3 class="text-xl font-playfair mb-1">Bắt đầu hẹn hò</h3>
+                                <p class="text-base text-charcoal mb-2">Tháng 8, 2020</p>
+                                <p class="text-base">Chúng tôi bắt đầu hành trình yêu thương, cùng nhau trải qua nhiều kỉ niệm đáng nhớ.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="relative z-10 mb-8 md:mb-16 fade-in">
+                        <!-- Desktop layout -->
+                        <div class="hidden md:flex items-center mb-4">
+                            <div class="w-1/2 pr-8 text-right">
+                                <h3 class="text-xl md:text-2xl font-playfair mb-2">Lời cầu hôn</h3>
+                                <p class="text-lg text-charcoal">Tháng 12, 2023</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-goldPrimary flex items-center justify-center royal-shadow z-10">
+                                <i class="fas fa-ring text-white"></i>
+                            </div>
+                            <div class="w-1/2 pl-8">
+                                <p class="text-lg">Dưới ánh sáng lung linh của Paris, anh đã quỳ gối và cầu hôn em bằng một chiếc nhẫn kim cương lấp lánh.</p>
+                            </div>
+                        </div>
+
+                        <!-- Mobile layout -->
+                        <div class="md:hidden flex mb-4">
+                            <div class="w-16 flex-shrink-0 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-goldPrimary flex items-center justify-center royal-shadow z-10">
+                                    <i class="fas fa-ring text-white text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow pl-4">
+                                <h3 class="text-xl font-playfair mb-1">Lời cầu hôn</h3>
+                                <p class="text-base text-charcoal mb-2">Tháng 12, 2023</p>
+                                <p class="text-base">Dưới ánh sáng lung linh của Paris, anh đã quỳ gối và cầu hôn em bằng một chiếc nhẫn kim cương lấp lánh.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 4 -->
+                    <div class="relative z-10 fade-in">
+                        <!-- Desktop layout -->
+                        <div class="hidden md:flex items-center mb-4">
+                            <div class="w-1/2 pr-8 text-right">
+                                <p class="text-lg">Chúng tôi hạnh phúc thông báo lễ cưới của mình và mong được đón tiếp quý vị!</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-goldPrimary flex items-center justify-center royal-shadow z-10">
+                                <i class="fas fa-church text-white"></i>
+                            </div>
+                            <div class="w-1/2 pl-8">
+                                <h3 class="text-xl md:text-2xl font-playfair mb-2">Ngày cưới</h3>
+                                <p class="text-lg text-charcoal">15 tháng 8, 2025</p>
+                            </div>
+                        </div>
+
+                        <!-- Mobile layout -->
+                        <div class="md:hidden flex mb-4">
+                            <div class="w-16 flex-shrink-0 flex justify-center">
+                                <div class="w-10 h-10 rounded-full bg-goldPrimary flex items-center justify-center royal-shadow z-10">
+                                    <i class="fas fa-church text-white text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow pl-4">
+                                <h3 class="text-xl font-playfair mb-1">Ngày cưới</h3>
+                                <p class="text-base text-charcoal mb-2">15 tháng 8, 2025</p>
+                                <p class="text-base">Chúng tôi hạnh phúc thông báo lễ cưới của mình và mong được đón tiếp quý vị!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Event Details Section -->
+            <section id="event" class="py-20 parallax" style="background-image: url('https://placehold.co/1920x1080');">
+        <div class="bg-white bg-opacity-90 py-20">
+            <div class="container mx-auto px-3 sm:px-4 md:px-6">
+                <h2 class="text-5xl font-playfair text-center mb-16 gold-text fade-in">Thông Tin Lễ Cưới</h2>
+
+                <div class="flex flex-wrap justify-center gap-12">
+                    <!-- Ceremony -->
+                    <div class="bg-creamWhite p-4 sm:p-6 md:p-8 rounded-lg royal-shadow fade-in w-full md:w-[45%]">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 rounded-full bg-goldPrimary flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-ring text-white text-2xl"></i>
+                            </div>
+                            <h3 class="text-3xl font-playfair mb-2">Lễ Cưới</h3>
+                        </div>
+                        <div class="space-y-4 text-lg">
+                            <p><i class="far fa-calendar-alt text-goldPrimary mr-3"></i> 15 tháng 8, 2025</p>
+                            <p><i class="far fa-clock text-goldPrimary mr-3"></i> 10:00 - 12:00</p>
+                            <p><i class="fas fa-map-marker-alt text-goldPrimary mr-3"></i> Nhà thờ XYZ, 123 Đường ABC, Quận XYZ, Thành phố ABC</p>
+                        </div>
+                        <div class="mt-8 space-y-4">
+                            <div class="h-64 rounded-lg overflow-hidden royal-shadow">
+                                <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4946681321814!2d106.70093707486087!3d10.773225189387898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f4b3330bcc7%3A0x4db964d76bf6e18e!2sNotre-Dame%20Cathedral%20Basilica%20of%20Saigon!5e0!3m2!1sen!2s!4v1710175305019!5m2!1sen!2s"
+                                        width="100%"
+                                        height="100%"
+                                        style="border:0;"
+                                        allowfullscreen=""
+                                        loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                            <p class="text-center text-sm italic">Nhấp vào bản đồ để xem chỉ đường</p>
+                        </div>
+                    </div>
+
+                    <!-- Reception -->
+                    <div class="bg-creamWhite p-4 sm:p-6 md:p-8 rounded-lg royal-shadow fade-in w-full md:w-[45%]">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 rounded-full bg-goldPrimary flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-glass-cheers text-white text-2xl"></i>
+                            </div>
+                            <h3 class="text-3xl font-playfair mb-2">Tiệc Cưới</h3>
+                        </div>
+                        <div class="space-y-4 text-lg">
+                            <p><i class="far fa-calendar-alt text-goldPrimary mr-3"></i> 15 tháng 8, 2025</p>
+                            <p><i class="far fa-clock text-goldPrimary mr-3"></i> 18:00 - 22:00</p>
+                            <p><i class="fas fa-map-marker-alt text-goldPrimary mr-3"></i> Khách sạn Rex, 141 Nguyễn Huệ, Quận 1, Thành phố Hồ Chí Minh</p>
+                        </div>
+                        <div class="mt-8 space-y-4">
+                            <div class="h-64 rounded-lg overflow-hidden royal-shadow">
+                                <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.3952072050615!2d106.70171817486096!3d10.77654208934788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f46b3220625%3A0xc4b0b514711b0f8f!2sRex%20Hotel!5e0!3m2!1sen!2s!4v1710175422737!5m2!1sen!2s"
+                                        width="100%"
+                                        height="100%"
+                                        style="border:0;"
+                                        allowfullscreen=""
+                                        loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                            <p class="text-center text-sm italic">Nhấp vào bản đồ để xem chỉ đường</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Dress Code -->
+                <div class="max-w-2xl mx-auto mt-16 p-8 bg-royalBlue text-creamWhite rounded-lg royal-shadow fade-in">
+                    <h3 class="text-3xl font-playfair text-center mb-6 gold-text">Dress Code</h3>
+                    <div class="text-center">
+                        <p class="text-xl mb-4">Xin vui lòng tham dự lễ cưới của chúng tôi trong trang phục:</p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                            <div class="p-4 rounded-md" style="background-color: #FFFDD0;">
+                                <p class="text-charcoal font-medium">Trắng Ngọc Trai</p>
+                            </div>
+                            <div class="p-4 rounded-md" style="background-color: #D4AF37;">
+                                <p class="text-white font-medium">Vàng Gold</p>
+                            </div>
+                            <div class="p-4 rounded-md" style="background-color: #002366; border: 2px solid white;">
+                                <p class="text-white font-medium">Xanh Royal</p>
+                            </div>
+                            <div class="p-4 rounded-md" style="background-color: #E5E4E2;">
+                                <p class="text-charcoal font-medium">Bạc Platinum</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="container mx-auto px-3 sm:px-4 md:px-6">
+            <h2 class="text-5xl font-playfair text-center mb-16 gold-text fade-in">Album Hình Ảnh</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+                <!-- Gallery Image 1 -->
+                <div class="gallery-image baroque-frame rounded-lg overflow-hidden fade-in">
+                                            <img src="https://placehold.co/600x600" alt="Gallery 1" class="w-full h-full object-cover">
+                </div>
+                <!-- Gallery Image 2 -->
+                <div class="gallery-image baroque-frame rounded-lg overflow-hidden fade-in">
+                                            <img src="https://placehold.co/600x600" alt="Gallery 2" class="w-full h-full object-cover">
+                </div>
+                <!-- Gallery Image 3 -->
+                <div class="gallery-image baroque-frame rounded-lg overflow-hidden fade-in">
+                                            <img src="https://placehold.co/600x600" alt="Gallery 3" class="w-full h-full object-cover">
+                </div>
+                <!-- Gallery Image 4 -->
+                <div class="gallery-image baroque-frame rounded-lg overflow-hidden fade-in">
+                                            <img src="https://placehold.co/600x600" alt="Gallery 4" class="w-full h-full object-cover">
+                </div>
+                <!-- Gallery Image 5 -->
+                <div class="gallery-image baroque-frame rounded-lg overflow-hidden fade-in">
+                                            <img src="https://placehold.co/600x600" alt="Gallery 5" class="w-full h-full object-cover">
+                </div>
+                <!-- Gallery Image 6 -->
+                <div class="gallery-image baroque-frame rounded-lg overflow-hidden fade-in">
+                                            <img src="https://placehold.co/600x600" alt="Gallery 6" class="w-full h-full object-cover">
+                </div>
+                <!-- Gallery Image 7 -->
+                <div class="gallery-image baroque-frame rounded-lg overflow-hidden fade-in">
+                                            <img src="https://placehold.co/600x600" alt="Gallery 7" class="w-full h-full object-cover">
+                </div>
+                <!-- Gallery Image 8 -->
+                <div class="gallery-image baroque-frame rounded-lg overflow-hidden fade-in">
+                                            <img src="https://placehold.co/600x600" alt="Gallery 8" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- RSVP Section -->
+            <section id="rsvp" class="py-20 parallax" style="background-image: url('https://placehold.co/1920x1080');">
+        <div class="bg-white bg-opacity-90 py-20">
+            <div class="container mx-auto px-3 sm:px-4 md:px-6">
+                <h2 class="text-5xl font-playfair text-center mb-16 gold-text fade-in">Xác Nhận Tham Dự</h2>
+                
+                <div class="max-w-3xl mx-auto">
+                    <form class="bg-creamWhite p-10 rounded-lg royal-shadow fade-in">
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block mb-2 font-medium text-lg">Họ và tên</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-goldPrimary bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-goldLight">
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 font-medium text-lg">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-goldPrimary bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-goldLight">
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="phone" class="block mb-2 font-medium text-lg">Số điện thoại</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-3 border border-goldPrimary bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-goldLight">
+                            </div>
+                            <div>
+                                <label for="guests" class="block mb-2 font-medium text-lg">Số lượng người tham dự</label>
+                                <select id="guests" class="w-full px-4 py-3 border border-goldPrimary bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-goldLight">
+                                    <option value="1">1 người</option>
+                                    <option value="2">2 người</option>
+                                    <option value="3">3 người</option>
+                                    <option value="4">4 người</option>
+                                    <option value="5">5 người</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block mb-2 font-medium text-lg">Lựa chọn món ăn</label>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="flex items-center">
+                                    <input type="radio" id="normal" name="meal" value="normal" class="mr-2">
+                                    <label for="normal">Thực đơn thông thường</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" id="vegetarian" name="meal" value="vegetarian" class="mr-2">
+                                    <label for="vegetarian">Thực đơn chay</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block mb-2 font-medium text-lg">Lời nhắn</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-goldPrimary bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-goldLight"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="royal-button bg-goldPrimary hover:bg-goldLight text-charcoal px-8 py-3 rounded-md text-lg tracking-wider font-medium uppercase w-full">
+                            Gửi xác nhận
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Guestbook Section -->
+    <section id="guestbook" class="py-20 bg-white">
+        <div class="container mx-auto px-3 sm:px-4 md:px-6">
+            <h2 class="text-5xl font-playfair text-center mb-16 gold-text fade-in">Sổ Lưu Bút</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="order-2 md:order-1 fade-in">
+                    <div class="baroque-frame bg-creamWhite p-8 rounded-lg royal-shadow">
+                        <h3 class="text-3xl font-playfair text-center mb-8">Lời chúc từ khách mời</h3>
+                        
+                        <!-- Wishes Container -->
+                        <div class="space-y-6 max-h-96 overflow-y-auto pr-4">
+                            <!-- Wish 1 -->
+                            <div class="p-4 border border-goldLight rounded-md">
+                                <p class="italic mb-2">"Xin chúc mừng hai bạn! Cầu mong tình yêu của hai bạn mãi trường tồn và hạnh phúc!"</p>
+                                <p class="text-right font-medium">- Nguyễn Văn X</p>
+                            </div>
+                            
+                            <!-- Wish 2 -->
+                            <div class="p-4 border border-goldLight rounded-md">
+                                <p class="italic mb-2">"Chúc mừng hai bạn đã tìm thấy nhau. Chúc hai bạn có một cuộc sống hôn nhân hạnh phúc!"</p>
+                                <p class="text-right font-medium">- Trần Thị Y</p>
+                            </div>
+                            
+                            <!-- Wish 3 -->
+                            <div class="p-4 border border-goldLight rounded-md">
+                                <p class="italic mb-2">"Chúc hai bạn trăm năm hạnh phúc, sớm sinh quý tử!"</p>
+                                <p class="text-right font-medium">- Lê Văn Z</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 md:order-2 fade-in">
+                    <div class="baroque-frame bg-creamWhite p-8 rounded-lg royal-shadow">
+                        <h3 class="text-3xl font-playfair text-center mb-8">Gửi lời chúc</h3>
+                        
+                        <form>
+                            <div class="mb-6">
+                                <label for="guestName" class="block mb-2 font-medium text-lg">Họ và tên</label>
+                                <input type="text" id="guestName" class="w-full px-4 py-3 border border-goldPrimary bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-goldLight">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="wish" class="block mb-2 font-medium text-lg">Lời chúc</label>
+                                <textarea id="wish" rows="4" class="w-full px-4 py-3 border border-goldPrimary bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-goldLight"></textarea>
+                            </div>
+                            
+                            <button type="submit" id="wishButton" class="royal-button bg-goldPrimary hover:bg-goldLight text-charcoal px-8 py-3 rounded-md text-lg tracking-wider font-medium uppercase w-full">
+                                Gửi lời chúc
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QR Code Direct Display Section -->
+    <section id="wedding-gift" class="py-20 bg-white">
+        <div class="container mx-auto px-3 sm:px-4 md:px-6">
+            <div class="text-center mb-16">
+                <!-- Decorative element above heading -->
+                <div class="inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="30" viewBox="0 0 120 30" class="mb-4">
+                        <path d="M0,15 C30,5 50,25 60,15 C70,5 90,25 120,15" stroke="#D4AF37" stroke-width="1.5" fill="none"/>
+                        <path d="M60,0 C60,10 60,20 60,30" stroke="#D4AF37" stroke-width="1.5" fill="none"/>
+                        <circle cx="60" cy="15" r="4" fill="#D4AF37"/>
+                        <circle cx="40" cy="15" r="2" fill="#D4AF37"/>
+                        <circle cx="80" cy="15" r="2" fill="#D4AF37"/>
+                    </svg>
+                </div>
+                <h2 class="text-5xl font-playfair text-center gold-text fade-in">Hộp Mừng Cưới</h2>
+                <!-- Decorative element below heading -->
+                <div class="inline-block mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="180" height="15" viewBox="0 0 180 15">
+                        <path d="M0,7.5 L75,7.5 M105,7.5 L180,7.5" stroke="#D4AF37" stroke-width="1"/>
+                        <circle cx="90" cy="7.5" r="7.5" fill="#D4AF37"/>
+                        <circle cx="90" cy="7.5" r="5" fill="#FFFDD0"/>
+                        <circle cx="90" cy="7.5" r="2" fill="#D4AF37"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <!-- Groom QR Code -->
+                <div class="relative fade-in">
+                    <!-- Ornamental border with gold corners -->
+                    <div class="absolute inset-0 border-2 border-goldPrimary rounded-lg"></div>
+                    <div class="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-goldPrimary rounded-tl-lg"></div>
+                    <div class="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-goldPrimary rounded-tr-lg"></div>
+                    <div class="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-goldPrimary rounded-bl-lg"></div>
+                    <div class="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-goldPrimary rounded-br-lg"></div>
+
+                    <!-- Floral corner decorations -->
+                    <div class="absolute -top-3 -left-3 w-12 h-12 flex items-center justify-center">
+                        <i class="fas fa-fan text-goldPrimary opacity-70 text-2xl transform rotate-45"></i>
+                    </div>
+                    <div class="absolute -top-3 -right-3 w-12 h-12 flex items-center justify-center">
+                        <i class="fas fa-fan text-goldPrimary opacity-70 text-2xl transform -rotate-45"></i>
+                    </div>
+                    <div class="absolute -bottom-3 -left-3 w-12 h-12 flex items-center justify-center">
+                        <i class="fas fa-fan text-goldPrimary opacity-70 text-2xl transform -rotate-135"></i>
+                    </div>
+                    <div class="absolute -bottom-3 -right-3 w-12 h-12 flex items-center justify-center">
+                        <i class="fas fa-fan text-goldPrimary opacity-70 text-2xl transform rotate-135"></i>
+                    </div>
+
+                    <!-- Inner content with extra padding for the border -->
+                    <div class="bg-creamWhite p-10 rounded-lg royal-shadow">
+                        <!-- Decorative element above title -->
+                        <div class="flex justify-center mb-4">
+                            <i class="fas fa-ring text-goldPrimary text-2xl"></i>
+                        </div>
+
+                        <h3 class="text-3xl font-playfair text-center mb-6">
+                        <span class="relative inline-block">
+                            Mừng Cưới Đến Chú Rể
+                            <span class="absolute left-0 right-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-goldPrimary to-transparent"></span>
+                        </span>
+                        </h3>
+
+                        <div class="flex justify-center mb-6">
+                            <!-- Gold-styled QR code container -->
+                            <div class="p-3 bg-gradient-to-r from-goldLight via-goldPrimary to-goldLight rounded-lg">
+                                <div class="w-48 h-48 bg-white p-3 rounded-md">
+                                    <img src="https://placehold.co/200x200" alt="QR chú rể" class="w-full h-full object-contain">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bank details for the groom -->
+                        <div class="text-center">
+                            <p class="mb-1"><strong>Ngân hàng:</strong> MB Bank</p>
+                            <p class="mb-1"><strong>Tên tài khoản:</strong> PHAM DUY VI</p>
+                            <p class="mb-1"><strong>Số tài khoản:</strong> 9990104021999</p>
+                        </div>
+
+                        <!-- Decorative element below QR -->
+                        <div class="flex justify-center mt-4">
+                            <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-goldPrimary to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bride QR Code -->
+                <div class="relative fade-in">
+                    <!-- Ornamental border with gold corners -->
+                    <div class="absolute inset-0 border-2 border-goldPrimary rounded-lg"></div>
+                    <div class="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-goldPrimary rounded-tl-lg"></div>
+                    <div class="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-goldPrimary rounded-tr-lg"></div>
+                    <div class="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-goldPrimary rounded-bl-lg"></div>
+                    <div class="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-goldPrimary rounded-br-lg"></div>
+
+                    <!-- Floral corner decorations -->
+                    <div class="absolute -top-3 -left-3 w-12 h-12 flex items-center justify-center">
+                        <i class="fas fa-fan text-goldPrimary opacity-70 text-2xl transform rotate-45"></i>
+                    </div>
+                    <div class="absolute -top-3 -right-3 w-12 h-12 flex items-center justify-center">
+                        <i class="fas fa-fan text-goldPrimary opacity-70 text-2xl transform -rotate-45"></i>
+                    </div>
+                    <div class="absolute -bottom-3 -left-3 w-12 h-12 flex items-center justify-center">
+                        <i class="fas fa-fan text-goldPrimary opacity-70 text-2xl transform -rotate-135"></i>
+                    </div>
+                    <div class="absolute -bottom-3 -right-3 w-12 h-12 flex items-center justify-center">
+                        <i class="fas fa-fan text-goldPrimary opacity-70 text-2xl transform rotate-135"></i>
+                    </div>
+
+                    <!-- Inner content with extra padding for the border -->
+                    <div class="bg-creamWhite p-10 rounded-lg royal-shadow">
+                        <!-- Decorative element above title -->
+                        <div class="flex justify-center mb-4">
+                            <i class="fas fa-heart text-goldPrimary text-2xl"></i>
+                        </div>
+
+                        <h3 class="text-3xl font-playfair text-center mb-6">
+                        <span class="relative inline-block">
+                            Mừng Cưới Đến Cô Dâu
+                            <span class="absolute left-0 right-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-goldPrimary to-transparent"></span>
+                        </span>
+                        </h3>
+
+                        <div class="flex justify-center mb-6">
+                            <!-- Gold-styled QR code container -->
+                            <div class="p-3 bg-gradient-to-r from-goldLight via-goldPrimary to-goldLight rounded-lg">
+                                <div class="w-48 h-48 bg-white p-3 rounded-md">
+                                    <img src="https://placehold.co/200x200" alt="QR cô dâu" class="w-full h-full object-contain">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bank details for the bride -->
+                        <div class="text-center">
+                            <p class="mb-1"><strong>Ngân hàng:</strong> Techcombank</p>
+                            <p class="mb-1"><strong>Tên tài khoản:</strong> HO THI THANH THUY</p>
+                            <p class="mb-1"><strong>Số tài khoản:</strong> 19036612730611</p>
+                        </div>
+
+                        <!-- Decorative element below QR -->
+                        <div class="flex justify-center mt-4">
+                            <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-goldPrimary to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-royalBlue text-creamWhite py-12">
+        <div class="container mx-auto px-3 sm:px-4 md:px-6">
+            <div class="text-center mb-8">
+                <h2 class="font-playfair text-3xl gold-text mb-4">Nguyễn Văn A & Nguyễn Thị B</h2>
+                <p class="text-xl mb-6">Cảm ơn bạn đã ghé thăm website đám cưới của chúng tôi</p>
+                
+                <div class="flex justify-center gap-6 mb-8">
+                    <a href="#" class="text-goldPrimary hover:text-goldLight transition-colors">
+                        <i class="fab fa-facebook-f text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-goldPrimary hover:text-goldLight transition-colors">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-goldPrimary hover:text-goldLight transition-colors">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                </div>
+                
+                <p>&copy; 2025 Nguyễn Văn A & Nguyễn Thị B. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const weddingDate = new Date('August 15, 2025 10:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Scroll Animation
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('resize', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+        
+        // Controls for glitter effect and music
+        const glitterContainer = document.getElementById('glitter-container');
+        let glitterActive = false;
+        
+        function createGlitter() {
+            if (!glitterActive) return;
+
+            // The container where we'll add the glitter
+            const container = document.getElementById('glitter-container');
+
+            // Choose a random glitter type
+            const glitterTypes = ['circular', 'square', 'diamond'];
+            const type = glitterTypes[Math.floor(Math.random() * glitterTypes.length)];
+
+            // Create the glitter element
+            const glitter = document.createElement('div');
+            glitter.classList.add('glitter-base');
+
+            if (type === 'circular') {
+                glitter.classList.add('glitter');
+            } else if (type === 'square') {
+                glitter.classList.add('square-glitter');
+            } else { // diamond
+                glitter.classList.add('diamond-glitter');
+            }
+            
+            // Position randomly anywhere on screen (in percentage)
+            glitter.style.top = Math.random() * 100 + '%';
+            glitter.style.left = Math.random() * 100 + '%';
+            
+            // Decide between floating and twinkling (80% float, 20% twinkle)
+            const animationType = Math.random() < 0.8 ? 'float' : 'twinkle';
+
+            if (animationType === 'float') {
+                // Set random drift distances
+                const xDrift = Math.random() * 60 - 30; // -30px to 30px
+                const yDrift = Math.random() * 60 - 10; // -10px to 50px
+                glitter.style.setProperty('--x-drift', xDrift + 'px');
+                glitter.style.setProperty('--y-drift', yDrift + 'px');
+
+                // Animation settings
+                const duration = Math.random() * 8 + 4; // 4s to 12s
+                glitter.style.animation = `glitterFloat ${duration}s ease-in-out forwards`;
+
+                // Remove after animation completes
+                setTimeout(() => {
+                    glitter.remove();
+                }, duration * 1000 + 100);
+            } else {
+                // Twinkling effect - stays in place but fades in/out
+                const duration = Math.random() * 4 + 2; // 2s to 6s
+                const iterations = Math.floor(Math.random() * 3) + 1; // 1 to 3 twinkles
+                
+                glitter.style.animation = `glitterTwinkle ${duration}s ease-in-out ${iterations}`;
+                
+                // Remove after animation completes
+                setTimeout(() => {
+                    glitter.remove();
+                }, duration * iterations * 1000 + 100);
+            }
+            
+            // Add to container
+            container.appendChild(glitter);
+        }
+        
+        // Create glitter at regular intervals - adjust frequency as needed
+        setInterval(() => {
+            if (glitterActive) {
+                // Create several glitters at once with different timing
+                for (let i = 0; i < 4; i++) {
+                    setTimeout(() => createGlitter(), i * 100);
+                }
+            }
+        }, 500);
+        
+        // Create initial burst of glitter across the entire screen
+        function createInitialGlitter() {
+            if (glitterActive) {
+                // Create many glitters distributed across the entire screen
+                for (let i = 0; i < 40; i++) {
+                    setTimeout(() => createGlitter(), i * 50);
+                }
+            }
+        }
+        
+        // Toggle glitter effect
+        const heartToggle = document.getElementById('heartToggle');
+        
+        heartToggle.addEventListener('click', () => {
+            glitterActive = !glitterActive;
+            
+            if (glitterActive) {
+                heartToggle.style.backgroundColor = '#D4AF37'; // Bordeaux red - luxurious dark red for ON
+                createInitialGlitter(); // Create initial burst when turned on
+            } else {
+                heartToggle.style.backgroundColor = '#800020'; // Gold for OFF
+                // Khi tắt hiệu ứng, tăng tốc độ biến mất của các phần tử glitter (10 lần nhanh hơn)
+                document.querySelectorAll('.glitter-base').forEach(glitter => {
+                    // Áp dụng chuyển đổi độ mờ nhanh hơn
+                    glitter.style.transition = 'opacity 0.2s linear';
+                    glitter.style.opacity = '0';
+                    // Xóa phần tử sau 200ms (tương đương 10 lần nhanh hơn nếu thời gian ban đầu là khoảng 2s)
+                    setTimeout(() => {
+                        glitter.remove();
+                    }, 200);
+                });
+            }
+        });
+        
+        // Audio Controls
+        const audioToggle = document.getElementById('audioToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+        
+        audioToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                audioToggle.innerHTML = '<i class="fas fa-music"></i>';
+                audioToggle.style.backgroundColor = '#800020'; // Gold for OFF
+            } else {
+                bgMusic.play().catch(e => {
+                    console.log("Audio play failed:", e);
+                });
+                audioToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                audioToggle.style.backgroundColor = '#D4AF37'; // Royal blue for ON
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // Confetti effect for wish submission
+        const wishButton = document.getElementById('wishButton');
+        
+        wishButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Simple validation
+            const nameInput = document.getElementById('guestName');
+            const wishInput = document.getElementById('wish');
+            
+            if (nameInput.value.trim() === '' || wishInput.value.trim() === '') {
+                alert('Vui lòng nhập đầy đủ thông tin!');
+                return;
+            }
+            
+            // Confetti effect (simplified)
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('heart');
+                confetti.innerHTML = '<i class="fas fa-heart"></i>';
+                
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = Math.random() * 100 + 'vh';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.opacity = Math.random() * 0.5 + 0.5;
+                confetti.style.fontSize = Math.random() * 15 + 10 + 'px';
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+            
+            // Clear form (in real scenario, you would send data to server)
+            nameInput.value = '';
+            wishInput.value = '';
+            
+            // Show success message
+            alert('Cảm ơn bạn đã gửi lời chúc!');
+        });
+    </script>
+    <script>
+        // Smooth Scrolling for Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all anchor links that have a hash (#) in their href
+            const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+            // Loop through each anchor link
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Prevent the default jump-to behavior
+                    e.preventDefault();
+
+                    // Get the target element from the href attribute
+                    const targetId = this.getAttribute('href');
+
+                    // Handle the case where href="#" (often used for buttons)
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+
+                    // Check if the target element exists
+                    if (targetElement) {
+                        // Get the navbar height to offset the scroll position
+                        const navbarHeight = document.querySelector('nav').offsetHeight;
+
+                        // Calculate the target position with offset for the navbar
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+                        // Smooth scroll to the target element
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+
+                        // Update the URL hash without causing a page jump
+                        history.pushState(null, null, targetId);
+
+                        // Add active state to the current navigation item
+                        anchorLinks.forEach(navLink => {
+                            navLink.classList.remove('text-goldPrimary');
+                            navLink.classList.add('hover:text-goldPrimary');
+                        });
+
+                        this.classList.add('text-goldPrimary');
+                        this.classList.remove('hover:text-goldPrimary');
+                    }
+                });
+            });
+
+            // Highlight the current section in the navigation when scrolling
+            window.addEventListener('scroll', function() {
+                // Debounce/throttle the scroll event for better performance
+                if (!window.requestAnimationFrame) {
+                    // For older browsers
+                    window.requestAnimationFrame = function(callback) {
+                        return setTimeout(callback, 1000 / 60);
+                    };
+                }
+
+                if (this.isScrolling) return;
+                this.isScrolling = true;
+
+                window.requestAnimationFrame(() => {
+                    highlightCurrentSection();
+                    this.isScrolling = false;
+                });
+            });
+
+            function highlightCurrentSection() {
+                // Get all sections with IDs
+                const sections = document.querySelectorAll('section[id], header[id]');
+                const navbarHeight = document.querySelector('nav').offsetHeight;
+
+                // Find the section that's currently in view
+                let currentSection = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - navbarHeight - 100; // Adding some offset for better UX
+                    const sectionBottom = sectionTop + section.offsetHeight;
+
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                        currentSection = '#' + section.getAttribute('id');
+                    }
+                });
+
+                // Update the active state in the navigation
+                anchorLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+
+                    if (href === currentSection) {
+                        link.classList.add('text-goldPrimary');
+                        link.classList.remove('hover:text-goldPrimary');
+                    } else {
+                        link.classList.remove('text-goldPrimary');
+                        link.classList.add('hover:text-goldPrimary');
+                    }
+                });
+            }
+
+            // Handle the RSVP button in the hero section
+            const rsvpButton = document.querySelector('header button.royal-button');
+            if (rsvpButton) {
+                rsvpButton.addEventListener('click', function() {
+                    const rsvpSection = document.querySelector('#rsvp');
+                    if (rsvpSection) {
+                        const navbarHeight = document.querySelector('nav').offsetHeight;
+                        const targetPosition = rsvpSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+
+            // Add a subtle reveal animation when scrolling to new sections
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1, // Trigger when at least 10% of the element is visible
+                rootMargin: '0px 0px -10% 0px' // Slightly adjust the trigger area
+            });
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

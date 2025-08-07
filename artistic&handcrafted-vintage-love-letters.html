@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation - Vintage Love Letters</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/ScrollTrigger.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#e8d9c4', // Beige/Nâu nhạt (60%)
+                        secondary: '#7a3b2e', // Đỏ Burgundy (30%)
+                        secondary2: '#556b2f', // Xanh Olive đậm (30%)
+                        accent: '#d4af37', // Vàng ánh kim (10%)
+                        accent2: '#111111', // Đen tuyền (10%)
+                    },
+                    fontFamily: {
+                        handwritten: ['Dancing Script', 'cursive'],
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'old-paper': "url('https://images.unsplash.com/photo-1581345628965-9a6d046cb712?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
+                    },
+                },
+            },
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #e8d9c4;
+            --color-secondary: #7a3b2e;
+            --color-secondary2: #556b2f;
+            --color-accent: #d4af37;
+            --color-accent2: #111111;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-primary);
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            background-attachment: fixed;
+        }
+
+        .old-paper {
+            background-color: var(--color-primary);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .old-paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            opacity: 0.4;
+            pointer-events: none;
+            border-radius: 5px;
+        }
+
+        .paper-edge {
+            position: relative;
+        }
+
+        .paper-edge::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: transparent;
+            border: 1px solid rgba(122, 59, 46, 0.2);
+            border-radius: 7px;
+            pointer-events: none;
+        }
+
+        .wax-seal {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transform: rotate(5deg);
+        }
+
+        .wax-seal::before {
+            content: '❤';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--color-primary);
+            font-size: 24px;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-rsvp {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .btn-rsvp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transition: left 0.6s;
+        }
+
+        .btn-rsvp:hover::before {
+            left: 100%;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .gallery-item img {
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0);
+            transition: background-color 0.3s;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hiệu ứng tim bay */
+        .heart {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: var(--color-secondary);
+            transform: rotate(45deg);
+            animation: heartFloat 5s linear infinite;
+            opacity: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: -10px;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: rotate(45deg) translateY(0) scale(0.6);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: rotate(45deg) translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .music-controls, .heart-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .heart-controls {
+            bottom: 80px;
+        }
+
+        .music-controls:hover, .heart-controls:hover {
+            transform: scale(1.1);
+        }
+
+        .music-controls i, .heart-controls i {
+            color: var(--color-secondary);
+            font-size: 20px;
+        }
+
+        /* Đồng hồ đếm ngược */
+        .countdown-item {
+            position: relative;
+            background-color: var(--color-primary);
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            opacity: 0.3;
+            pointer-events: none;
+            border-radius: 5px;
+        }
+
+        /* Nút CTA */
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+            border-radius: 25px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background-color: var(--color-secondary2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .lightbox-content {
+            max-width: 80%;
+            max-height: 80%;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 100%;
+            border: 10px solid var(--color-primary);
+            border-radius: 5px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            color: var(--color-primary);
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* Sổ lưu bút */
+        .guestbook-entry {
+            border-bottom: 1px dashed var(--color-secondary);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* RSVP Form */
+        .form-input {
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--color-secondary);
+            border-radius: 5px;
+            padding: 10px 15px;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-color: var(--color-accent);
+            outline: none;
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--color-secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-container {
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container.left {
+            left: 0;
+            padding-right: 40px;
+        }
+
+        .timeline-container.right {
+            left: 50%;
+            padding-left: 40px;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--color-primary);
+            border: 2px solid var(--color-secondary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-container.right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--color-primary);
+            position: relative;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Map */
+        .vintage-map {
+            background-image: url('https://placehold.co/800x400');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .map-marker {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-secondary);
+            border-radius: 50% 50% 0 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .map-marker::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+        }
+
+        /* Mobile nav */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-primary);
+            z-index: 1500;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            background-color: var(--color-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-container.left {
+                left: 0;
+            }
+
+            .timeline-container.right {
+                left: 0;
+            }
+
+            .timeline-container.left::after, .timeline-container.right::after {
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800">
+    <!-- Thanh điều hướng -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-primary bg-opacity-90 shadow-md desktop-nav">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-secondary2 font-handwritten text-2xl">T & M</div>
+                <div class="flex space-x-6">
+                    <a href="#home" class="nav-link text-secondary hover:text-accent2">Trang Chủ</a>
+                    <a href="#story" class="nav-link text-secondary hover:text-accent2">Câu Chuyện</a>
+                    <a href="#event" class="nav-link text-secondary hover:text-accent2">Sự Kiện</a>
+                    <a href="#gallery" class="nav-link text-secondary hover:text-accent2">Hình Ảnh</a>
+                    <a href="#rsvp" class="nav-link text-secondary hover:text-accent2">RSVP</a>
+                    <a href="#guestbook" class="nav-link text-secondary hover:text-accent2">Lưu Bút</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile menu toggle -->
+    <div class="mobile-menu-toggle" id="menuToggle">
+        <i class="fas fa-bars text-secondary"></i>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="nav-link text-secondary text-2xl my-3">Trang Chủ</a>
+        <a href="#story" class="nav-link text-secondary text-2xl my-3">Câu Chuyện</a>
+        <a href="#event" class="nav-link text-secondary text-2xl my-3">Sự Kiện</a>
+        <a href="#gallery" class="nav-link text-secondary text-2xl my-3">Hình Ảnh</a>
+        <a href="#rsvp" class="nav-link text-secondary text-2xl my-3">RSVP</a>
+        <a href="#guestbook" class="nav-link text-secondary text-2xl my-3">Lưu Bút</a>
+        <div class="absolute top-5 right-5 cursor-pointer" id="closeMenu">
+            <i class="fas fa-times text-secondary text-2xl"></i>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 pb-10 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="old-paper paper-edge max-w-4xl mx-auto py-12 px-8 text-center relative">
+                <div class="mb-10 reveal-text">
+                    <h1 class="font-handwritten text-6xl md:text-7xl text-secondary mb-3">Trang & Minh</h1>
+                    <p class="text-secondary2 font-serif text-xl italic">Những Lá Thư Yêu Thương</p>
+                </div>
+                
+                <div class="wax-seal mx-auto mb-10"></div>
+                
+                <p class="font-serif text-xl mb-8 text-secondary2 italic">"Tình yêu không phải là nhìn chằm chằm vào nhau, mà là cùng nhau nhìn về một hướng."</p>
+                
+                <div class="flex justify-center mb-10">
+                    <p class="font-serif text-2xl text-secondary">Chúng tôi xin trân trọng mời bạn tham dự lễ cưới<br>vào ngày <span class="font-handwritten text-accent2">15 tháng 05 năm 2025</span></p>
+                </div>
+                
+                <!-- Countdown Timer -->
+                <div class="mb-10">
+                    <p class="font-handwritten text-3xl text-secondary mb-4">Còn</p>
+                    <div class="flex justify-center space-x-4" id="countdown">
+                        <div class="countdown-item">
+                            <div class="font-handwritten text-3xl text-secondary" id="days">00</div>
+                            <div class="text-secondary2 text-sm">Ngày</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="font-handwritten text-3xl text-secondary" id="hours">00</div>
+                            <div class="text-secondary2 text-sm">Giờ</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="font-handwritten text-3xl text-secondary" id="minutes">00</div>
+                            <div class="text-secondary2 text-sm">Phút</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="font-handwritten text-3xl text-secondary" id="seconds">00</div>
+                            <div class="text-secondary2 text-sm">Giây</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#rsvp" class="cta-button">Xác nhận tham dự</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Love Story Section -->
+    <section id="story" class="py-20 bg-primary bg-opacity-30">
+        <div class="container mx-auto px-4 overflow-container">
+            <h2 class="text-center font-handwritten text-5xl text-secondary mb-16">Câu Chuyện Tình Yêu</h2>
+            
+            <div class="timeline">
+                <!-- Milestone 1 -->
+                <div class="timeline-container left">
+                    <div class="timeline-content old-paper">
+                        <h3 class="font-handwritten text-3xl text-secondary mb-3">Lần Đầu Gặp Gỡ</h3>
+                        <p class="font-serif text-secondary2">Chúng tôi gặp nhau tại một buổi triển lãm nghệ thuật. Ánh mắt đầu tiên đã nói lên tất cả, dù lúc đó chúng tôi còn chưa biết về nhau điều gì.</p>
+                        <p class="font-handwritten text-xl text-accent2 mt-2">15.05.2020</p>
+                    </div>
+                </div>
+                
+                <!-- Milestone 2 -->
+                <div class="timeline-container right">
+                    <div class="timeline-content old-paper">
+                        <h3 class="font-handwritten text-3xl text-secondary mb-3">Hẹn Hò Đầu Tiên</h3>
+                        <p class="font-serif text-secondary2">Tách cà phê đầu tiên tại quán nhỏ góc phố, câu chuyện kéo dài từ buổi sáng đến chiều tối mà vẫn chưa muốn dừng lại.</p>
+                        <p class="font-handwritten text-xl text-accent2 mt-2">30.05.2020</p>
+                    </div>
+                </div>
+                
+                <!-- Milestone 3 -->
+                <div class="timeline-container left">
+                    <div class="timeline-content old-paper">
+                        <h3 class="font-handwritten text-3xl text-secondary mb-3">Chuyến Du Lịch Đầu Tiên</h3>
+                        <p class="font-serif text-secondary2">Chúng tôi cùng nhau khám phá miền Bắc, những con đường mòn dẫn đến thác nước và bầu trời đầy sao đã chứng kiến lời hứa đầu tiên.</p>
+                        <p class="font-handwritten text-xl text-accent2 mt-2">10.10.2020</p>
+                    </div>
+                </div>
+                
+                <!-- Milestone 4 -->
+                <div class="timeline-container right">
+                    <div class="timeline-content old-paper">
+                        <h3 class="font-handwritten text-3xl text-secondary mb-3">Lời Cầu Hôn</h3>
+                        <p class="font-serif text-secondary2">Trên chiếc cầu tre nhỏ ở quê nhà, giữa mùa hoa sen nở, anh đã quỳ xuống với chiếc nhẫn làm từ cỏ và lời hứa sẽ trao nhẫn thật sau này.</p>
+                        <p class="font-handwritten text-xl text-accent2 mt-2">15.05.2023</p>
+                    </div>
+                </div>
+                
+                <!-- Milestone 5 -->
+                <div class="timeline-container left">
+                    <div class="timeline-content old-paper">
+                        <h3 class="font-handwritten text-3xl text-secondary mb-3">Lễ Ăn Hỏi</h3>
+                        <p class="font-serif text-secondary2">Gia đình hai bên gặp gỡ, trao đổi những phong tục truyền thống và chúc phúc cho chúng tôi bước vào hành trình mới.</p>
+                        <p class="font-handwritten text-xl text-accent2 mt-2">01.05.2025</p>
+                    </div>
+                </div>
+                
+                <!-- Milestone 6 -->
+                <div class="timeline-container right">
+                    <div class="timeline-content old-paper highlight-story">
+                        <h3 class="font-handwritten text-3xl text-secondary mb-3">Ngày Cưới</h3>
+                        <p class="font-serif text-secondary2">Và đây là ngày hạnh phúc nhất, khi chúng tôi cùng nhau viết nên trang mới của cuộc đời. Rất mong được đón tiếp bạn trong ngày trọng đại này.</p>
+                        <p class="font-handwritten text-xl text-accent2 mt-2">15.05.2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Event Details Section -->
+    <section id="event" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-center font-handwritten text-5xl text-secondary mb-12">Thông Tin Lễ Cưới</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Left Column: Ceremony -->
+                <div class="old-paper paper-edge p-6">
+                    <div class="text-center mb-4">
+                        <h3 class="font-handwritten text-3xl text-secondary mb-2">Lễ Thành Hôn</h3>
+                        <div class="w-16 h-0.5 bg-secondary mx-auto"></div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <p class="font-serif text-center text-secondary2 text-lg mb-2">Thứ Năm, 15 tháng 05 năm 2025</p>
+                        <p class="font-serif text-center text-secondary2 text-lg">9:00 - 11:00 sáng</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <p class="font-serif text-center text-secondary2 text-lg mb-1">Nhà Thờ Chánh Tòa</p>
+                        <p class="font-serif text-center text-secondary2">40 Nhà Chung, Hoàn Kiếm, Hà Nội</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <p class="font-handwritten text-xl text-secondary2 italic">"Dress Code: Semi-formal"</p>
+                        <p class="text-sm text-secondary2 mt-1">Gợi ý màu: Beige, Nâu đất, Burgundy, Olive</p>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Reception -->
+                <div class="old-paper paper-edge p-6">
+                    <div class="text-center mb-4">
+                        <h3 class="font-handwritten text-3xl text-secondary mb-2">Tiệc Cưới</h3>
+                        <div class="w-16 h-0.5 bg-secondary mx-auto"></div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <p class="font-serif text-center text-secondary2 text-lg mb-2">Thứ Năm, 15 tháng 05 năm 2025</p>
+                        <p class="font-serif text-center text-secondary2 text-lg">18:00 - 21:00 tối</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <p class="font-serif text-center text-secondary2 text-lg mb-1">Khách Sạn Metropole</p>
+                        <p class="font-serif text-center text-secondary2">15 Ngô Quyền, Hoàn Kiếm, Hà Nội</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <p class="font-handwritten text-xl text-secondary2 italic">"Dress Code: Elegant"</p>
+                        <p class="text-sm text-secondary2 mt-1">Tiệc buffet với các món Á - Âu</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map Section -->
+            <div class="max-w-4xl mx-auto mt-12">
+                <div class="old-paper paper-edge p-6">
+                    <h3 class="font-handwritten text-3xl text-secondary mb-4 text-center">Địa Điểm Tiệc Cưới</h3>
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="wax-seal"></div>
+                    </div>
+                    <div class="text-center">
+                        <p class="font-serif text-xl text-secondary2 mb-2">Khách Sạn Metropole</p>
+                        <p class="font-serif text-secondary2 mb-4">15 Ngô Quyền, Hoàn Kiếm, Hà Nội</p>
+                        <p class="font-serif text-secondary2 italic mb-4">"Phòng tiệc Hồng Kông, Tầng 2"</p>
+                        <a href="https://goo.gl/maps/example" target="_blank" class="cta-button inline-block mt-2">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Xem chỉ đường
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Schedule -->
+            <div class="max-w-3xl mx-auto mt-16">
+                <h3 class="text-center font-handwritten text-3xl text-secondary mb-8">Lịch Trình Chi Tiết</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Morning Schedule -->
+                    <div class="old-paper paper-edge p-5">
+                        <h4 class="font-handwritten text-2xl text-secondary mb-3 text-center">Buổi Sáng</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="font-handwritten text-xl text-accent2 mr-3">08:30</span>
+                                <div>
+                                    <p class="font-serif text-secondary2">Đón tiếp khách tại Nhà Thờ</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-handwritten text-xl text-accent2 mr-3">09:00</span>
+                                <div>
+                                    <p class="font-serif text-secondary2">Bắt đầu Lễ Thành Hôn</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-handwritten text-xl text-accent2 mr-3">10:30</span>
+                                <div>
+                                    <p class="font-serif text-secondary2">Chụp ảnh lưu niệm</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-handwritten text-xl text-accent2 mr-3">11:30</span>
+                                <div>
+                                    <p class="font-serif text-secondary2">Tiệc trà nhẹ</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Evening Schedule -->
+                    <div class="old-paper paper-edge p-5">
+                        <h4 class="font-handwritten text-2xl text-secondary mb-3 text-center">Buổi Tối</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="font-handwritten text-xl text-accent2 mr-3">17:30</span>
+                                <div>
+                                    <p class="font-serif text-secondary2">Đón tiếp khách tại Khách Sạn</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-handwritten text-xl text-accent2 mr-3">18:15</span>
+                                <div>
+                                    <p class="font-serif text-secondary2">Lễ trao nhẫn và phát biểu</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-handwritten text-xl text-accent2 mr-3">19:00</span>
+                                <div>
+                                    <p class="font-serif text-secondary2">Tiệc chính thức bắt đầu</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-handwritten text-xl text-accent2 mr-3">20:30</span>
+                                <div>
+                                    <p class="font-serif text-secondary2">Cắt bánh cưới & Khiêu vũ</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-primary bg-opacity-30">
+        <div class="container mx-auto px-4">
+            <h2 class="text-center font-handwritten text-5xl text-secondary mb-12">Album Ảnh</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Image 1 -->
+                            <div class="gallery-item cursor-pointer" data-img="https://placehold.co/600x800">
+                <img src="https://placehold.co/600x800" alt="Cặp đôi" class="w-full h-64 object-cover rounded">
+                </div>
+                
+                <!-- Image 2 -->
+                            <div class="gallery-item cursor-pointer" data-img="https://placehold.co/600x800">
+                <img src="https://placehold.co/600x800" alt="Khoảnh khắc hạnh phúc" class="w-full h-64 object-cover rounded">
+                </div>
+                
+                <!-- Image 3 -->
+                            <div class="gallery-item cursor-pointer" data-img="https://placehold.co/600x800">
+                <img src="https://placehold.co/600x800" alt="Cặp đôi dạo chơi" class="w-full h-64 object-cover rounded">
+                </div>
+                
+                <!-- Image 4 -->
+                            <div class="gallery-item cursor-pointer" data-img="https://placehold.co/600x800">
+                <img src="https://placehold.co/600x800" alt="Lễ đính hôn" class="w-full h-64 object-cover rounded">
+                </div>
+                
+                <!-- Image 5 -->
+                            <div class="gallery-item cursor-pointer" data-img="https://placehold.co/600x800">
+                <img src="https://placehold.co/600x800" alt="Chuyến du lịch" class="w-full h-64 object-cover rounded">
+                </div>
+                
+                <!-- Image 6 -->
+                            <div class="gallery-item cursor-pointer" data-img="https://placehold.co/600x800">
+                <img src="https://placehold.co/600x800" alt="Kỷ niệm" class="w-full h-64 object-cover rounded">
+                </div>
+            </div>
+            
+            <!-- Lightbox -->
+            <div class="lightbox" id="lightbox">
+                <div class="lightbox-content">
+                    <img src="" alt="Gallery image" id="lightbox-img">
+                    <span class="lightbox-close">&times;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- RSVP Section -->
+    <section id="rsvp" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-center font-handwritten text-5xl text-secondary mb-12">Xác Nhận Tham Dự</h2>
+            
+            <div class="old-paper paper-edge max-w-2xl mx-auto p-8">
+                <form id="rsvpForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block font-serif text-secondary2 mb-2">Họ và tên</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block font-serif text-secondary2 mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="phone" class="block font-serif text-secondary2 mb-2">Số điện thoại</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="guests" class="block font-serif text-secondary2 mb-2">Số lượng người tham dự</label>
+                            <select id="guests" name="guests" class="form-input">
+                                <option value="1">1 người</option>
+                                <option value="2">2 người</option>
+                                <option value="3">3 người</option>
+                                <option value="4">4 người</option>
+                                <option value="5">5 người</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block font-serif text-secondary2 mb-2">Bạn sẽ tham dự</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="attend_ceremony" class="mr-2">
+                                <span class="font-serif text-secondary2">Lễ Thành Hôn (buổi sáng)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="attend_reception" class="mr-2">
+                                <span class="font-serif text-secondary2">Tiệc Cưới (buổi tối)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block font-serif text-secondary2 mb-2">Món ăn yêu cầu</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="meal_preference" value="standard" class="mr-2" checked>
+                                <span class="font-serif text-secondary2">Thực đơn tiêu chuẩn</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="meal_preference" value="vegetarian" class="mr-2">
+                                <span class="font-serif text-secondary2">Chay</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="meal_preference" value="special" class="mr-2">
+                                <span class="font-serif text-secondary2">Yêu cầu đặc biệt (ghi chú bên dưới)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block font-serif text-secondary2 mb-2">Lời nhắn & ghi chú</label>
+                        <textarea id="message" name="message" rows="4" class="form-input"></textarea>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" id="rsvpSubmit" class="cta-button">Gửi xác nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Guestbook Section -->
+    <section id="guestbook" class="py-20 bg-primary bg-opacity-30">
+        <div class="container mx-auto px-4">
+            <h2 class="text-center font-handwritten text-5xl text-secondary mb-12">Sổ Lưu Bút</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Left: Add wishes form -->
+                <div class="old-paper paper-edge p-6">
+                    <h3 class="font-handwritten text-3xl text-secondary mb-6 text-center">Gửi Lời Chúc</h3>
+                    
+                    <form id="wishForm" class="space-y-4">
+                        <div>
+                            <label for="wishName" class="block font-serif text-secondary2 mb-2">Tên của bạn</label>
+                            <input type="text" id="wishName" name="wishName" class="form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="wishMessage" class="block font-serif text-secondary2 mb-2">Lời chúc</label>
+                            <textarea id="wishMessage" name="wishMessage" rows="5" class="form-input" required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" id="wishSubmit" class="cta-button">Gửi lời chúc</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Right: Display wishes -->
+                <div class="old-paper paper-edge p-6 overflow-y-auto" style="max-height: 500px;">
+                    <h3 class="font-handwritten text-3xl text-secondary mb-6 text-center">Lời Chúc Từ Bạn Bè</h3>
+                    
+                    <div id="wishes" class="space-y-6">
+                        <!-- Sample wishes -->
+                        <div class="guestbook-entry">
+                            <h4 class="font-handwritten text-xl text-secondary">Hoàng Minh</h4>
+                            <p class="font-serif text-secondary2 italic">"Chúc hai bạn trăm năm hạnh phúc, luôn vui vẻ và yêu thương nhau. Mong rằng tổ ấm của hai bạn sẽ luôn tràn ngập tiếng cười."</p>
+                            <p class="text-right text-sm text-secondary2 mt-1">10.03.2025</p>
+                        </div>
+                        
+                        <div class="guestbook-entry">
+                            <h4 class="font-handwritten text-xl text-secondary">Thúy An</h4>
+                            <p class="font-serif text-secondary2 italic">"Gửi đến cặp đôi hoàn hảo lời chúc ngọt ngào nhất. Tình yêu của hai bạn là nguồn cảm hứng cho tất cả chúng tôi. Mong rằng cuộc sống hôn nhân sẽ còn ngọt ngào hơn cả bánh cưới."</p>
+                            <p class="text-right text-sm text-secondary2 mt-1">15.03.2025</p>
+                        </div>
+                        
+                        <div class="guestbook-entry">
+                            <h4 class="font-handwritten text-xl text-secondary">Gia đình Nguyễn</h4>
+                            <p class="font-serif text-secondary2 italic">"Chúc mừng hai cháu đã tìm thấy nhau giữa cuộc đời bao la này. Hãy nắm chặt tay nhau, cùng vun đắp hạnh phúc và vượt qua mọi thử thách."</p>
+                            <p class="text-right text-sm text-secondary2 mt-1">20.03.2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Registry Section -->
+    <section id="registry" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-center font-handwritten text-5xl text-secondary mb-12">Danh Sách Quà Cưới</h2>
+            
+            <div class="old-paper paper-edge max-w-2xl mx-auto p-8 text-center">
+                <p class="font-serif text-lg text-secondary2 mb-6">Sự hiện diện của bạn tại đám cưới là món quà quý giá nhất đối với chúng tôi. Tuy nhiên, nếu bạn muốn tặng chúng tôi món quà kỷ niệm, bạn có thể tham khảo danh sách dưới đây.</p>
+                
+                <div class="flex justify-center space-x-8 mb-10">
+                    <div>
+                        <img src="https://placehold.co/200x200" alt="QR Code" class="w-32 h-32 mx-auto mb-2">
+                        <p class="font-serif text-secondary2">Quét mã QR</p>
+                    </div>
+                    
+                    <div>
+                        <img src="https://placehold.co/200x200" alt="NFC Tag" class="w-32 h-32 mx-auto mb-2">
+                        <p class="font-serif text-secondary2">Chạm thẻ NFC</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="cta-button">Xem danh sách quà cưới</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer class="bg-primary py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-handwritten text-4xl text-secondary mb-4">Trang & Minh</h2>
+                <p class="font-serif text-secondary2 mb-6">Cảm ơn bạn đã chia sẻ niềm vui với chúng tôi</p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-secondary hover:text-accent2 transition-colors">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-secondary hover:text-accent2 transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-secondary hover:text-accent2 transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                </div>
+                
+                <div class="space-y-2">
+                    <p class="font-serif text-secondary2">Liên hệ: <a href="mailto:contact@example.com" class="text-secondary hover:text-accent2">trangminh@example.com</a></p>
+                    <p class="font-serif text-secondary2">Số điện thoại: +84 123 456 789</p>
+                </div>
+                
+                <div class="mt-8">
+                    <p class="font-serif text-sm text-secondary2">&copy; 2025 - Trang & Minh Wedding</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Controls -->
+    <div class="heart-controls" id="heartToggle">
+        <i class="fas fa-heart"></i>
+    </div>
+    
+    <div class="music-controls" id="musicToggle">
+        <i class="fas fa-volume-mute"></i>
+    </div>
+    
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdnjs.cloudflare.com/ajax/libs/piano-js/0.5.5/piano.min.js" type="audio/mpeg">
+    </audio>
+    
+    <!-- Script -->
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const weddingDate = new Date('2025-05-15T09:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Gallery Lightbox
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.getAttribute('data-img');
+                lightboxImg.src = imgSrc;
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Mobile Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // RSVP Form Submission
+        const rsvpForm = document.getElementById('rsvpForm');
+        
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would normally send the form data to your server
+            // For demonstration, we'll just show an alert
+            
+            alert('Cảm ơn bạn đã xác nhận tham dự!');
+            rsvpForm.reset();
+        });
+        
+        // Guestbook Form Submission
+        const wishForm = document.getElementById('wishForm');
+        const wishes = document.getElementById('wishes');
+        
+        wishForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('wishName').value;
+            const message = document.getElementById('wishMessage').value;
+            
+            // Create new wish entry
+            const today = new Date();
+            const dateStr = `${today.getDate().toString().padStart(2, '0')}.${(today.getMonth() + 1).toString().padStart(2, '0')}.${today.getFullYear()}`;
+            
+            const wishEntry = document.createElement('div');
+            wishEntry.className = 'guestbook-entry';
+            wishEntry.innerHTML = `
+                <h4 class="font-handwritten text-xl text-secondary">${name}</h4>
+                <p class="font-serif text-secondary2 italic">"${message}"</p>
+                <p class="text-right text-sm text-secondary2 mt-1">${dateStr}</p>
+            `;
+            
+            // Add to the beginning of the wishes list
+            wishes.insertBefore(wishEntry, wishes.firstChild);
+            
+            // Create confetti effect
+            createConfetti();
+            
+            // Reset form
+            wishForm.reset();
+        });
+        
+        // Improved Heart Flying Effect
+        let heartAnimationInterval;
+        let heartAnimationActive = false;
+        const heartToggle = document.getElementById('heartToggle');
+        
+        // Create heart container to prevent overflow issues
+        const heartContainer = document.createElement('div');
+        heartContainer.style.position = 'fixed';
+        heartContainer.style.top = '0';
+        heartContainer.style.left = '0';
+        heartContainer.style.width = '100%';
+        heartContainer.style.height = '100%';
+        heartContainer.style.pointerEvents = 'none';
+        heartContainer.style.zIndex = '50';
+        heartContainer.style.overflow = 'hidden';
+        document.body.appendChild(heartContainer);
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            
+            // Random position at the bottom of the screen
+            const posX = Math.random() * 90 + 5; // 5% to 95% of screen width
+            heart.style.left = posX + 'vw';
+            heart.style.bottom = '-20px';
+            
+            // Random size
+            const size = Math.random() * 12 + 8;
+            heart.style.width = size + 'px';
+            heart.style.height = size + 'px';
+            
+            // Random rotation
+            heart.style.transform = `rotate(${Math.random() * 90 - 45}deg)`;
+            
+            // Random animation duration
+            const duration = Math.random() * 3 + 3;
+            heart.style.animation = `heartFloat ${duration}s linear forwards`;
+            
+            // Add to container
+            heartContainer.appendChild(heart);
+            
+            // Remove heart after animation ends
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+        
+        function toggleHeartAnimation() {
+            if (heartAnimationActive) {
+                clearInterval(heartAnimationInterval);
+                heartAnimationActive = false;
+                heartToggle.innerHTML = '<i class="far fa-heart"></i>';
+            } else {
+                heartAnimationInterval = setInterval(createHeart, 300);
+                heartAnimationActive = true;
+                heartToggle.innerHTML = '<i class="fas fa-heart"></i>';
+            }
+        }
+        toggleHeartAnimation();
+        heartToggle.addEventListener('click', toggleHeartAnimation);
+        
+        // Improved Confetti Effect
+        function createConfetti() {
+            // Container to prevent overflow issues
+            const confettiContainer = document.createElement('div');
+            confettiContainer.style.position = 'fixed';
+            confettiContainer.style.top = '0';
+            confettiContainer.style.left = '0';
+            confettiContainer.style.width = '100%';
+            confettiContainer.style.height = '100%';
+            confettiContainer.style.pointerEvents = 'none';
+            confettiContainer.style.zIndex = '1000';
+            confettiContainer.style.overflow = 'hidden';
+            
+            document.body.appendChild(confettiContainer);
+            
+            // Success message with animation
+            const successMessage = document.createElement('div');
+            successMessage.innerHTML = '<i class="fas fa-heart"></i> Cảm ơn lời chúc của bạn!';
+            successMessage.style.position = 'fixed';
+            successMessage.style.top = '50%';
+            successMessage.style.left = '50%';
+            successMessage.style.transform = 'translate(-50%, -50%)';
+            successMessage.style.backgroundColor = 'var(--color-secondary)';
+            successMessage.style.color = 'var(--color-primary)';
+            successMessage.style.padding = '15px 30px';
+            successMessage.style.borderRadius = '25px';
+            successMessage.style.fontFamily = "'Dancing Script', cursive";
+            successMessage.style.fontSize = '1.5rem';
+            successMessage.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            successMessage.style.zIndex = '1001';
+            successMessage.style.opacity = '0';
+            successMessage.style.transition = 'opacity 0.5s, transform 0.5s';
+            
+            document.body.appendChild(successMessage);
+            
+            // Show and animate success message
+            setTimeout(() => {
+                successMessage.style.opacity = '1';
+                successMessage.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            }, 100);
+            
+            setTimeout(() => {
+                successMessage.style.opacity = '0';
+                successMessage.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            }, 2500);
+            
+            setTimeout(() => {
+                successMessage.remove();
+            }, 3000);
+            
+            // Create confetti pieces
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'absolute';
+                    confetti.style.zIndex = '1000';
+                    
+                    // Randomize confetti appearance
+                    const size = Math.random() * 8 + 5;
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    
+                    // Mix of shapes: hearts, circles and squares
+                    if (Math.random() < 0.3) {
+                        // Heart shape
+                        confetti.style.backgroundColor = 'transparent';
+                        confetti.style.width = `${size * 1.2}px`;
+                        confetti.style.height = `${size * 1.2}px`;
+                        confetti.style.background = 'var(--color-secondary)';
+                        confetti.style.transform = 'rotate(45deg)';
+                        
+                        const before = document.createElement('div');
+                        before.style.content = '';
+                        before.style.position = 'absolute';
+                        before.style.width = '100%';
+                        before.style.height = '100%';
+                        before.style.background = 'var(--color-secondary)';
+                        before.style.borderRadius = '50%';
+                        before.style.top = '-50%';
+                        before.style.left = '0';
+                        
+                        const after = document.createElement('div');
+                        after.style.content = '';
+                        after.style.position = 'absolute';
+                        after.style.width = '100%';
+                        after.style.height = '100%';
+                        after.style.background = 'var(--color-secondary)';
+                        after.style.borderRadius = '50%';
+                        after.style.top = '0';
+                        after.style.left = '-50%';
+                        
+                        confetti.appendChild(before);
+                        confetti.appendChild(after);
+                    } else {
+                        // Circles and squares
+                        confetti.style.backgroundColor = getRandomColor();
+                        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                    }
+                    
+                    // Starting position - center
+                    confetti.style.top = '50%';
+                    confetti.style.left = '50%';
+                    
+                    // Random ejection angle and distance
+                    const angle = Math.random() * 360;
+                    const distance = Math.random() * 300 + 100;
+                    const duration = Math.random() * 1.5 + 1.5;
+                    const delay = Math.random() * 0.5;
+                    
+                    // Add to container
+                    confettiContainer.appendChild(confetti);
+                    
+                    // Apply animation with keyframes
+                    confetti.animate([
+                        { 
+                            transform: 'translate(-50%, -50%) rotate(0deg)',
+                            opacity: 1 
+                        },
+                        { 
+                            transform: `translate(
+                                calc(-50% + ${Math.cos(angle * Math.PI / 180) * distance}px),
+                                calc(-50% + ${Math.sin(angle * Math.PI / 180) * distance}px)
+                            ) rotate(${Math.random() * 720 - 360}deg)`,
+                            opacity: 0
+                        }
+                    ], {
+                        duration: duration * 1000,
+                        delay: delay * 1000,
+                        easing: 'cubic-bezier(0.215, 0.610, 0.355, 1.000)',
+                        fill: 'forwards'
+                    });
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, (duration + delay) * 1000);
+                }, Math.random() * 200); // Stagger confetti creation
+            }
+            
+            // Remove container after all animations complete
+            setTimeout(() => {
+                confettiContainer.remove();
+            }, 4000);
+        }
+        
+        function getRandomColor() {
+            const colors = [
+                'var(--color-secondary)',
+                'var(--color-secondary2)',
+                'var(--color-accent)',
+                'var(--color-primary)'
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        // Background Music
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        let musicPlaying = false;
+        
+        musicToggle.addEventListener('click', () => {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicPlaying = false;
+                musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else {
+                bgMusic.play().catch(e => {
+                    console.log('Audio could not be played: ', e);
+                });
+                musicPlaying = true;
+                musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }
+        });
+        
+        // Scroll Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Init animation for text elements
+            const revealElements = document.querySelectorAll('.reveal-text');
+            
+            revealElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 1s, transform 1s';
+            });
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Function to handle scroll events
+            function handleScroll() {
+                revealElements.forEach(element => {
+                    if (isInViewport(element) && element.style.opacity === '0') {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Initial check
+            handleScroll();
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScroll);
+        });
+        
+        // Initialize timeline scrolling effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineContainers = document.querySelectorAll('.timeline-container');
+            
+            timelineContainers.forEach(container => {
+                container.style.opacity = '0';
+                
+                // Khác nhau giữa desktop và mobile
+                if (window.innerWidth > 768) {
+                    // Desktop: hiệu ứng trượt ngang từ 2 bên vào giữa
+                    container.style.transform = container.classList.contains('left') ? 
+                        'translateX(-50px)' : 'translateX(50px)';
+                } else {
+                    // Mobile: hiệu ứng trượt từ dưới lên (để tránh tràn ngang)
+                    container.style.transform = 'translateY(30px)';
+                }
+                
+                container.style.transition = 'opacity 0.8s, transform 0.8s';
+            });
+            
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            function handleTimelineScroll() {
+                timelineContainers.forEach(container => {
+                    if (isInViewport(container) && container.style.opacity === '0') {
+                        setTimeout(() => {
+                            container.style.opacity = '1';
+                            container.style.transform = 'translateX(0)';
+                        }, 200); // Small delay for staggered effect
+                    }
+                });
+            }
+            
+            // Initial check
+            handleTimelineScroll();
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', handleTimelineScroll);
+            
+            // Xử lý sự kiện resize cửa sổ để thích ứng khi xoay màn hình
+            window.addEventListener('resize', function() {
+                timelineContainers.forEach(container => {
+                    if (container.style.opacity === '0') {
+                        if (window.innerWidth > 768) {
+                            container.style.transform = container.classList.contains('left') ? 
+                                'translateX(-50px)' : 'translateX(50px)';
+                        } else {
+                            container.style.transform = 'translateY(30px)';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+                    

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html">
+<head>
+    <title>Wedding Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="header-footer-styles.css">
+    <script src="common.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <link rel="stylesheet" href="home-styles.css">
+</head>
+<body>
+    <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-lg shadow-md transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center h-20 px-4">
+            <div class="logo w-1/5">
+                <a href="#" class="font-playfair text-3xl font-semibold text-gray-800">NFC Wedding</a>
+            </div>
+    
+            <nav class="hidden md:flex items-center justify-center space-x-8 w-3/5">
+                <a href="#" class="sm:text-base md:text-lg text-gray-800 hover:text-pink-500 transition-colors duration-300 nav-link">Trang Chủ</a>
+                <a href="#products" class="sm:text-base md:text-lg text-gray-800 hover:text-pink-500 transition-colors duration-300 nav-link">Sản Phẩm</a>
+                <a href="#gallery" class="sm:text-base md:text-lg text-gray-800 hover:text-pink-500 transition-colors duration-300 nav-link">Bộ Sưu Tập</a>
+                <a href="#video" class="sm:text-base md:text-lg text-gray-800 hover:text-pink-500 transition-colors duration-300 nav-link">Video Hướng Dẫn</a>
+                <a href="#testimonials" class="sm:text-base md:text-lg text-gray-800 hover:text-pink-500 transition-colors duration-300 nav-link">Khách Hàng Nói Gì?</a>
+                <a href="#contact" class="sm:text-base md:text-lg text-gray-800 hover:text-pink-500 transition-colors duration-300 nav-link">Liên hệ</a>
+            </nav>
+    
+            <div class="hidden md:flex w-1/5 justify-end">
+                <a href="#contact" class="order-button bg-gradient-to-r from-red-400 to-orange-400 text-white py-2 px-6 rounded-full font-semibold hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:translate-y-[-5px]">
+                    Đặt hàng ngay
+                </a>
+            </div>
+    
+            <div class="block md:hidden">
+                <button id="menuBtn" class="text-gray-800 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden bg-white shadow-2xl fixed top-0 left-0 w-full h-screen z-50 transform -translate-y-full transition-transform duration-500">
+            <div class="container mx-auto px-4 py-8">
+                <div class="flex justify-between items-center mb-8">
+                    <a href="#" class="font-playfair text-3xl font-semibold text-gray-800">NFC Wedding</a>
+                    <button id="closeMenu" class="text-gray-800 focus:outline-none">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                <div class="flex flex-col space-y-6">
+                    <a href="#" class="sm:text-base md:text-xl text-gray-800 hover:text-pink-500 transition-colors duration-300">Trang Chủ</a>
+                    <a href="#products" class="sm:text-base md:text-xl text-gray-800 hover:text-pink-500 transition-colors duration-300">Sản Phẩm</a>
+                    <a href="#gallery" class="sm:text-base md:text-xl text-gray-800 hover:text-pink-500 transition-colors duration-300">Bộ Sưu Tập</a>
+                    <a href="#video" class="sm:text-base md:text-xl text-gray-800 hover:text-pink-500 transition-colors duration-300">Video Hướng Dẫn</a>
+                    <a href="#testimonials" class="sm:text-base md:text-xl text-gray-800 hover:text-pink-500 transition-colors duration-300">Khách Hàng Nói Gì?</a>
+                    <a href="#contact" class="sm:text-base md:text-xl text-gray-800 hover:text-pink-500 transition-colors duration-300">Liên hệ</a>
+                    <a href="#contact" class="mt-6 bg-gradient-to-r from-red-400 to-orange-400 text-white py-3 px-6 rounded-full font-semibold text-center">Đặt hàng ngay</a>
+                </div>
+            </div>
+        </div>
+    </header>
+        <!-- PROMOTIONAL BANNER -->
+    <div id="promoPopup" class="fixed inset-x-0 top-20 z-40 transform -translate-y-full transition-transform duration-500">
+        <div class="bg-gradient-to-r from-red-400 to-pink-400 text-white py-3 px-4 shadow-lg">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex-1 text-center">
+                    <p class="font-semibold">🎁 Hot deal! Tặng kèm website đám cưới miễn phí khi đặt thiệp cưới NFC hôm nay!</p>
+                </div>
+                <button id="closePromo" class="text-white focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero" class="h-screen flex items-center justify-center bg-gradient-to-b from-[#FFFBF2] to-[#FCE8E6]">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="font-playfair text-3xl md:text-6xl text-[#333] mb-4">Thiệp cưới NFC – Chạm để trao hạnh phúc</h1>
+                <p class="font-montserrat sm:text-base md:text-lg sm:text-base md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">Thiệp cưới hiện đại, lưu giữ khoảnh khắc theo cách đặc biệt nhất.</p>
+    
+                <!-- 3D Card Container -->
+                <div id="card-container" class="w-full md:w-1/2 h-64 md:h-96 mx-auto mb-12 relative">
+                    <!-- Three.js will render here -->
+                </div>
+    
+                <a href="#gallery" class="inline-block bg-gradient-to-r from-red-400 to-pink-500 text-white py-4 px-10 rounded-full sm:text-base md:text-xl font-semibold shadow-2xl hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:translate-y-[-5px]">Xem ngay bộ sưu tập</a>
+            </div>
+        </section>
+    
+        <!-- PRODUCT OVERVIEW -->
+        <section id="products" class="py-20 bg-[#FFFDF9]">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="font-playfair text-4xl text-[#3E3E3E] mb-6">Thiệp cưới NFC – Sự kết hợp hoàn hảo giữa truyền thống và công nghệ</h2>
+                        <p class="text-[#555] sm:text-base md:text-lg leading-relaxed mb-6">
+                            Thiệp cưới NFC không chỉ là một chiếc thiệp cưới bình thường, mà còn là một bước tiến đột phá, giúp bạn chia sẻ những khoảnh khắc, hình ảnh, video, hoặc thông điệp đặc biệt tới người thân chỉ với một cú chạm nhẹ.
+                        </p>
+                        <ul class="mt-6 space-y-3">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-[#6FCF97] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Dễ dàng chia sẻ thông tin sự kiện.</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-[#6FCF97] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Tạo ấn tượng mạnh với khách mời.</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-[#6FCF97] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Tiết kiệm thời gian và chi phí in ấn.</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-[#6FCF97] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Góp phần bảo vệ môi trường.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="product-3d-model">
+                        <div id="product-model-container" class="w-4/5 h-[300px] sm:h-[400px] md:h-[500px] mx-auto">
+                            <!-- Three.js product model will render here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- FEATURES & BENEFITS -->
+        <section id="features" class="py-12 md:py-24 bg-gradient-to-b from-white to-[#FFF6F1]">
+            <div class="container mx-auto px-4">
+                <h2 class="font-playfair text-4xl text-center text-[#333] mb-12">Tính năng độc đáo của Thiệp Cưới NFC</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="feature-card bg-white rounded-3xl p-4 sm:p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-20 transition-all duration-300 hover:translate-z-60 hover:scale-105">
+                        <div class="icon-container w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto transform-style-preserve-3d perspective-1000">
+                            <i class="fas fa-wifi text-pink-500 text-2xl"></i>
+                        </div>
+                        <h3 class="sm:text-base md:text-xl font-semibold text-center mb-3">Chạm là kết nối</h3>
+                        <p class="text-gray-600 text-center">Khách mời dễ dàng truy cập thông tin, video, hình ảnh về đám cưới chỉ với một cú chạm nhẹ.</p>
+                    </div>
+    
+                    <!-- Feature 2 -->
+                    <div class="feature-card bg-white rounded-3xl p-4 sm:p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-20 transition-all duration-300 hover:translate-z-60 hover:scale-105">
+                        <div class="icon-container w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto transform-style-preserve-3d perspective-1000">
+                            <i class="fas fa-microchip text-pink-500 text-2xl"></i>
+                        </div>
+                        <h3 class="sm:text-base md:text-xl font-semibold text-center mb-3">Công nghệ hiện đại</h3>
+                        <p class="text-gray-600 text-center">Tích hợp chip NFC tiên tiến, giúp lưu trữ dữ liệu nhanh chóng, an toàn và tiện lợi.</p>
+                    </div>
+    
+                    <!-- Feature 3 -->
+                    <div class="feature-card bg-white rounded-3xl p-4 sm:p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-20 transition-all duration-300 hover:translate-z-60 hover:scale-105">
+                        <div class="icon-container w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto transform-style-preserve-3d perspective-1000">
+                            <i class="fas fa-leaf text-pink-500 text-2xl"></i>
+                        </div>
+                        <h3 class="sm:text-base md:text-xl font-semibold text-center mb-3">Thân thiện môi trường</h3>
+                        <p class="text-gray-600 text-center">Giảm thiểu giấy in và chất thải, hướng tới đám cưới xanh hiện đại.</p>
+                    </div>
+    
+                    <!-- Feature 4 -->
+                    <div class="feature-card bg-white rounded-3xl p-4 sm:p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-20 transition-all duration-300 hover:translate-z-60 hover:scale-105">
+                        <div class="icon-container w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto transform-style-preserve-3d perspective-1000">
+                            <i class="fas fa-paint-brush text-pink-500 text-2xl"></i>
+                        </div>
+                        <h3 class="sm:text-base md:text-xl font-semibold text-center mb-3">Thiết kế độc quyền</h3>
+                        <p class="text-gray-600 text-center">Mỗi thiệp cưới NFC đều được thiết kế cá nhân hóa, thể hiện cá tính riêng của từng cặp đôi.</p>
+                    </div>
+    
+                    <!-- Feature 5 -->
+                    <div class="feature-card bg-white rounded-3xl p-4 sm:p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-20 transition-all duration-300 hover:translate-z-60 hover:scale-105">
+                        <div class="icon-container w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto transform-style-preserve-3d perspective-1000">
+                            <i class="fas fa-clock text-pink-500 text-2xl"></i>
+                        </div>
+                        <h3 class="sm:text-base md:text-xl font-semibold text-center mb-3">Tiết kiệm thời gian</h3>
+                        <p class="text-gray-600 text-center">Không còn mất thời gian in ấn, phân phối thiệp truyền thống, dễ dàng thay đổi thông tin mọi lúc.</p>
+                    </div>
+    
+                    <!-- Feature 6 -->
+                    <div class="feature-card bg-white rounded-3xl p-4 sm:p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-20 transition-all duration-300 hover:translate-z-60 hover:scale-105">
+                        <div class="icon-container w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto transform-style-preserve-3d perspective-1000">
+                            <i class="fas fa-gem text-pink-500 text-2xl"></i>
+                        </div>
+                        <h3 class="sm:text-base md:text-xl font-semibold text-center mb-3">Ấn tượng khó quên</h3>
+                        <p class="text-gray-600 text-center">Thiệp cưới NFC tạo trải nghiệm khó quên, khẳng định phong cách và dấu ấn riêng của bạn.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- VIDEO DEMO / TUTORIAL -->
+        <section id="video" class="py-12 md:py-24 bg-white">
+            <div class="container mx-auto px-4 flex flex-col items-center justify-center">
+                <h2 class="font-playfair text-4xl md:text-5xl text-gray-800 mb-8 text-center">Khám phá cách sử dụng Thiệp cưới NFC dễ dàng nhất</h2>
+                <div class="video-container w-full md:w-4/5 lg:w-3/5 rounded-3xl shadow-2xl transform perspective-1000 translate-z-20 hover:translate-z-50 hover:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe class="rounded-3xl w-full h-[250px] md:h-[400px]" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- GALLERY / PRODUCTS SHOWCASE -->
+        <section id="gallery" class="py-12 md:py-24 bg-gradient-to-b from-white to-pink-50">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="font-playfair text-4xl text-gray-800 mb-12">Bộ sưu tập thiệp cưới NFC</h2>
+                <div id="carousel-container" class="w-full md:w-4/5 lg:w-3/5 h-[300px] sm:h-[400px] md:h-[500px] mx-auto relative">
+                    <!-- Three.js Carousel will render here -->
+                </div>
+                <div class="carousel-controls flex justify-center items-center mt-8 space-x-8">
+                    <button id="prevBtn" class="w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-chevron-left text-pink-500"></i>
+                    </button>
+                    <button id="nextBtn" class="w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-chevron-right text-pink-500"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    
+        <!-- TESTIMONIALS -->
+        <section id="testimonials" class="py-12 md:py-24 bg-gradient-to-b from-pink-50 to-white">
+            <div class="container mx-auto px-4">
+                <h2 class="font-playfair text-4xl text-center text-gray-800 mb-12">Khách hàng nói gì về chúng tôi</h2>
+                <div class="flex flex-col md:flex-row gap-8 justify-center">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card bg-white rounded-3xl p-4 sm:p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-30 transition-all duration-300 hover:translate-z-80 hover:scale-105">
+                        <div class="flex flex-col items-center">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Ngọc Anh" class="w-16 h-16 rounded-full object-cover shadow-md mb-4">
+                            <h3 class="font-semibold sm:text-base md:text-lg">Ngọc Anh</h3>
+                            <p class="text-gray-500 text-sm mb-4">Cô dâu</p>
+                            <div class="flex text-yellow-400 mb-4">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 text-center leading-relaxed">
+                                "Thiệp cưới NFC đã mang đến những bất ngờ tuyệt vời cho khách mời của chúng tôi. Họ thực sự ấn tượng với công nghệ này. Tất cả các hình ảnh và thông tin đều được truy cập dễ dàng chỉ bằng một cú chạm!"
+                            </p>
+                        </div>
+                    </div>
+    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card bg-white rounded-3xl p-4 sm:p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-40 transition-all duration-300 hover:translate-z-80 hover:scale-105">
+                        <div class="flex flex-col items-center">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Minh Tuấn" class="w-16 h-16 rounded-full object-cover shadow-md mb-4">
+                            <h3 class="font-semibold sm:text-base md:text-lg">Minh Tuấn</h3>
+                            <p class="text-gray-500 text-sm mb-4">Chú rể</p>
+                            <div class="flex text-yellow-400 mb-4">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 text-center leading-relaxed">
+                                "Chất lượng thiệp tuyệt vời và dịch vụ khách hàng thì quá tốt. Đội ngũ đã giúp chúng tôi tùy chỉnh thiệp theo ý thích và hỗ trợ chúng tôi trong suốt quá trình. Mọi người đều rất thích nó!"
+                            </p>
+                        </div>
+                    </div>
+    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card bg-white rounded-3xl p-4 sm:p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-20 transition-all duration-300 hover:translate-z-80 hover:scale-105">
+                        <div class="flex flex-col items-center">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Thu Hà" class="w-16 h-16 rounded-full object-cover shadow-md mb-4">
+                            <h3 class="font-semibold sm:text-base md:text-lg">Thu Hà</h3>
+                            <p class="text-gray-500 text-sm mb-4">Khách mời</p>
+                            <div class="flex text-yellow-400 mb-4">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="text-gray-600 text-center leading-relaxed">
+                                "Khi nhận được thiệp, tôi thực sự bất ngờ. Thay vì chỉ đọc thông tin cơ bản, tôi có thể xem tất cả các khoảnh khắc đẹp của cặp đôi chỉ với một cú chạm. Đây là một ý tưởng tuyệt vời!"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="pricing" class="py-12 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="font-playfair text-4xl text-center text-gray-800 mb-12">Gói dịch vụ phù hợp với mọi nhu cầu</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Basic Plan -->
+                    <div class="pricing-card bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-20 transition-all duration-300 hover:translate-z-60 hover:scale-105 border border-pink-100">
+                        <div class="text-center mb-6">
+                            <h3 class="font-playfair text-2xl font-semibold mb-2">Cơ Bản</h3>
+                            <div class="text-rose-500 text-4xl font-bold mb-2">499K</div>
+                            <p class="text-gray-500">Mỗi website / 3 tháng</p>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>1 mẫu thiết kế cơ bản</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Tên miền tùy chỉnh</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Thư viện ảnh (50 ảnh)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>RSVP cơ bản</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <svg class="w-5 h-5 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Danh sách quà cưới</span>
+                            </li>
+                        </ul>
+                        <a href="#create"
+                           class="block text-center bg-gradient-to-r from-rose-400 to-pink-400 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">Chọn
+                            gói này</a>
+                    </div>
+    
+                    <!-- Premium Plan -->
+                    <div class="pricing-card bg-gradient-to-b from-rose-50 to-pink-50 rounded-3xl p-6 shadow-xl hover:shadow-2xl transform perspective-1000 translate-z-40 transition-all duration-300 hover:translate-z-80 hover:scale-110 border-2 border-pink-200 relative">
+                        <div class="absolute top-0 right-0 bg-gradient-to-r from-rose-500 to-pink-500 text-white py-1 px-4 rounded-bl-xl rounded-tr-xl font-semibold text-sm">
+                            Phổ biến nhất
+                        </div>
+                        <div class="text-center mb-6">
+                            <h3 class="font-playfair text-2xl font-semibold mb-2">Cao Cấp</h3>
+                            <div class="text-rose-500 text-4xl font-bold mb-2">899K</div>
+                            <p class="text-gray-500">Mỗi website / 6 tháng</p>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>5 mẫu thiết kế cao cấp</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Tên miền tùy chỉnh</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Thư viện ảnh không giới hạn</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>RSVP nâng cao + thống kê</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Danh sách quà cưới</span>
+                            </li>
+                        </ul>
+                        <a href="#create"
+                           class="block text-center bg-gradient-to-r from-rose-500 to-pink-500 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">Chọn
+                            gói này</a>
+                    </div>
+    
+                    <!-- Luxury Plan -->
+                    <div class="pricing-card bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transform perspective-1000 translate-z-20 transition-all duration-300 hover:translate-z-60 hover:scale-105 border border-pink-100">
+                        <div class="text-center mb-6">
+                            <h3 class="font-playfair text-2xl font-semibold mb-2">Sang Trọng</h3>
+                            <div class="text-rose-500 text-4xl font-bold mb-2">1.499K</div>
+                            <p class="text-gray-500">Mỗi website / 12 tháng</p>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Tất cả mẫu thiết kế cao cấp</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Tên miền tùy chỉnh</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Thư viện ảnh & video không giới hạn</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>RSVP nâng cao + thống kê</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Tùy chỉnh toàn diện + hỗ trợ VIP</span>
+                            </li>
+                        </ul>
+                        <a href="#create"
+                           class="block text-center bg-gradient-to-r from-rose-400 to-pink-400 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">Chọn
+                            gói này</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CTA SECTION -->
+        <section id="cta" class="py-12 md:py-24 bg-gradient-to-r from-red-400 to-orange-400">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="font-playfair text-5xl text-white mb-8">Sẵn sàng tạo ấn tượng với thiệp cưới NFC?</h2>
+                <a href="#contact" class="inline-block bg-gradient-to-r from-white to-pink-100 text-pink-500 py-4 px-8 rounded-full sm:text-base md:text-xl font-semibold shadow-2xl hover:shadow-xl transform perspective-1000 translate-z-30 transition-all duration-300 hover:translate-z-70 hover:scale-110 hover:rotate-x-10">Liên hệ đặt hàng ngay!</a>
+            </div>
+        </section>
+    
+        <!-- CONTACT FORM SECTION -->
+        <section id="contact" class="py-12 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="font-playfair text-4xl text-center text-gray-800 mb-12">Liên hệ với chúng tôi</h2>
+                <div class="max-w-2xl mx-auto">
+                    <form id="contactForm" class="bg-white rounded-3xl shadow-2xl p-4 sm:p-6 transform perspective-1000 transition-all duration-500">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 mb-2">Họ tên</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 mb-2">Số điện thoại</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400" required>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 mb-2">Lời nhắn</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-red-400 to-pink-500 text-white py-3 rounded-xl font-semibold sm:text-base md:text-lg transform transition-all duration-300 hover:shadow-lg hover:scale-105">Gửi tin nhắn</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <script src="home-scripts.js"></script>
+    </main>
+    <footer class="py-16 bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Logo & Brand Info -->
+                <div>
+                    <a href="#" class="font-playfair text-3xl text-white font-semibold mb-4 block">NFC Wedding</a>
+                    <p class="mt-4 leading-relaxed">Thiệp cưới NFC - Kết nối tương lai, lưu giữ kỷ niệm mãi mãi.</p>
+                    <div class="mt-6 flex space-x-4 social-icons">
+                        <a href="#" class="text-white hover:text-pink-400 transition-colors duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-pink-400 transition-colors duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-pink-400 transition-colors duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-pink-400 transition-colors duration-300">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+    
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="sm:text-base md:text-xl font-semibold text-white mb-6">Điều hướng nhanh</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-gray-400 transition-colors duration-300">Trang chủ</a></li>
+                        <li><a href="#products" class="hover:text-gray-400 transition-colors duration-300">Sản phẩm</a></li>
+                        <li><a href="#gallery" class="hover:text-gray-400 transition-colors duration-300">Bộ sưu tập</a></li>
+                        <li><a href="#video" class="hover:text-gray-400 transition-colors duration-300">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#testimonials" class="hover:text-gray-400 transition-colors duration-300">Đánh giá khách hàng</a></li>
+                        <li><a href="#contact" class="hover:text-gray-400 transition-colors duration-300">Liên hệ</a></li>
+                        <li><a href="#" class="hover:text-gray-400 transition-colors duration-300">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="sm:text-base md:text-xl font-semibold text-white mb-6">Thông tin liên hệ</h3>
+                    <div class="space-y-4">
+                        <p class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-pink-400 mr-3 mt-1"></i>
+                            <span>123 Đường Lê Lợi, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</span>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-phone-alt text-pink-400 mr-3"></i>
+                            <span>090 123 4567</span>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope text-pink-400 mr-3"></i>
+                            <span>hello@nfcwedding.vn</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p>&copy; 2025 NFC Wedding. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+        <!-- LIVE CHAT BUTTON -->
+    <div id="liveChat" class="fixed bottom-8 right-8 z-50">
+        <button id="liveChatBtn" class="w-16 h-16 bg-pink-400 rounded-full shadow-2xl flex items-center justify-center transform perspective-1000 translate-z-30 transition-all duration-300 hover:translate-z-60 hover:scale-110 animate-bounce-slow">
+            <i class="fas fa-comments text-white text-2xl"></i>
+        </button>
+
+        <!-- Popup Chat Window (hidden by default) -->
+        <div id="chatPopup" class="hidden absolute bottom-20 right-0 w-80 h-[400px] bg-white rounded-3xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
+            <div class="bg-pink-100 py-4 px-6 rounded-t-3xl">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-semibold">Tư vấn trực tuyến</h3>
+                    <button id="closeChat" class="text-gray-600 hover:text-gray-800 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="chatMessages" class="p-4 h-[280px] overflow-auto">
+                <div class="chat-message mb-4">
+                    <div class="bg-pink-100 p-3 rounded-lg inline-block max-w-[80%]">
+                        <p class="text-gray-800">Xin chào! Chúng tôi có thể giúp gì cho bạn về thiệp cưới NFC?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 p-4 flex items-center">
+                <input type="text" id="chatInput" placeholder="Nhập tin nhắn..." class="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400">
+                <button id="sendChat" class="ml-2 bg-pink-400 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-pink-500 transition-colors">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="header-footer-scripts.js"></script>
+</body>
